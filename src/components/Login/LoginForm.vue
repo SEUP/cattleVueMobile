@@ -8,7 +8,7 @@
                 <v-text-field label="ชื่อผู้ใช้"/>
                 <v-text-field label="รหัสผ่าน"/>
             </v-form>
-            <v-btn :to="{name : `main`}" block color="primary">เข้าสู่ระบบ</v-btn>
+            <v-btn :to="{name : `main`}" replace block color="primary">เข้าสู่ระบบ</v-btn>
         </v-card-text>
     </v-card>
 </template>
