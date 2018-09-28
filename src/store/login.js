@@ -1,34 +1,38 @@
 import axios from "@/axios"
+
 const state = {
-    isLoad : false,
+    loginForm : {}
 }
 
 const getters = {}
 
 const mutations = {
-    setLoad : (state,value) => {
-        state.isLoad = value
+    resetLoginForm : function(state){
+        state.loginForm = {}
     }
 }
 
 const actions = {
 
-    login: async ({commit}, form) => {
+    login: async ({commit,state}) => {
         console.log("user/login")
-        let result = await axios.post('/api/v1/farmer/login', form)
+        let result = await axios.post('/api/v1/farmer/login', state.loginForm)
             .then((r) => {
-                // console.log("user/login", r.data)
-                applicationSettings.setString("token", r.data.token);
-                axios.defaults.headers.common['Authorization'] = `Bearer ${applicationSettings.getString('token')}`;
-                console.log('user/login', 'finish')
-
+                console.log("login/login", r.data)
+                let storage = window.localStorage;
+                storage.setItem("token", r.data.token)
+                axios.defaults.headers.common['Authorization'] = `Bearer ${storage.getItem('token')}`;
+                console.log('login/login', 'finish')
                 return r.data;
-            })   .catch((error) => {
-
+            }).catch((error) => {
+                console.error(error.stack)
             })
-
+        commit("resetLoginForm")
         return result
     },
+    logout : async ({commit,state}) =>{
+        localStorage.removeItem("token")
+    }
 
 }
 
