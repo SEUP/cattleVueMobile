@@ -37,7 +37,7 @@
     import store from "@/store/"
     import {get} from 'vuex-pathify'
     import FarmerAvatar from "@/components/Farmer/Avatar/FarmerAvatar";
-    import FarmerProfileCard from "@/components/Farmer/FarmerProfileCard";
+    import FarmerProfileCard from "@/components/Farmer/Profile/FarmerProfileCard";
     import FarmerCaptureAvatar from "@/components/Farmer/Avatar/FarmerCaptureAvatar";
     import FarmerSelectAvatar from "@/components/Farmer/Avatar/FarmerSelectAvatar";
 

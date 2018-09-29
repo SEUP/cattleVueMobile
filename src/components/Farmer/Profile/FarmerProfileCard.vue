@@ -3,10 +3,14 @@
         <v-toolbar card dense class="grey lighten-4">
             ข้อมูลส่วนตัว
             <v-spacer></v-spacer>
-            <v-btn depressed>
-                <v-icon>mdi-pencil</v-icon>
-                แก้ไข
-            </v-btn>
+
+            <farmer-edit-profile-dialog>
+                <v-btn depressed>
+                    <v-icon>mdi-pencil</v-icon>
+                    แก้ไข
+                </v-btn>
+            </farmer-edit-profile-dialog>
+
         </v-toolbar>
         <!--content-->
 
@@ -60,10 +64,11 @@
 
 <script>
     import {get} from "vuex-pathify"
+    import FarmerEditProfileDialog from "./FarmerEditProfileDialog";
 
     export default {
         name: "FarmerProfileCard",
-        components: {},
+        components: {FarmerEditProfileDialog},
         computed: {
             farmer: get("farmer/farmer"),
             hiddenPersonalID: function () {

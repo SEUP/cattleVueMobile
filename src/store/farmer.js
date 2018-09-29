@@ -1,4 +1,13 @@
 import axios from "@/axios"
+import _ from 'lodash'
+
+function replaceEmptyWithNull(x) {
+    _.forEach(x, function (value, key) {
+        if (value == '') {
+            x[key] = null
+        }
+    });
+}
 
 const state = {
     farmer: null,
@@ -60,7 +69,27 @@ const actions = {
             });
         return result
     },
-
+    async updateFarmer(context, params) {
+        replaceEmptyWithNull(params);
+        let result = await axios.put(`/api/v1/farmer/farmers/${params.id}`, params)
+            .then(async (response) => {
+                let farmer = response.data
+                let farm;
+                if (farmer.farm == null) {
+                    farm = await context.dispatch("getFarmForm", {id: farmer.id})
+                    farmer.farm = farm
+                } else {
+                    farm = farmer.farm
+                    context.commit("setFarm", farm)
+                }
+                context.commit("setFarmer", farmer)
+                return farmer;
+            }).catch((error) => {
+                context.dispatch("error/setError", error.response.data, {root: true});
+                return null
+            })
+        return result
+    },
     async downloadAvatar(context) {
         let result = await axios.get(`/api/v1/farmer/farmers/${context.state.farmer.id}/avatar`,
             {
