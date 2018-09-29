@@ -37,7 +37,7 @@
 <script>
 
     import store from "@/store/"
-    import {get, sync} from "vuex-pathify"
+    import {get} from "vuex-pathify"
 
     import FarmerAvatar from "@/components/Farmer/Avatar/FarmerAvatar";
 
@@ -45,7 +45,6 @@
         name: 'App',
         components: {
             FarmerAvatar,
-            HelloWorld,
         },
         async beforeRouteEnter(to, from, next) {
             //fetch neccessery data

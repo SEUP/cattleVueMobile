@@ -27,6 +27,7 @@ const mutations = {
             state.farm.farm_lat = isNaN(lat) ? null : lat
             state.farm.farm_lng = isNaN(lng) ? null : lng
         } catch (e) {
+            window.console.error(e.stack)
         }
 
     },
@@ -60,7 +61,7 @@ const actions = {
         return result
     },
 
-    async downloadAvatar(context, params) {
+    async downloadAvatar(context) {
         let result = await axios.get(`/api/v1/farmer/farmers/${context.state.farmer.id}/avatar`,
             {
                 responseType: 'arraybuffer'

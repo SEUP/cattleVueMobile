@@ -21,7 +21,7 @@
 
 <script>
 
-    import {get, sync} from "vuex-pathify"
+    import {get} from "vuex-pathify"
 
     export default {
         name: "FarmerAvatar",
