@@ -1,6 +1,7 @@
 
 const state = {
     isLoad : false,
+    stack : 0
 }
 
 const getters = {}
@@ -17,15 +18,21 @@ const actions = {
     },
 
     showLoad : async (context) => {
+        context.state.stack+=1
         context.commit("setLoad",true)
     },
 
+
     dismissLoad : async (context) => {
         setTimeout(
-            context.commit("setLoad",false),
+            () => {
+               context.state.stack -= 1
+               if(context.state.stack == 0) {
+                   context.commit("setLoad",false)
+               }
+            },
             500
         )
-
     }
 }
 

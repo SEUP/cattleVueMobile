@@ -54,7 +54,6 @@
             //fetch neccessery data
             await store.dispatch("farmer/getFarmer")
             await store.dispatch("farmer/downloadAvatar")
-
             next()
         },
         computed: {

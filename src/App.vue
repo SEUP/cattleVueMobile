@@ -8,16 +8,17 @@
 <script>
     import axios from "@/axios"
     import Loading from "./components/Share/Loading";
-    import {call} from "vuex-pathify"
 
     export default {
         name: "App",
         components: {Loading},
+        data: () => ({}),
         methods: {
-            showLoad : async function(){
+            showLoad: async function () {
                 await this.$store.dispatch("loading/showLoad")
             },
-            dismissLoad : async function(){
+            dismissLoad: async function () {
+
                 await this.$store.dispatch("loading/dismissLoad")
             }
         },
@@ -25,7 +26,7 @@
 
             //check auth
             let storage = window.localStorage
-            if(storage.getItem('token')) {
+            if (storage.getItem('token')) {
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + storage.getItem('token');
             }
 
@@ -54,10 +55,9 @@
                 },
                 error => {
                     this.$emit("response-error");
-                    console.log(error.response.status);
                     if (error.response.status == 422) {
                         this.$store.dispatch("login/logout")
-                        this.$router.push({name : 'home'})
+                        this.$router.push({name: 'home'})
                     }
                     return Promise.reject(error);
                 }
