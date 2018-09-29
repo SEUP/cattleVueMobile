@@ -11,7 +11,7 @@
                                 <h2 class="text-truncate">{{farmer.firstname}} {{farmer.lastname}}</h2>
                             </v-flex>
                             <v-flex xs6 class="pa-1">
-                                <v-btn depressed color="success" block>เลือกภาพ</v-btn>
+                                <farmer-select-avatar/>
                             </v-flex>
                             <v-flex xs6 class="pa-1">
                                 <farmer-capture-avatar/>
@@ -34,15 +34,17 @@
 
 <script>
 
-    import {get,sync} from 'vuex-pathify'
-    import FarmerAvatar from "@/components/Farmer/FarmerAvatar";
-    import FarmerProfileCard from "@/components/Farmer/FarmerProfileCard";
-    import FarmerCaptureAvatar from "@/components/Farmer/FarmerCaptureAvatar";
     import store from "@/store/"
+    import {get,sync} from 'vuex-pathify'
+    import FarmerAvatar from "@/components/Farmer/Avatar/FarmerAvatar";
+    import FarmerProfileCard from "@/components/Farmer/FarmerProfileCard";
+    import FarmerCaptureAvatar from "@/components/Farmer/Avatar/FarmerCaptureAvatar";
+    import FarmerSelectAvatar from "@/components/Farmer/Avatar/FarmerSelectAvatar";
 
     export default {
         name: 'App',
         components: {
+            FarmerSelectAvatar,
             FarmerCaptureAvatar,
             FarmerProfileCard,
             FarmerAvatar

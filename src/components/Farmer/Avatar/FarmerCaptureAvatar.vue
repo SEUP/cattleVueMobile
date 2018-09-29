@@ -1,12 +1,18 @@
 <template>
     <div>
-        <v-btn @click="captureImage()" depressed color="success" block>ถ่ายภาพ</v-btn>
+        <v-btn @click="captureImage()" depressed :color="buttonColor" block>ถ่ายภาพ</v-btn>
     </div>
 </template>
 
 <script>
     export default {
         name: "FarmerCaptureAvatar",
+        props : {
+            buttonColor : {
+                type : [String],
+                default : "primary"
+            }
+        },
         methods: {
             captureImage: async function () {
                 let options = {
@@ -23,7 +29,7 @@
                         await this.$store.dispatch("farmer/uploadAvatar",uri)
                     },
                     async (error) => {
-                        console.log(error)
+                        window.console.log(error)
                     },
                     options
                 )

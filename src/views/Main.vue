@@ -36,10 +36,10 @@
 
 <script>
 
-    import HelloWorld from "@/components/HelloWorld"
-    import {get, sync} from "vuex-pathify"
-    import FarmerAvatar from "@/components/Farmer/FarmerAvatar";
     import store from "@/store/"
+    import {get, sync} from "vuex-pathify"
+
+    import FarmerAvatar from "@/components/Farmer/Avatar/FarmerAvatar";
 
     export default {
         name: 'App',
