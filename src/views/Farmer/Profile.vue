@@ -23,6 +23,7 @@
             <v-layout column class="mt-3">
                 <v-flex>
                     <farmer-profile-card/>
+                    <farmer-logout/>
                 </v-flex>
 
             </v-layout>
@@ -39,10 +40,12 @@
     import FarmerProfileCard from "@/components/Farmer/Profile/FarmerProfileCard";
     import FarmerCaptureAvatar from "@/components/Farmer/Avatar/FarmerCaptureAvatar";
     import FarmerSelectAvatar from "@/components/Farmer/Avatar/FarmerSelectAvatar";
+    import FarmerLogout from "@/components/Farmer/Profile/FarmerLogout";
 
     export default {
         name: 'App',
         components: {
+            FarmerLogout,
             FarmerSelectAvatar,
             FarmerCaptureAvatar,
             FarmerProfileCard,

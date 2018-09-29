@@ -22,7 +22,6 @@ const actions = {
         context.commit("setLoad",true)
     },
 
-
     dismissLoad : async (context) => {
         setTimeout(
             () => {

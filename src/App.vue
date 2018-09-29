@@ -55,7 +55,7 @@
                 },
                 error => {
                     this.$emit("response-error");
-                    if (error.response.status == 422) {
+                    if (error.response.status == 401) {
                         this.$store.dispatch("login/logout")
                         this.$router.push({name: 'home'})
                     }

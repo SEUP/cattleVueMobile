@@ -156,6 +156,10 @@ const actions = {
                     return null
                 })
         return result
+    },
+
+    async clearState(context){
+        context.commit('clearState')
     }
 
 }

@@ -15,23 +15,24 @@ const mutations = {
 const actions = {
 
     login: async ({commit,state}) => {
-        console.log("user/login")
+        window.console.log("user/login")
         let result = await axios.post('/api/v1/farmer/login', state.loginForm)
             .then((r) => {
-                console.log("login/login", r.data)
+                window.console.log("login/login", r.data)
                 let storage = window.localStorage;
                 storage.setItem("token", r.data.token)
                 axios.defaults.headers.common['Authorization'] = `Bearer ${storage.getItem('token')}`;
-                console.log('login/login', 'finish')
+                window.console.log('login/login', 'finish')
                 return r.data;
             }).catch((error) => {
-                console.error(error.stack)
+                window.console.error(error.stack)
             })
         commit("resetLoginForm")
         return result
     },
-    logout : async ({commit,state}) =>{
+    logout : async (context) =>{
         localStorage.removeItem("token")
+        context.dispatch("farmer/clearState",{},{root:true})
     }
 
 }
