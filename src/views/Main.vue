@@ -11,7 +11,7 @@
                             <h2 class="text-truncate">{{farmer.firstname}} {{farmer.lastname}}</h2>
                         </v-flex>
                         <v-flex xs6 class="pa-1">
-                            <v-btn depressed color="success" block>ข้อมูลผู้ใช้</v-btn>
+                            <v-btn :to="{name : `farmer-profile`}" depressed color="success" block>ข้อมูลผู้ใช้</v-btn>
                         </v-flex>
                         <v-flex xs6 class="pa-1">
                             <v-btn depressed color="success" block>ข้อมูลฟาร์ม</v-btn>
