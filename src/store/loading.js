@@ -31,7 +31,7 @@ const actions = {
                    context.commit("setLoad",false)
                }
             },
-            500
+            100
         )
     }
 }

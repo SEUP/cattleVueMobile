@@ -1,34 +1,33 @@
 <template>
-        <v-content v-if="farmer">
-            <v-container fluid>
-                <v-layout row align-center>
-                    <v-flex class="">
-                        <farmer-avatar/>
-                    </v-flex>
-                    <v-flex xs8>
-                        <v-layout row wrap>
-                            <v-flex xs12>
-                                <h2 class="text-truncate">{{farmer.firstname}} {{farmer.lastname}}</h2>
-                            </v-flex>
-                            <v-flex xs6 class="pa-1">
-                                <farmer-select-avatar/>
-                            </v-flex>
-                            <v-flex xs6 class="pa-1">
-                                <farmer-capture-avatar/>
-                            </v-flex>
-                        </v-layout>
-                    </v-flex>
-                </v-layout>
+    <v-content v-if="farmer">
+        <v-container fluid>
+            <v-layout row align-center>
+                <v-flex class="">
+                    <farmer-avatar/>
+                </v-flex>
+                <v-flex xs8>
+                    <v-layout row wrap>
+                        <v-flex xs12>
+                            <h2 class="text-truncate">{{farmer.firstname}} {{farmer.lastname}}</h2>
+                        </v-flex>
+                        <v-flex xs6 class="pa-1">
+                            <farmer-select-avatar/>
+                        </v-flex>
+                        <v-flex xs6 class="pa-1">
+                            <farmer-capture-avatar/>
+                        </v-flex>
+                    </v-layout>
+                </v-flex>
+            </v-layout>
 
-                <v-layout column class="mt-3">
-                    <v-flex>
-                        <farmer-profile-card/>
-                    </v-flex>
+            <v-layout column class="mt-3">
+                <v-flex>
+                    <farmer-profile-card/>
+                </v-flex>
 
-                </v-layout>
-            </v-container>
-
-        </v-content>
+            </v-layout>
+        </v-container>
+    </v-content>
 
 </template>
 

@@ -34,17 +34,44 @@
             <v-divider/>
             <v-list-tile>
                 <v-list-tile-content>
-                    <v-list-tile-title>ที่อยู่</v-list-tile-title>
+                    <v-list-tile-title>เลขที่</v-list-tile-title>
                     <v-list-tile-sub-title>
-                        <span style="font-weight: bold;">เลขที่ </span>
                         {{farmer.house_address ? farmer.house_address : "-" }}
-                        <span style="font-weight: bold;">ตำบล </span>
+                    </v-list-tile-sub-title>
+                </v-list-tile-content>
+            </v-list-tile>
+            <v-divider/>
+            <v-list-tile>
+                <v-list-tile-content>
+                    <v-list-tile-title>ตำบล</v-list-tile-title>
+                    <v-list-tile-sub-title>
                         {{farmer.houseDistrict.district_name ? farmer.houseDistrict.district_name : "-" }}
-                        <span style="font-weight: bold;">อำเภอ </span>
+                    </v-list-tile-sub-title>
+                </v-list-tile-content>
+            </v-list-tile>
+            <v-divider/>
+            <v-list-tile>
+                <v-list-tile-content>
+                    <v-list-tile-title>อำเภอ</v-list-tile-title>
+                    <v-list-tile-sub-title>
                         {{farmer.houseAmphur.amphur_name ? farmer.houseAmphur.amphur_name : "-" }}<br/>
-                        <span style="font-weight: bold;">จังหวัด </span>
+                    </v-list-tile-sub-title>
+                </v-list-tile-content>
+            </v-list-tile>
+            <v-divider/>
+            <v-list-tile>
+                <v-list-tile-content>
+                    <v-list-tile-title>จังหวัด</v-list-tile-title>
+                    <v-list-tile-sub-title>
                         {{farmer.houseProvince.province_name ? farmer.houseProvince.province_name : "-" }}
-                        <span style="font-weight: bold;">รหัสไปรษณีย์ </span>
+                    </v-list-tile-sub-title>
+                </v-list-tile-content>
+            </v-list-tile>
+            <v-divider/>
+            <v-list-tile>
+                <v-list-tile-content>
+                    <v-list-tile-title>รหัสไปรษณีย์</v-list-tile-title>
+                    <v-list-tile-sub-title>
                         {{farmer.house_zipcode ? farmer.house_zipcode : "-" }}
                     </v-list-tile-sub-title>
                 </v-list-tile-content>
@@ -64,10 +91,11 @@
 
 <script>
     import {get} from "vuex-pathify"
+
     import FarmerEditProfileDialog from "./FarmerEditProfileDialog";
 
     export default {
-        name: "FarmerProfileCard",
+        name: "Farm",
         components: {FarmerEditProfileDialog},
         computed: {
             farmer: get("farmer/farmer"),

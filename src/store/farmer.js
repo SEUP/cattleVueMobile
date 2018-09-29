@@ -90,6 +90,35 @@ const actions = {
             })
         return result
     },
+    async updateFarm(context, params) {
+        replaceEmptyWithNull(params);
+        if (params.id) {
+            let result = await axios.put(`/api/v1/farmer/farmers/${context.state.farmer.id}/farms/${params.id}`, params)
+                .then(async (response) => {
+                    context.commit("setFarm", response.data);
+                    return response.data
+                })
+                .catch((error) => {
+                    window.console.log(error.stack);
+                    context.dispatch("error/setError", error.response.data, {root: true});
+                    return null
+                })
+            return result
+        } else {
+            let result = await axios.post(`/api/v1/farmer/farmers/${context.state.farmer.id}/farms`, params)
+                .then(async (response) => {
+                    window.console.log('success', response.data);
+                    context.commit("setFarm", response.data)
+                    return response.data;
+                })
+                .catch((error) => {
+                    window.console.log(error.stack)
+                    return null
+                })
+            return result
+        }
+    },
+
     async downloadAvatar(context) {
         let result = await axios.get(`/api/v1/farmer/farmers/${context.state.farmer.id}/avatar`,
             {

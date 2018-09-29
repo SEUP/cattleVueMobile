@@ -1,5 +1,5 @@
 <template>
-    <div v-if="form">
+    <div>
         <div @click.stop="dialog = true">
             <slot>
                 <v-btn flat icon>
@@ -46,22 +46,21 @@
                                       :error-messages="error.phone_number"/>
                         <v-text-field label="ที่อยู่ปัจจุบัน" v-model="form.house_address"/>
 
-                        <!--<district-select v-if="form" @change="updateDistrictSelect"-->
-                        <!--:valProvince="form.house_province"-->
-                        <!--:valAmphur="form.house_amphur"-->
-                        <!--:valDistrict="form.house_district"-->
 
-                        <!--&gt;</district-select>-->
+                        <district-select v-if="form" @change="updateDistrictSelect"
+                        :valProvince="form.house_province"
+                        :valAmphur="form.house_amphur"
+                        :valDistrict="form.house_district"></district-select>
 
                         <v-text-field label="รหัสไปรษณีย์" v-model="form.house_zipcode" hide-details/>
                         <br>
-                        <v-text-field label="Username" v-model="form.username"
-                                      :error-messages="error.username"/>
-                        <v-text-field label="Email" v-model="form.email"/>
-                        <v-text-field type="password" label="Password" v-model="form.password"
-                                      :error-messages="error.password"/>
-                        <v-text-field type="password" label="Confirmed password" v-model="form.password_confirmation"
-                                      :error-messages="error.password_confirmation"/>
+                        <!--<v-text-field label="Username" v-model="form.username"-->
+                                      <!--:error-messages="error.username"/>-->
+                        <!--<v-text-field label="Email" v-model="form.email"/>-->
+                        <!--<v-text-field type="password" label="Password" v-model="form.password"-->
+                                      <!--:error-messages="error.password"/>-->
+                        <!--<v-text-field type="password" label="Confirmed password" v-model="form.password_confirmation"-->
+                                      <!--:error-messages="error.password_confirmation"/>-->
                     </v-flex>
 
                 </v-card-text>
@@ -72,15 +71,24 @@
 </template>
 <script>
     import {get} from "vuex-pathify"
+    import _ from "lodash"
+    import DistrictSelect from "../../Share/DistrictSelect";
 
     export default {
         name: "FarmerEditProfileDialog",
-        components: {},
+        components: {DistrictSelect},
         data: () => ({
             dialog: false,
+            form : null
         }),
+        watch : {
+            dialog : function() {
+                this.form = _.cloneDeep(this.farmer)
+                this.$store.dispatch('error/resetError')
+            }
+        },
         computed: {
-            form: get("farmer/farmer"),
+            farmer: get("farmer/farmer"),
             error: get("error/error")
         },
         methods: {
@@ -102,7 +110,6 @@
             updateFarmer: async function () {
                 let form = await this.$store.dispatch("farmer/updateFarmer", this.form);
                 if (form) {
-                    alert("บันทึกข้อมูลเเล้ว")
                     this.dialog = false
                 }
             }

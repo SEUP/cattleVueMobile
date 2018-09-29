@@ -1,32 +1,36 @@
 <template>
-    <div>
+    <v-content>
+        <v-container fluid>
+            <v-layout column class="">
+                <v-flex>
+                    <farmer-farm-card/>
+                </v-flex>
+            </v-layout>
+        </v-container>
+    </v-content>
 
-    </div>
 </template>
 
 <script>
 
-    import {get,sync} from 'vuex-pathify'
+    import store from "@/store/"
+    import FarmerFarmCard from "@/components/Farmer/Farm/FarmerFarmCard";
 
     export default {
         name: 'App',
-        components: {
-
-        },
+        components: {FarmerFarmCard},
         async beforeRouteEnter(to, from, next) {
             //fetch neccessery data
+            await store.dispatch("farmer/getFarmer")
             next()
         },
-        computed: {
-
-        },
+        computed: {},
         async mounted() {
             await this.initial();
         },
         methods: {
             initial: async function () {
                 await this.$store.dispatch("farmer/getFarmer")
-                await this.$store.dispatch("farmer/downloadAvatar")
             }
         }
 

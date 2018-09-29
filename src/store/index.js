@@ -6,6 +6,7 @@ import loading from './loading';
 import login from "./login"
 import farmer from "./farmer"
 import error from "./error"
+import choice from "./choice/"
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ const modules = {
     login : login,
     farmer : farmer,
     error : error,
+    choice : choice,
 }
 
 export default new Vuex.Store({
