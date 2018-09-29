@@ -22,15 +22,14 @@
                 await this.$store.dispatch("loading/dismissLoad")
             }
         },
-        created() {
-
-            //check auth
+        mounted() {
             let storage = window.localStorage
             if (storage.getItem('token')) {
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + storage.getItem('token');
+                this.$router.replace({name : 'main'})
             }
-
-            //
+        },
+        created() {
 
             this.$on("before-request", this.showLoad);
             this.$on("request-error", this.dismissLoad);
