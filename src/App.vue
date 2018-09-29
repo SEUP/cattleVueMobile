@@ -23,6 +23,14 @@
         },
         created() {
 
+            //check auth
+            let storage = window.localStorage
+            if(storage.getItem('token')) {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + storage.getItem('token');
+            }
+
+            //
+
             this.$on("before-request", this.showLoad);
             this.$on("request-error", this.dismissLoad);
             this.$on("after-response", this.dismissLoad);
