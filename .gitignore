@@ -2,7 +2,7 @@
 /node_modules
 /dist
 /platforms
-/plugins
+
 www
 
 # local env files
