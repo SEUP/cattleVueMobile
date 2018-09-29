@@ -38,7 +38,8 @@
 
     import HelloWorld from "@/components/HelloWorld"
     import {get, sync} from "vuex-pathify"
-    import FarmerAvatar from "../components/Farmer/FarmerAvatar";
+    import FarmerAvatar from "@/components/Farmer/FarmerAvatar";
+    import store from "@/store/"
 
     export default {
         name: 'App',
@@ -48,6 +49,8 @@
         },
         async beforeRouteEnter(to, from, next) {
             //fetch neccessery data
+            await store.dispatch("farmer/getFarmer")
+            await store.dispatch("farmer/downloadAvatar")
             next()
         },
         computed: {
@@ -59,8 +62,7 @@
         },
         methods: {
             initial: async function () {
-                await this.$store.dispatch("farmer/getFarmer")
-                await this.$store.dispatch("farmer/downloadAvatar")
+
             }
         }
 

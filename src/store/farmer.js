@@ -83,6 +83,21 @@ const actions = {
         return result
     },
 
+    async uploadAvatar(context, dataUrl) {
+        let url = dataUrl
+
+        let result = await
+            axios.post(`/api/v1/farmer/farmers/${context.state.farmer.id}/avatar`, {img: url})
+                .then((response) => {
+                    context.commit("setAvatar", dataUrl)
+                    return response.data
+                })
+                .catch((error) => {
+                    context.dispatch("error/setError", error.response.data, {root: true});
+                    return null
+                })
+        return result
+    }
 
 }
 

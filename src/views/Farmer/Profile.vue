@@ -14,7 +14,7 @@
                                 <v-btn depressed color="success" block>เลือกภาพ</v-btn>
                             </v-flex>
                             <v-flex xs6 class="pa-1">
-                                <v-btn depressed color="success" block>ถ่ายภาพ</v-btn>
+                                <farmer-capture-avatar/>
                             </v-flex>
                         </v-layout>
                     </v-flex>
@@ -37,16 +37,22 @@
     import {get,sync} from 'vuex-pathify'
     import FarmerAvatar from "@/components/Farmer/FarmerAvatar";
     import FarmerProfileCard from "@/components/Farmer/FarmerProfileCard";
+    import FarmerCaptureAvatar from "@/components/Farmer/FarmerCaptureAvatar";
+    import store from "@/store/"
 
     export default {
         name: 'App',
         components: {
+            FarmerCaptureAvatar,
             FarmerProfileCard,
             FarmerAvatar
 
         },
         async beforeRouteEnter(to, from, next) {
             //fetch neccessery data
+            await store.dispatch("farmer/getFarmer")
+            await store.dispatch("farmer/downloadAvatar")
+
             next()
         },
         computed: {
@@ -58,8 +64,6 @@
         },
         methods: {
             initial: async function () {
-                await this.$store.dispatch("farmer/getFarmer")
-                await this.$store.dispatch("farmer/downloadAvatar")
             }
         }
 
