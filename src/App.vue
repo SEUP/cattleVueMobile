@@ -22,12 +22,14 @@
                 await this.$store.dispatch("loading/dismissLoad")
             }
         },
-        mounted() {
+        async mounted() {
             let storage = window.localStorage
             if (storage.getItem('token')) {
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + storage.getItem('token');
                 this.$router.replace({name : 'main'})
             }
+
+            let provinces = await this.$store.dispatch('choice/province/getProvinces');
         },
         created() {
 
