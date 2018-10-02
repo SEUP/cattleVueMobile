@@ -29,6 +29,11 @@ export default new Router({
             path: '/main/farm',
             name: 'farmer-farm',
             component: loadView('Farmer/Farm')
+        },
+        {
+            path: '/cattle/male/view',
+            name: 'male-view',
+            component: loadView('Cattle/Male/view')
         }
     ]
 })

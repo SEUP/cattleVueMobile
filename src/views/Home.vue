@@ -1,10 +1,10 @@
 <template>
-   <v-content>
+   <v-content class="bg">
       <v-container fluid fill-height>
-        <v-layout align-center justify-center>
-          <v-flex xs12 sm8 md4>
-            <v-layout justify-center class="mb-5">
-              <img src="@/assets/logo.png"/>
+        <v-layout align-center justify-center> 
+          <v-flex xs12 sm8 md4  >
+            <v-layout  justify-center   >
+              <img  style="height:250px;" src="@/assets/logob.png"/> 
             </v-layout>
           <login-form/>
           </v-flex>
@@ -13,6 +13,8 @@
    </v-content>
 
 </template>
+
+ 
 
 <script>
 // @ is an alias to /src
