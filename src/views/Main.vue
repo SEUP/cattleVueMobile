@@ -103,7 +103,11 @@
 
         },
         methods: {
+            getCattle: async function(){
+               await store.dispatch("cattle/getCattle",this.farmer.id)
+            },
             initial: async function () {
+                    this.getCattle();
                     this.dialogx = true;
                 },
                 close() {

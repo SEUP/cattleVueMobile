@@ -7,6 +7,7 @@
 
     export default {
         name: "Base",
+       
         computed: {
             error: get("error/error")
         }
