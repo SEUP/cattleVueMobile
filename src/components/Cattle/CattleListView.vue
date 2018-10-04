@@ -20,9 +20,19 @@
                     </v-layout>
                     <v-divider light></v-divider>
                     <v-layout row>
-                        <v-flex xs12 class="box-green pd-10">
+                        <v-flex xs12 class="box-green pd-10" @click="close()">
                             <center>
-                                <h2 class="nm" @click="close()">ดูรายละเอียด</h2>
+                                <h3 class="nm"  @click="close()"><v-icon class="light">mdi-eye</v-icon> ดูข้อมูล</h3>
+                            </center>
+                        </v-flex>
+                            <v-flex xs12 class="box-greenFX pd-10">
+                            <center>
+                                <h3 class="nm" @click="close()"><v-icon class="light">mdi mdi-settings</v-icon>จัดการ</h3>
+                            </center>
+                        </v-flex>
+                            <v-flex xs12 class="box-red pd-10">
+                            <center>
+                                <h3 class="nm" @click="deleteCattle()"><v-icon class="light">mdi-delete</v-icon>ลบ</h3>
                             </center>
                         </v-flex>
                     </v-layout>
@@ -30,6 +40,7 @@
             </v-flex>
         </v-layout>
 
+        
 
     </v-content>
 </template>
@@ -59,6 +70,13 @@
                 } else {
                     return data;
                 }
+            },
+            close(){
+                alert('hey');
+            },
+            deleteCattle: async function (){
+                 confirm("Press a button!");
+
             }
         }
     }
