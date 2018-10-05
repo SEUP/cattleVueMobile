@@ -23,6 +23,18 @@
             <v-layout column class="ma-3">
               <v-btn :to="{name : `male-view`}">พ่อพันธุ์</v-btn>
             </v-layout>
+            
+            <v-layout column class="ma-3">
+              <v-btn :to="{name : `female-view`}">แม่พันธุ์</v-btn>
+            </v-layout>
+
+            <v-layout column class="ma-3">
+              <v-btn :to="{name : `khun-view`}">โคขุน</v-btn>
+            </v-layout>
+
+            <v-layout column class="ma-3">
+              <v-btn :to="{name : `young-view`}">โคแรกเกิด</v-btn>
+            </v-layout>
         </v-container>
 
         <v-dialog v-model="dialogx" width="500">

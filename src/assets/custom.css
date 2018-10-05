@@ -194,6 +194,31 @@ background: linear-gradient(to right, rgba(235,210,82,1) 0%, rgba(255,99,125,1) 
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebd252', endColorstr='#ff637d', GradientType=1 );
 
 }
+.box-pink{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f731d3+0,f73169+99 */
+background: #f731d3; /* Old browsers */
+background: -moz-linear-gradient(left, #f731d3 0%, #f73169 99%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #f731d3 0%,#f73169 99%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #f731d3 0%,#f73169 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f731d3', endColorstr='#f73169',GradientType=1 ); /* IE6-9 */
+}
+
+.box-brown{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e55b2d+0,bc8725+99 */
+background: #e55b2d; /* Old browsers */
+background: -moz-linear-gradient(left, #e55b2d 0%, #bc8725 99%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #e55b2d 0%,#bc8725 99%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #e55b2d 0%,#bc8725 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e55b2d', endColorstr='#bc8725',GradientType=1 ); /* IE6-9 */
+}
+.box-greenLNB{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#20a06b+5,bf2ad3+99 */
+background: #20a06b; /* Old browsers */
+background: -moz-linear-gradient(left, #20a06b 5%, #bf2ad3 99%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #20a06b 5%,#bf2ad3 99%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #20a06b 5%,#bf2ad3 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#20a06b', endColorstr='#bf2ad3',GradientType=1 ); /* IE6-9 */
+}
 .box-green {
   background: rgba(0, 204, 153, 1);
   background: -moz-linear-gradient(

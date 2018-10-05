@@ -5,7 +5,10 @@
                 <v-card>
                     <v-layout>
                         <v-flex xs5 class="pd-20">
-                            <v-img class="circle50" :src="baseUrl+cattle.image_url" height="90px" width="90px" contain></v-img>
+
+                            <v-img v-if="cattle.image_url" class="circle50" :src="image(cattle.image_url)" height="90px" width="90px" contain></v-img>
+                            <img v-else class="circle50" src="@/assets/cattle.png" height="90px" width="90px" contain />
+                         
                         </v-flex>
                         <v-flex xs7>
                             <v-card-title primary-title>
@@ -22,17 +25,23 @@
                     <v-layout row>
                         <v-flex xs12 class="box-green pd-10" @click="close()">
                             <center>
-                                <h3 class="nm"  @click="close()"><v-icon class="light">mdi-eye</v-icon> ดูข้อมูล</h3>
+                                <h3 class="nm" @click="close()">
+                                    <v-icon class="light">mdi-eye</v-icon> ดูข้อมูล
+                                </h3>
                             </center>
                         </v-flex>
-                            <v-flex xs12 class="box-greenFX pd-10">
+                        <v-flex xs12 class="box-greenFX pd-10">
                             <center>
-                                <h3 class="nm" @click="close()"><v-icon class="light">mdi mdi-settings</v-icon>จัดการ</h3>
+                                <h3 class="nm" @click="close()">
+                                    <v-icon class="light">mdi mdi-settings</v-icon>จัดการ
+                                </h3>
                             </center>
                         </v-flex>
-                            <v-flex xs12 class="box-red pd-10">
+                        <v-flex xs12 class="box-red pd-10">
                             <center>
-                                <h3 class="nm" @click="deleteCattle()"><v-icon class="light">mdi-delete</v-icon>ลบ</h3>
+                                <h3 class="nm" @click="removeCattle(cattle)">
+                                    <v-icon class="light">mdi-delete</v-icon>ลบ
+                                </h3>
                             </center>
                         </v-flex>
                     </v-layout>
@@ -40,7 +49,7 @@
             </v-flex>
         </v-layout>
 
-        
+
 
     </v-content>
 </template>
@@ -54,30 +63,52 @@
         name: "CattleListView",
         data() {
             return {
-                baseUrl: 'http://mct.ict.up.ac.th:10008/'
+                baseUrl: 'http://mct.ict.up.ac.th:10008/',
+                cattlesData: {},
             }
         },
         computed: {
             getAge: get("cattle/getAge"),
+            cattles: get("cattle/cattles"),
         },
         props: {
-            cattles: {}
+            params: {}
+        },
+        async mounted() {
+             this.initial();
         },
         methods: {
-            notNull(data) {
-                if (data == null) {
-                    return 'ยังไม่มีข้อมูล';
-                } else {
-                    return data;
-                }
-            },
-            close(){
-                alert('hey');
-            },
-            deleteCattle: async function (){
-                 confirm("Press a button!");
+            initial: async function () {
+                    this.getCattle();
+                },
+                image(image){
 
-            }
+                    if(image){return this.baseUrl+image}
+                    else{ return '@/assets/logo.png';} 
+                },
+                getCattle: async function () {
+
+                        await store.dispatch("cattle/getCattle", this.params)
+                     
+                    },  
+                    notNull(data) {
+                        if (data == null) { 
+                            return 'ยังไม่มีข้อมูล';
+                        } else {
+                            return data;
+                        }
+                    },
+
+                    close() {
+                        alert('hey');
+                    },
+                    removeCattle: async function (params) {
+                        let check = confirm("คุณแน่ใจใช่ไหมที่จะลบข้อมูล");
+                        if (check) {
+                            await store.dispatch("cattle/removeCattle", params)
+                        }
+                        this.initial();
+                    },
         }
     }
 </script>

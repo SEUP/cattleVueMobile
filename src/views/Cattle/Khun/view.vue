@@ -50,13 +50,13 @@
 
             ActionBar: async function() {
                 let params = {
-                    bg: 'box-purple',
-                    title: 'พ่อพันธุ์',
+                    bg: 'box-brown',
+                    title: 'โคขุน',
                     iconLeft: 'mdi-arrow-left',
 
                     btnFirst: true,
                     iconFirst: 'mdi-plus-circle',
-                    pathFirst: '/cattle/male/add',
+                    pathFirst: '/cattle/khun/add',
  
                 };
                 await store.dispatch("mobile/customActionBar",params) 
@@ -65,7 +65,7 @@
             getCattle: async function () {
                     this.params = {
                         farmerId: this.farmer.id,
-                        cattle_type: '020100',
+                        cattle_type: '020300',
                     }
                 await store.dispatch("cattle/getCattle", this.params)
              

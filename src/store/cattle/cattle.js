@@ -35,7 +35,9 @@ const actions = {
     async getCattle(context,params) { 
         let result = await axios.get('/api/v1/farmer/farmer/'+params.farmerId+'/cattles',{params:params})
         .then(async (response) => {
-            context.commit('setCattle',response.data); 
+            let u = response.data;
+            console.log(u.data);
+            context.commit('setCattle',u.data); 
             return result;
         })
         .catch((error) => {  
@@ -45,13 +47,36 @@ const actions = {
         
       return result   
      },
-   
-  
-  
+
+     async createCattle(context,params){
+        let result = await axios.post(`/api/v1/farmer/farmer/${params.farmer_id}/cattles`, params)
+        .then((response) => {
+            alert('บันทึกข้อมูลสำเร็จ');
+          return response.data
+        })
+        .catch((error) => {
+          context.dispatch("error/setError", error.response.data, {root: true});
+          return null
+        });
+      return result
+     },
+
+     async removeCattle(context,params){ 
  
-
-    
-
+            let result = await axios.delete(`/api/v1/farmer/farmer/${params.farmer_id}/cattles/` + params.id) //return True or False
+              .then((response) => {
+                  alert('ลบข้อมูลสำเร็จ');
+                return response.data
+              })
+              .catch((error) => {
+                alert('เกิดข้อผิดพลาดในการลบข้อมูล');
+                context.dispatch("error/setError", error.response.data, {root: true});
+                return null
+              });
+            return result
+        
+     },
+   
     async clearState(context){
         context.commit('clearState')
     }

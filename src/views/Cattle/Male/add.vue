@@ -2,7 +2,7 @@
     <v-content>
         <ActionBar />
         <v-container>
-            <CattleListView :params="params" />
+            <AddForm :addData="addData"/>
         </v-container>
          
     </v-content>
@@ -15,25 +15,25 @@
     } from "vuex-pathify"
 
     import FarmerAvatar from "@/components/Farmer/Avatar/FarmerAvatar";
-    import CattleListView from "@/components/Cattle/CattleListView";
+    import AddForm from "@/components/Cattle/AddForm";
     import ActionBar from "@/components/Menu/ActionBar";
     export default {
         name: 'App',
         components: {
-            FarmerAvatar,
-            CattleListView,
-            ActionBar
+            FarmerAvatar, 
+            ActionBar,
+            AddForm
         },
         data() {
             return {
-                params:{},
+                addData:{},
             }
         },
         async beforeRouteEnter(to, from, next) {
             //fetch neccessery data
             await store.dispatch("farmer/getFarmer")
             await store.dispatch("farmer/downloadAvatar")
-           // await store.dispatch("mobile/defaultActionBar")
+            await store.dispatch("mobile/defaultActionBar",'เพิ่มพ่อพันธุ์')
 
             next()
         },
@@ -46,34 +46,30 @@
         async mounted() {
             await this.initial();
         },
-        methods: {
+        methods: { 
+            setDataForAdd: async function () {
+                this.addData = {
+                        farmer_id :this.farmer.id,
+                        name:'',
+                       cattle_status: "010100",
+                        cattle_type: "020100",
+                        cattle_sex: "030100",
+                        cattle_breeding: null, 
 
-            ActionBar: async function() {
-                let params = {
-                    bg: 'box-purple',
-                    title: 'พ่อพันธุ์',
-                    iconLeft: 'mdi-arrow-left',
-
-                    btnFirst: true,
-                    iconFirst: 'mdi-plus-circle',
-                    pathFirst: '/cattle/male/add',
- 
-                };
-                await store.dispatch("mobile/customActionBar",params) 
+                }
             },
-
             getCattle: async function () {
-                    this.params = {
+                    let params = {
                         farmerId: this.farmer.id,
                         cattle_type: '020100',
                     }
-                await store.dispatch("cattle/getCattle", this.params)
-             
+                    await store.dispatch("cattle/getCattle", params)
+               
                 },
-                initial: async function () {
-                        this.ActionBar();
+                initial: async function () { 
                         this.getCattle();
-                    },
+                        this.setDataForAdd();
+                  },
 
         }
 
