@@ -16,7 +16,8 @@
                     </h3>
                     <v-divider light></v-divider>
                     <h2>อาการ</h2>
-                     <v-dialog ref="dialog0" v-model="datePicker[0].dialog" :return-value.sync="datePicker[0].date"
+
+                    <v-dialog ref="dialog0" v-model="datePicker[0].dialog" :return-value.sync="datePicker[0].date"
                         persistent lazy full-width width="290px">
                         <v-text-field slot="activator" :value="dateTH(datePicker[0].date)" :label="datePicker[0].key"
                             readonly></v-text-field>
@@ -26,31 +27,51 @@
                             <v-btn flat color="primary" @click.native=" $refs.dialog0.save(datePicker[0].date)">OK</v-btn>
                         </v-date-picker>
                     </v-dialog>
-                    <hr>
-                    <h2>การรักษา</h2>
-                    <v-dialog ref="dialog1" v-model="datePicker[1].dialog" :return-value.sync="datePicker[1].date"
-                       persistent lazy full-width width="290px">
-                       <v-text-field slot="activator" :value="dateTH(datePicker[1].date)" :label="datePicker[1].key"
-                           readonly></v-text-field>
-                       <v-date-picker v-model="datePicker[1].date" scrollable>
-                           <v-spacer></v-spacer>
-                           <v-btn flat color="primary" @click="datePicker[1].dialog = false">Cancel</v-btn>
-                           <v-btn flat color="primary" @click.native=" $refs.dialog1.save(datePicker[1].date)">OK</v-btn>
-                       </v-date-picker>
-                   </v-dialog>
 
-                    <hr>
+                    <v-text-field label="ลักษณะอาการเบื้อต้น"></v-text-field>
+
+                    <v-select :items="notNull(items[0].key)" item-text="choice" item-value="id" :label="items[0].id"
+                        persistent-hint single-line></v-select>
+
+                    <v-select :items="notNull(items[1].key)" item-text="choice" item-value="id" :label="items[1].id"
+                        persistent-hint single-line></v-select>
+
+ 
+                    <h2>การรักษา</h2>
+
+                    <v-dialog ref="dialog1" v-model="datePicker[1].dialog" :return-value.sync="datePicker[1].date"
+                        persistent lazy full-width width="290px">
+                        <v-text-field slot="activator" :value="dateTH(datePicker[1].date)" :label="datePicker[1].key"
+                            readonly></v-text-field>
+                        <v-date-picker v-model="datePicker[1].date" scrollable>
+                            <v-spacer></v-spacer>
+                            <v-btn flat color="primary" @click="datePicker[1].dialog = false">Cancel</v-btn>
+                            <v-btn flat color="primary" @click.native=" $refs.dialog1.save(datePicker[1].date)">OK</v-btn>
+                        </v-date-picker>
+                    </v-dialog>
+
+                    <v-select :items="notNull(items[2].key)" item-text="choice" item-value="id" :label="items[2].id"
+                        persistent-hint single-line></v-select>
+
+                    <v-text-field label="วิธีการรักษา"></v-text-field>
+
+                    <v-text-field label="ยาที่รักษา"></v-text-field>
+                  
                     <h2>ผลการรักษา</h2>
+
                     <v-dialog ref="dialog2" v-model="datePicker[2].dialog" :return-value.sync="datePicker[2].date"
-                       persistent lazy full-width width="290px">
-                       <v-text-field slot="activator" :value="dateTH(datePicker[2].date)" :label="datePicker[2].key"
-                           readonly></v-text-field>
-                       <v-date-picker v-model="datePicker[2].date" scrollable>
-                           <v-spacer></v-spacer>
-                           <v-btn flat color="primary" @click="datePicker[2].dialog = false">Cancel</v-btn>
-                           <v-btn flat color="primary" @click.native=" $refs.dialog2.save(datePicker[2].date)">OK</v-btn>
-                       </v-date-picker>
-                   </v-dialog>
+                        persistent lazy full-width width="290px">
+                        <v-text-field slot="activator" :value="dateTH(datePicker[2].date)" :label="datePicker[2].key"
+                            readonly></v-text-field>
+                        <v-date-picker v-model="datePicker[2].date" scrollable>
+                            <v-spacer></v-spacer>
+                            <v-btn flat color="primary" @click="datePicker[2].dialog = false">Cancel</v-btn>
+                            <v-btn flat color="primary" @click.native=" $refs.dialog2.save(datePicker[2].date)">OK</v-btn>
+                        </v-date-picker>
+                    </v-dialog>
+                    
+                    <v-select :items="notNull(items[3].key)" item-text="choice" item-value="id" :label="items[3].id"
+                        persistent-hint single-line></v-select>
 
                     <v-btn v-if="!update" @click="createData()" large round class="box-green wh full-width">บันทึก</v-btn>
                     <v-btn v-else @click="updateData()" large round class="box-green wh full-width">แก้ไข</v-btn>
@@ -79,16 +100,21 @@
                     on: false
                 },
                 /*******DatePicker***************/
-                datePicker: [
-                    { key:'วัน/เดือน/ปี ที่สังเกตเห็นอาการ',
-                    dialog: false,
-                    date: null,},
-                    { key:'วัน/เดือน/ปี ที่รักษา',
-                    dialog: false,
-                    date: null,},
-                    { key:'วัน/เดือน/ปี ตรวจอาการอีกครั้ง',
-                    dialog: false,
-                    date: null,},
+                datePicker: [{
+                        key: 'วัน/เดือน/ปี ที่สังเกตเห็นอาการ',
+                        dialog: false,
+                        date: null,
+                    },
+                    {
+                        key: 'วัน/เดือน/ปี ที่รักษา',
+                        dialog: false,
+                        date: null,
+                    },
+                    {
+                        key: 'วัน/เดือน/ปี ตรวจอาการอีกครั้ง',
+                        dialog: false,
+                        date: null,
+                    },
                 ],
                 /********************************/
                 items: [{
@@ -99,11 +125,11 @@
                         id: 'โรค',
                         key: {},
                     },
-                     {
+                    {
                         id: 'ผู้รักษา',
                         key: {},
                     },
-                     {
+                    {
                         id: 'ผลการรักษา',
                         key: {},
                     },
@@ -141,8 +167,10 @@
             },
             createData: async function () {
                     this.setDate();
-                    this.form.options = { worming_type: "",
-                                            maker: ""}
+                    this.form.options = {
+                        worming_type: "",
+                        maker: ""
+                    }
                     this.form.worming_type = [this.form.worming_type];
                     let params = {
                         api: 'farmer/cattles/' + this.cattle.id + '/worming',
@@ -154,9 +182,11 @@
                 },
                 updateData: async function () {
                         this.setDate();
-                          this.form.options = { worming_type: "",
-                                            maker: ""}
-                    this.form.worming_type = [this.form.worming_type];
+                        this.form.options = {
+                            worming_type: "",
+                            maker: ""
+                        }
+                        this.form.worming_type = [this.form.worming_type];
                         let params = {
                             api: 'farmer/cattles/' + this.cattle.id + '/worming/' + this.forms.id,
                             form: this.form
