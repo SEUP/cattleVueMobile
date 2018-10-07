@@ -27,6 +27,7 @@
         data() {
             return {
                 params:{},
+              
             }
         },
         async beforeRouteEnter(to, from, next) {

@@ -1,8 +1,8 @@
 <template>
     <v-content>
         <ActionBar />
-        <v-container>
-            <AddForm :addData="addData"/>
+        <v-container> 
+            <AddForm :addData="addData"/> 
         </v-container>
          
     </v-content>
@@ -23,6 +23,8 @@
             FarmerAvatar, 
             ActionBar,
             AddForm
+        },props:{
+            cccc:{}
         },
         data() {
             return {
@@ -33,7 +35,7 @@
             //fetch neccessery data
             await store.dispatch("farmer/getFarmer")
             await store.dispatch("farmer/downloadAvatar")
-            await store.dispatch("mobile/defaultActionBar",'เพิ่มพ่อพันธุ์')
+            await store.dispatch("mobile/defaultActionBar",'เพิ่มแม่พันธุ์')
 
             next()
         },
@@ -48,17 +50,21 @@
         },
         methods: { 
             setDataForAdd: async function () {
-                this.addData = {
+                    if(this.cccc != null){ 
+                    this.addData = this.cccc
+                    }else{
+                          this.addData = {
                         farmer_id :this.farmer.id,
                         name:'',
                        cattle_status: "010100",
-                        cattle_type: "020200",
-                        cattle_sex: "030100",
-                        cattle_breeding: null, 
-
-                }
+                        cattle_type: "020200", 
+                        cattle_breeding: null,  
+                        }
+                    }
+                 
             },
             getCattle: async function () {
+                 
                     let params = {
                         farmerId: this.farmer.id,
                         cattle_type: '020100',
@@ -69,6 +75,7 @@
                 initial: async function () { 
                         this.getCattle();
                         this.setDataForAdd();
+                        console.log('cattle',this.cccc);
                   },
 
         }

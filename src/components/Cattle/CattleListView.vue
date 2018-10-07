@@ -5,10 +5,7 @@
                 <v-card>
                     <v-layout>
                         <v-flex xs5 class="pd-20">
-
-                            <v-img v-if="cattle.image_url" class="circle50" :src="image(cattle.image_url)" height="90px" width="90px" contain></v-img>
-                            <img v-else class="circle50" src="@/assets/cattle.png" height="90px" width="90px" contain />
-                         
+                            <CattleAvatar :url="cattle.image_url" /> 
                         </v-flex>
                         <v-flex xs7>
                             <v-card-title primary-title>
@@ -23,16 +20,16 @@
                     </v-layout>
                     <v-divider light></v-divider>
                     <v-layout row>
-                        <v-flex xs12 class="box-green pd-10" @click="close()">
+                        <v-flex xs12 class="box-blueLN pd-10" @click="close()">
                             <center>
-                                <h3 class="nm" @click="close()">
+                                <h3 class="nm" @click="goProfile(cattle)">
                                     <v-icon class="light">mdi-eye</v-icon> ดูข้อมูล
                                 </h3>
                             </center>
                         </v-flex>
                         <v-flex xs12 class="box-greenFX pd-10">
                             <center>
-                                <h3 class="nm" @click="close()">
+                                <h3 class="nm" @click="manage(cattle)">
                                     <v-icon class="light">mdi mdi-settings</v-icon>จัดการ
                                 </h3>
                             </center>
@@ -59,11 +56,14 @@
     import {
         get
     } from "vuex-pathify"
+      import CattleAvatar from "@/components/Cattle/Avatar/Image";
     export default {
         name: "CattleListView",
+        components:{
+            CattleAvatar
+        },
         data() {
-            return {
-                baseUrl: 'http://mct.ict.up.ac.th:10008/',
+            return { 
                 cattlesData: {},
             }
         },
@@ -75,33 +75,41 @@
             params: {}
         },
         async mounted() {
-             this.initial();
+            this.initial();
         },
         methods: {
             initial: async function () {
                     this.getCattle();
                 },
-                image(image){
+                goProfile(data) {
 
-                    if(image){return this.baseUrl+image}
-                    else{ return '@/assets/logo.png';} 
+                    this.$router.push({
+                        name: 'cattle-profile',
+                        params: {
+                            cattle: data
+                        }
+                    });
                 },
                 getCattle: async function () {
-
                         await store.dispatch("cattle/getCattle", this.params)
-                     
-                    },  
+                    },
                     notNull(data) {
-                        if (data == null) { 
+                        if (data == null) {
                             return 'ยังไม่มีข้อมูล';
                         } else {
                             return data;
                         }
                     },
 
-                    close() {
-                        alert('hey');
+                    manage(data) {
+                        this.$router.push({
+                            name: 'cattle-manage',
+                            params: {
+                                cattle: data
+                            }
+                        });
                     },
+
                     removeCattle: async function (params) {
                         let check = confirm("คุณแน่ใจใช่ไหมที่จะลบข้อมูล");
                         if (check) {

@@ -35,6 +35,10 @@
             <v-layout column class="ma-3">
               <v-btn :to="{name : `young-view`}">โคแรกเกิด</v-btn>
             </v-layout>
+ 
+            <v-layout column class="ma-3">
+              <v-btn :to="{name : `cattle-manage`}">Test</v-btn>
+            </v-layout>
         </v-container>
 
         <v-dialog v-model="dialogx" width="500">

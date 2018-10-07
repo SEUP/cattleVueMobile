@@ -8,6 +8,8 @@ import farmer from "./farmer"
 import error from "./error"
 import choice from "./choice/"
 import cattle from "./cattle/cattle"
+import core from "./core"
+import manage_default from "./cattle/manage/default"
 
 Vue.use(Vuex)
 
@@ -19,6 +21,8 @@ const modules = {
     choice : choice,
     cattle:cattle,
     mobile:mobile,
+    core:core,
+    manageDef:manage_default
 }
 
 export default new Vuex.Store({

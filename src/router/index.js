@@ -30,48 +30,69 @@ export default new Router({
             name: 'farmer-farm',
             component: loadView('Farmer/Farm')
         },
+        {
+            path: '/cattle/profile',
+            name: 'cattle-profile',
+            props: true,
+            component: loadView('Cattle/Core/profile')
+        },
+         /*****************************MaleCattle*************************************** */
+         {
+            path: '/cattle/manage',
+            name: 'cattle-manage',
+            props: true,
+            component: loadView('Cattle/Core/manage')
+        },
         /*****************************MaleCattle*************************************** */
         {
             path: '/cattle/male/view',
             name: 'male-view',
+            props: true,
             component: loadView('Cattle/Male/view')
         },
         {
             path: '/cattle/male/add',
             name: 'male-add',
+            props: true,
             component: loadView('Cattle/Male/add')
         },
         /*****************************FemaleCattle*************************************** */
         {
             path: '/cattle/female/view',
             name: 'female-view',
+            props: true,
             component: loadView('Cattle/Female/view')
         },
         {
             path: '/cattle/female/add',
             name: 'female-add',
+            props: true,
             component: loadView('Cattle/Female/add')
         },
           /*****************************KhunCattle*************************************** */
           {
             path: '/cattle/khun/view',
             name: 'khun-view',
+            props: true,
             component: loadView('Cattle/Khun/view')
         },
         {
             path: '/cattle/khun/add',
             name: 'khun-add',
+            props: true,
             component: loadView('Cattle/Khun/add')
         },
           /*****************************YoungCattle*************************************** */
           {
             path: '/cattle/young/view',
             name: 'young-view',
+            props: true,
             component: loadView('Cattle/Young/view')
         },
         {
             path: '/cattle/young/add',
             name: 'young-add',
+            props: true,
             component: loadView('Cattle/Young/add')
         }
     ]

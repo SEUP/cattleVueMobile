@@ -97,7 +97,7 @@ export default {
                     return l
                 }
             }
-            return null
+            return 'w,j,u'
         },
         getChoiceByCode: (state) => (choice_id) => {
             if (choice_id) {

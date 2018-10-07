@@ -74,7 +74,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e8069', end
 .f-29{
   font-size: 22px!important;
 }
-
+.full-width{width:90%!important;}
 .box-margin {
   margin-left: 10px;
 }
@@ -253,6 +253,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#20a06b', end
     rgba(149, 194, 89, 1) 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00cc99', endColorstr='#95c259', GradientType=1 );
+}
+.box-blueLN{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#30f2db+0,3295ff+99 */
+background: #30f2db; /* Old browsers */
+background: -moz-linear-gradient(left, #30f2db 0%, #3295ff 99%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #30f2db 0%,#3295ff 99%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #30f2db 0%,#3295ff 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#30f2db', endColorstr='#3295ff',GradientType=1 ); /* IE6-9 */
 }
 .box-greenLN{
 background: rgba(210,255,82,1);
