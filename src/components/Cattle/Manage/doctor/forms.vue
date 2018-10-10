@@ -15,25 +15,27 @@
                         <v-btn fab color="red" dark @click="closeDialog()">X</v-btn>การข้อมูลการผสมพันธุ์
                     </h3>
                     <v-divider light></v-divider>
-                    <h2>อาการ</h2>
-
+                    <h2>อาการ</h2> 
+                   
+                     
                     <v-dialog ref="dialog0" v-model="datePicker[0].dialog" :return-value.sync="datePicker[0].date"
                         persistent lazy full-width width="290px">
                         <v-text-field slot="activator" :value="dateTH(datePicker[0].date)" :label="datePicker[0].key"
                             readonly></v-text-field>
+                            
                         <v-date-picker v-model="datePicker[0].date" scrollable>
                             <v-spacer></v-spacer>
                             <v-btn flat color="primary" @click="datePicker[0].dialog = false">Cancel</v-btn>
-                            <v-btn flat color="primary" @click.native=" $refs.dialog0.save(datePicker[0].date)">OK</v-btn>
+                            <v-btn flat color="primary" @click="form.check_therapy_date = datePicker[0].date" @click.native=" $refs.dialog0.save(datePicker[0].date)">OK</v-btn>
                         </v-date-picker>
                     </v-dialog>
 
-                    <v-text-field label="ลักษณะอาการเบื้อต้น"></v-text-field>
+                    <v-text-field v-model="form.initial_symptoms" label="ลักษณะอาการเบื้อต้น"></v-text-field>
 
-                    <v-select :items="notNull(items[0].key)" item-text="choice" item-value="id" :label="items[0].id"
+                    <v-select v-model="form.symptom_group" :items="notNull(items[0].key)" item-text="choice" item-value="id" :label="items[0].id"
                         persistent-hint single-line></v-select>
-
-                    <v-select :items="notNull(items[1].key)" item-text="choice" item-value="id" :label="items[1].id"
+ 
+                    <v-select v-model="form.disease" :items="notNull(items[1].key)" item-text="choice" item-value="id" :label="items[1].id"
                         persistent-hint single-line></v-select>
 
  
@@ -46,16 +48,16 @@
                         <v-date-picker v-model="datePicker[1].date" scrollable>
                             <v-spacer></v-spacer>
                             <v-btn flat color="primary" @click="datePicker[1].dialog = false">Cancel</v-btn>
-                            <v-btn flat color="primary" @click.native=" $refs.dialog1.save(datePicker[1].date)">OK</v-btn>
+                            <v-btn flat color="primary" @click="form.observation_date = datePicker[1].date"  @click.native=" $refs.dialog1.save(datePicker[1].date)">OK</v-btn>
                         </v-date-picker>
                     </v-dialog>
 
-                    <v-select :items="notNull(items[2].key)" item-text="choice" item-value="id" :label="items[2].id"
+                    <v-select v-model="form.therapist"  :items="notNull(items[2].key)" item-text="choice" item-value="id" :label="items[2].id"
                         persistent-hint single-line></v-select>
 
-                    <v-text-field label="วิธีการรักษา"></v-text-field>
+                    <v-text-field  v-model="form.therapy_method"   label="วิธีการรักษา"></v-text-field>
 
-                    <v-text-field label="ยาที่รักษา"></v-text-field>
+                    <v-text-field  v-model="form.medication"   label="ยาที่รักษา"></v-text-field>
                   
                     <h2>ผลการรักษา</h2>
 
@@ -66,11 +68,11 @@
                         <v-date-picker v-model="datePicker[2].date" scrollable>
                             <v-spacer></v-spacer>
                             <v-btn flat color="primary" @click="datePicker[2].dialog = false">Cancel</v-btn>
-                            <v-btn flat color="primary" @click.native=" $refs.dialog2.save(datePicker[2].date)">OK</v-btn>
+                            <v-btn flat color="primary" @click="form.therapy_date = datePicker[2].date"  @click.native=" $refs.dialog2.save(datePicker[2].date)">OK</v-btn>
                         </v-date-picker>
                     </v-dialog>
                     
-                    <v-select :items="notNull(items[3].key)" item-text="choice" item-value="id" :label="items[3].id"
+                    <v-select v-model="form.therapy_result" :items="notNull(items[3].key)" item-text="choice" item-value="id" :label="items[3].id"
                         persistent-hint single-line></v-select>
 
                     <v-btn v-if="!update" @click="createData()" large round class="box-green wh full-width">บันทึก</v-btn>
@@ -139,8 +141,8 @@
         computed: {
             dateTH: get('core/dateTH'),
             notNull: get('core/notNull'),
-            setData: get('manageDef/setWorms'),
-            data: get('manageDef/worms'),
+            setData: get('manageDef/setDoctor'),
+            data: get('manageDef/doctor'),
         },
         props: {
             cattle: {},
@@ -166,14 +168,11 @@
                 this.dialog.on = false
             },
             createData: async function () {
-                    this.setDate();
-                    this.form.options = {
-                        worming_type: "",
-                        maker: ""
-                    }
-                    this.form.worming_type = [this.form.worming_type];
+            
+                    //this.setDate();
+                    
                     let params = {
-                        api: 'farmer/cattles/' + this.cattle.id + '/worming',
+                        api: 'farmer/cattles/' + this.cattle.id + '/therapy',
                         form: this.form
                     }
                     let create = await store.dispatch("manageDef/createData", params);
@@ -181,14 +180,9 @@
                     this.load();
                 },
                 updateData: async function () {
-                        this.setDate();
-                        this.form.options = {
-                            worming_type: "",
-                            maker: ""
-                        }
-                        this.form.worming_type = [this.form.worming_type];
+                        //this.setDate(); 
                         let params = {
-                            api: 'farmer/cattles/' + this.cattle.id + '/worming/' + this.forms.id,
+                            api: 'farmer/cattles/' + this.cattle.id + '/therapy/' + this.forms.id,
                             form: this.form
                         }
                         let create = await store.dispatch("manageDef/updateData", params);
@@ -197,7 +191,7 @@
                     },
                     removeData: async function () {
                             let params = {
-                                api: 'farmer/cattles/' + this.cattle.id + '/worming/' + this.forms.id,
+                                api: 'farmer/cattles/' + this.cattle.id + '/therapy/' + this.forms.id,
                                 form: this.form
                             }
                             let check = confirm('คุณแน่ใจใช่ไหมที่จะลบข้อมูลนี้');
@@ -210,22 +204,20 @@
                         },
                         load: async function () {
                                 let params = {
-                                    api: 'farmer/cattles/' + this.cattle.id + '/worming',
+                                    api: 'farmer/cattles/' + this.cattle.id + '/therapy',
                                 }
                                 let data = await store.dispatch("manageDef/getData", params);
                                 this.setData(data);
                             },
                             setDate() {
-                                if (this.datePicker[0].date == null) {
-                                    this.form.worming_date = moment();
-                                } else {
-                                    this.form.worming_date = this.datePicker[0].date
-                                }
+                               
 
                             },
                             preDate() {
                                 if (this.update) {
-                                    this.datePicker[0].date = this.forms.worming_date;
+                                    this.datePicker[0].date = this.forms.check_therapy_date;
+                                     this.datePicker[1].date = this.forms.observation_date;
+                                      this.datePicker[2].date = this.forms.therapy_date;
                                 } else {
                                     for (let index = 0; index < this.datePicker.length; index++) {
                                         this.datePicker[index].date = null;
@@ -238,6 +230,7 @@
                                     this.items[index].key = await store.dispatch("choice/getChoicesByType",
                                         this.items[index].id);
                                 }
+                                 
 
                             }
 

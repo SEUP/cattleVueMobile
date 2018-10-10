@@ -1,39 +1,12 @@
 {
-    "cattle_id": 1250,
-    "worming_date": "2018-10-10",
-    "time_at": null,
-    "worming_type": [{
-        "id": "070200",
-        "choice": "พยาธิใบไม้",
-        "parent_id": "070000",
-        "options": null,
-        "created_at": null,
-        "updated_at": null
-    }],
-    "maker": "080100",
-    "options": {
-        "worming_type": "",
-        "maker": ""
-    }
-},
-
-{
-    "cattle_id": 1250,
-    "maker": "080100",
-    "worming_type":[ {
-        "id": "070200",
-        "choice": "พยาธิใบไม้",
-        "parent_id": "070000",
-        "options": null,
-        "created_at": null,
-        "updated_at": null
-    },{
-        "id": "070200",
-        "choice": "พยาธิใบไม้",
-        "parent_id": "070000",
-        "options": null,
-        "created_at": null,
-        "updated_at": null
-    }],
-    "worming_date": "2018-10-07T22:43:03.464Z"
+    "check_therapy_date": "2018-10-18",
+    "initial_symptoms": "asd",
+    "disease": "150200",
+    "observation_date": "2018-10-31",
+    "therapist": "160300",
+    "therapy_method": "asd",
+    "medication": "asd",
+    "therapy_date": "2018-10-30",
+    "therapy_result": "170200",
+    "worming_date": "2018-10-18"
 }
