@@ -3,11 +3,13 @@ import _ from 'lodash'
 import moment from 'moment';
 
 const state = {
-
+    noti:0
 }
 
 const getters = {
-
+    notiState: (state) => () => {
+        state.noti =  1;
+    },
     test: (state) => (a, b) => {
         return a + b;
     },

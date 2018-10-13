@@ -100,7 +100,7 @@
         },
         data() {
             return {
-                dialogx: true
+                dialogx: false
             }
         },
         async beforeRouteEnter(to, from, next) {
@@ -113,6 +113,8 @@
         computed: {
             farmer: get("farmer/farmer"),
             avatar: get("farmer/avatar"),
+            noti: get("core/noti"),
+             notiState: get("core/notiState"),
         },
         async mounted() {
             await this.initial();
@@ -123,8 +125,12 @@
                await store.dispatch("cattle/getCattle",this.farmer.id)
             },
             initial: async function () {
-                    this.getCattle();
-                    this.dialogx = true;
+                    this.getCattle(); 
+                    //alert(this.noti );
+                    if(this.noti == 0){
+                        this.dialogx = true;
+                        this.notiState();
+                    }
                 },
                 close() {
                     this.dialogx = false;
