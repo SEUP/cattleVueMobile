@@ -34,11 +34,13 @@
 
                     <v-select v-model="form.symptom_group" :items="notNull(items[0].key)" item-text="choice" item-value="id" :label="items[0].id"
                         persistent-hint single-line></v-select>
+                       <v-text-field v-model="form.options.symptom_group"   v-if="form.symptom_group == '140700'"  :label="items[0].id + ' อื่นๆ'"></v-text-field>
+
  
                     <v-select v-model="form.disease" :items="notNull(items[1].key)" item-text="choice" item-value="id" :label="items[1].id"
                         persistent-hint single-line></v-select>
+      <v-text-field  v-if="form.disease == '150600'" v-model="form.options.disease"  :label="items[1].id + ' อื่นๆ'"></v-text-field>
 
- 
                     <h2>การรักษา</h2>
 
                     <v-dialog ref="dialog1" v-model="datePicker[1].dialog" :return-value.sync="datePicker[1].date"
@@ -54,6 +56,8 @@
 
                     <v-select v-model="form.therapist"  :items="notNull(items[2].key)" item-text="choice" item-value="id" :label="items[2].id"
                         persistent-hint single-line></v-select>
+                     <v-text-field  v-model="form.options.therapist"  v-if="form.therapist == '160400'"  :label="items[2].id + ' อื่นๆ'"></v-text-field>
+
 
                     <v-text-field  v-model="form.therapy_method"   label="วิธีการรักษา"></v-text-field>
 
@@ -73,8 +77,7 @@
                     </v-dialog>
                     
                     <v-select v-model="form.therapy_result" :items="notNull(items[3].key)" item-text="choice" item-value="id" :label="items[3].id"
-                        persistent-hint single-line></v-select>
-
+                        persistent-hint single-line></v-select> 
                     <v-btn v-if="!update" @click="createData()" large round class="box-green wh full-width">บันทึก</v-btn>
                     <v-btn v-else @click="updateData()" large round class="box-green wh full-width">แก้ไข</v-btn>
 
@@ -97,7 +100,13 @@
         name: "Forms",
         data() {
             return {
-                form: {},
+                form: {
+                    options:{
+                        symptom_group:'',
+                        disease:'',
+                        therapist:''
+                    }
+                },
                 dialog: {
                     on: false
                 },

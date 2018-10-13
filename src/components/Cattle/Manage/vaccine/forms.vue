@@ -28,14 +28,14 @@
                             <v-btn flat color="primary" @click.native=" $refs.dialog0.save(datePicker[0].date)">OK</v-btn>
                         </v-date-picker>
                     </v-dialog>
-                 
-                    <v-select v-model="form.maker" :items="notNull(items[0].key)" item-text="choice"  item-value="id"
-                        :label="items[0].id" persistent-hint  single-line></v-select>
 
+                    <v-select v-model="form.maker" :items="notNull(items[0].key)" item-text="choice" item-value="id"
+                        :label="items[0].id" persistent-hint single-line></v-select>
+                    <v-text-field v-if="form.maker == '080300'" v-model="form.options.maker" :label="items[0].id+' อื่นๆ'" ></v-text-field>
 
                     <v-select v-model="form.vaccine_type" :items="notNull(items[1].key)" item-text="choice" item-value="id"
-                        :label="items[1].id" persistent-hint   single-line></v-select>
-
+                        :label="items[1].id" persistent-hint single-line></v-select>
+                    <v-text-field  v-if="form.vaccine_type == '060400'" v-model="form.options.vaccine_type"   :label="items[1].id+' อื่นๆ'" ></v-text-field>
 
                     <v-text-field v-model="form.vaccine_set" label="ชุดการผลิตวัคซีน"></v-text-field>
 
@@ -46,7 +46,7 @@
                         <v-date-picker v-model="datePicker[1].date" scrollable>
                             <v-spacer></v-spacer>
                             <v-btn flat color="primary" @click="datePicker[1].dialog = false">Cancel</v-btn>
-                            <v-btn flat color="primary" @click.native="$refs.dialog1.save(datePicker[1].date)" >OK</v-btn>
+                            <v-btn flat color="primary" @click.native="$refs.dialog1.save(datePicker[1].date)">OK</v-btn>
                         </v-date-picker>
                     </v-dialog>
 
@@ -86,7 +86,12 @@
                 dialog: {
                     on: false
                 },
-                form: {},
+                form: {
+                    options:{
+                        maker:'',
+                        vaccine_type:'',
+                    }
+                },
                 tmp: {},
                 /*******DatePicker***************/
                 datePicker: [{
@@ -187,7 +192,7 @@
                                 this.form.vaccine_date = this.datePicker[0].date
                                 this.form.exp_date = this.datePicker[1].date
                                 this.form.mfg_date = this.datePicker[2].date
-                                
+
                             },
                             preDate() {
                                 if (this.update) {

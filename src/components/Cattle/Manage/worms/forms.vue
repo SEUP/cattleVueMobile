@@ -29,10 +29,13 @@
 
                     <v-select v-model="form.maker" :items="notNull(items[0].key)" item-text="choice" item-value="id"
                         :label="items[0].id" persistent-hint single-line></v-select>
-
+                    <v-text-field v-if="form.maker=='080300'"  v-model="form.options.maker"  :label="items[0].id + ' อื่นๆ'"></v-text-field>
 
                     <v-select v-model="form.worming_type" :items="notNull(items[1].key)" item-text="choice" item-value="id"
                         :label="items[1].id" return-object persistent-hint single-line></v-select>
+                        <v-text-field v-if="form.worming_type.id == '070500'"  v-model="form.options.worming_type"  :label="items[1].id + ' อื่นๆ'"></v-text-field>
+
+
                     <v-btn v-if="!update" @click="createData()" large round class="box-green wh full-width">บันทึก</v-btn>
                     <v-btn v-else @click="updateData()" large round class="box-green wh full-width">แก้ไข</v-btn>
 
@@ -55,7 +58,15 @@
         name: "Forms",
         data() {
             return {
-                form: {},
+                form: {
+                    worming_type:{
+                        id:''
+                    },
+                    options:{
+                        maker:'',
+                        worming_type:''
+                    }
+                },
                 dialog: {
                     on: false
                 },
@@ -96,13 +107,19 @@
                 this.form = this.forms
             },
             closeDialog() {
-                if (this.update) {
+                try {
+                        if (this.update) {
                     this.form = this.forms;
                 } else {
 
                     this.form = {};
                 }
+                
                 this.preDate();
+                } catch (error) {
+                    
+                }
+            
                 this.dialog.on = false
             },
             createData: async function () {
@@ -117,6 +134,7 @@
                     let create = await store.dispatch("manageDef/createData", params);
                     this.closeDialog();
                     this.load();
+                       this.dialog.on = false
                 },
                 updateData: async function () {
                         this.setDate();
@@ -130,6 +148,7 @@
                         let create = await store.dispatch("manageDef/updateData", params);
                         this.closeDialog();
                         this.load();
+                           this.dialog.on = false
                     },
                     removeData: async function () {
                             let params = {

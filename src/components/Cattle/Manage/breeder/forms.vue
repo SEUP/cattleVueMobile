@@ -38,12 +38,13 @@
                             <v-btn flat color="primary" @click.native="(breederDate.dialog=false)&&$refs.dialog.save(breederDate.date)">OK</v-btn>
                         </v-date-picker>
                     </v-dialog>
-
+                 
                     <v-select v-model="form.breed_type" :items="notNull(type)" item-text="choice" item-value="id" label="การให้น้ำเชื้อ"
                         persistent-hint return-object single-line></v-select>
+              
                     <v-select v-if="check()||checks" v-model="form.maker" :items="notNull(maker)" item-text="choice" item-value="id"
-                        label="ผู้ทำ" persistent-hint return-object single-line></v-select>
-                         <v-text-field v-if="checkMaker()" v-model="form.options.maker" slot="activator"  label="ผู้ทำอื่นๆ" ></v-text-field>
+                        label="ผู้ทำ" persistent-hint single-line></v-select>
+                 <v-text-field v-if="form.maker ==  '080300'"   v-model="form.options.maker" slot="activator"  label="ผู้ทำอื่นๆ" ></v-text-field>
                     <v-textarea v-model="form.breed_detail" label="หมายเหตุ"></v-textarea>
 
                     <v-divider light></v-divider>
@@ -67,7 +68,10 @@
         name: "Forms",
         data() {
             return {
-                form: { maker:'' },
+                form: { maker:'',
+                options:{
+                    maker:'',
+                } },
                 breederDialog: {
                     on: false,
                 },
