@@ -1,5 +1,6 @@
 <template>
-    <v-content v-if="farmer">
+    <v-content v-if="farmer" class="box-blue">
+        
         <v-container fluid>
             <v-layout row align-center>
                 <v-flex class="">
@@ -8,37 +9,50 @@
                 <v-flex xs8>
                     <v-layout row wrap>
                         <v-flex xs12>
-                            <h2 class="text-truncate">{{farmer.firstname}} {{farmer.lastname}}</h2>
+                            <h2 dark class="text-truncate wh nm">{{farmer.firstname}} {{farmer.lastname}}</h2>
                         </v-flex>
                         <v-flex xs6 class="pa-1">
-                            <v-btn :to="{name : `farmer-profile`}" depressed color="success" block>ข้อมูลผู้ใช้</v-btn>
+                            <v-btn round :to="{name : `farmer-profile`}" depressed color="success" block><v-icon>mdi-human-greeting</v-icon>ข้อมูลผู้ใช้</v-btn>
                         </v-flex>
-                        <v-flex xs6 class="pa-1">
-                            <v-btn :to="{name : `farmer-farm`}" depressed color="success" block>ข้อมูลฟาร์ม</v-btn>
+                        <v-flex  xs6 class="pa-1">
+                            <v-btn round :to="{name : `farmer-farm`}" depressed color="yellow" block><v-icon>mdi-home-assistant</v-icon>ข้อมูลฟาร์ม</v-btn>
                         </v-flex>
                     </v-layout>
                 </v-flex>
             </v-layout>
 
-            <v-layout column class="ma-3">
-              <v-btn :to="{name : `male-view`}">พ่อพันธุ์</v-btn>
-            </v-layout>
-            
-            <v-layout column class="ma-3">
-              <v-btn :to="{name : `female-view`}">แม่พันธุ์</v-btn>
-            </v-layout>
-
-            <v-layout column class="ma-3">
-              <v-btn :to="{name : `khun-view`}">โคขุน</v-btn>
+            <v-layout  @click="$router.push({name : 'male-view'})"   row class="pd-20 ma-3 shadow circle box-white" >
+               <v-flex xs4 ><v-icon class="mrl-18 pd-10 box-purple wh circle shadow"  style="font-size:40px;">mdi-cow</v-icon></v-flex>
+                 <v-flex xs8>
+                     <h2 class="nm">พ่อพันธุ์</h2>
+                     <h4 class="nm">จัดการพ่อพันธุ์ของคุณ</h4>
+                 </v-flex>
             </v-layout>
 
-            <v-layout column class="ma-3">
-              <v-btn :to="{name : `young-view`}">โคแรกเกิด</v-btn>
+             <v-layout  @click="$router.push({name : 'female-view'})"   row class="pd-20 ma-3 shadow circle box-white" >
+               <v-flex xs4 ><v-icon class="mrl-18 pd-10 box-pink wh circle shadow"  style="font-size:40px;">mdi-cow</v-icon></v-flex>
+                 <v-flex xs8>
+                     <h2 class="nm">แม่พันธุ์</h2>
+                     <h4 class="nm">จัดการแม่พันธุ์ของคุณ</h4>
+                 </v-flex>
+            </v-layout>
+
+             <v-layout  @click="$router.push({name : 'khun-view'})"   row class="pd-20 ma-3 shadow circle box-white" >
+               <v-flex xs4 ><v-icon class="mrl-18 pd-10 box-brown wh circle shadow"  style="font-size:40px;">mdi-cow</v-icon></v-flex>
+                 <v-flex xs8>
+                     <h2 class="nm">โคขุน</h2>
+                     <h4 class="nm">จัดการโคขุนของคุณ</h4>
+                 </v-flex>
+            </v-layout>
+
+             <v-layout  @click="$router.push({name : 'young-view'})"   row class="pd-20 ma-3 shadow circle box-white" >
+               <v-flex xs4 ><v-icon class="mrl-18 pd-10 box-greenLNB wh circle shadow"  style="font-size:40px;">mdi-cow</v-icon></v-flex>
+                 <v-flex xs8>
+                     <h2 class="nm">โคแรกเกิด</h2>
+                     <h4 class="nm">จัดการโคแรกเกิดของคุณ</h4>
+                 </v-flex>
             </v-layout>
  
-            <v-layout column class="ma-3">
-              <v-btn :to="{name : `cattle-manage`}">Test</v-btn>
-            </v-layout>
         </v-container>
 
         <v-dialog v-model="dialogx" width="500">
