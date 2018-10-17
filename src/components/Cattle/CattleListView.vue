@@ -69,7 +69,8 @@
         },
         computed: {
             getAge: get("cattle/getAge"),
-            cattles: get("cattle/cattles"),
+            cattles: get("cattle/cattles"), 
+            getCattleChoose: get("cattle/getCattleChoose"),
         },
         props: {
             params: {}
@@ -108,6 +109,7 @@
                                 cattle: data
                             }
                         });
+                        this.getCattleChoose(data);
                     },
 
                     removeCattle: async function (params) {

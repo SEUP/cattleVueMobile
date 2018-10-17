@@ -10,7 +10,7 @@ import choice from "./choice/"
 import cattle from "./cattle/cattle"
 import core from "./core"
 import manage_default from "./cattle/manage/default"
-
+import femaleBreeder from "./cattle/manage/femaleBreeder"
 Vue.use(Vuex)
 
 const modules = {
@@ -22,7 +22,8 @@ const modules = {
     cattle:cattle,
     mobile:mobile,
     core:core,
-    manageDef:manage_default
+    manageDef:manage_default,
+    femaleBreeder:femaleBreeder,
 }
 
 export default new Vuex.Store({

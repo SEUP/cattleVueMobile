@@ -1,7 +1,7 @@
 <template>
-    <v-card class="border">
+    <v-card class="border font">
         <v-card-title>
-            <h5 class="headline">ลงชื่อเข้าสู่ระบบ</h5>
+            <h2 class=" font">ลงชื่อเข้าสู่ระบบ</h2>
         </v-card-title>
         <v-card-text>
             <v-form>

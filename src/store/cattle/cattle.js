@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const state = {
   cattles: null,
-
+  cattleChoose:null,
 }
 
 const getters = {
@@ -20,6 +20,7 @@ const getters = {
       return "ไม่มีข้อมูล"
     }
   },
+  
   getCattleType: (state) => (type) => {
       if(type == '020100'){return 'พ่อพันธุ์'}
       else if(type == '020200'){return 'แม่พันธุ์'}
@@ -27,6 +28,11 @@ const getters = {
       else if(type == '020400'){return 'โคแรกเกิด'}
       else{return 'ไม่รู้จัก'} 
   },
+
+  getCattleChoose: (state) => (cattle) => {
+    state.cattleChoose = cattle;
+  },
+  
 
 }
 

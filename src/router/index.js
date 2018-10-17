@@ -36,14 +36,7 @@ export default new Router({
             props: true,
             component: loadView('Cattle/Core/profile')
         },
-         /*****************************MaleCattle*************************************** */
-         {
-            path: '/cattle/manage',
-            name: 'cattle-manage',
-            props: true,
-            component: loadView('Cattle/Core/manage')
-        },
-        /*****************************MaleCattle*************************************** */
+         /*****************************MaleCattle*************************************** */ 
         {
             path: '/cattle/male/view',
             name: 'male-view',
@@ -94,6 +87,31 @@ export default new Router({
             name: 'young-add',
             props: true,
             component: loadView('Cattle/Young/add')
-        }
+        },
+        /**********************************Manage Cattle***************************************** */
+        {
+            path: '/cattle/manage',
+            name: 'cattle-manage',
+            props: true,
+            component: loadView('Cattle/Core/manage')
+        },
+        {
+            path: '/cattle/manage/change-type',
+            name: 'change-type',
+            props: true,
+            component: loadView('Cattle/Core/Manage/ChangeType')
+        },
+        {
+            path: '/cattle/manage/Female-Breeder',
+            name: 'Female-Breeder',
+            props: true,
+            component: loadView('Cattle/Core/Manage/FemaleBreeder')
+        },
+        {
+            path: '/cattle/manage/Female-Breeder/create',
+            name: 'Female-Breeder-create',
+            props: true,
+            component: loadView('Cattle/Core/Manage/Breeder/create')
+        },
     ]
 })

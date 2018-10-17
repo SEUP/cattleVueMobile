@@ -1,6 +1,7 @@
 import axios from "@/axios"
  
 const state = {
+  femaleBreeder:{},
   breeder:{},
   vaccine:{},
   worms:{},
@@ -13,6 +14,9 @@ const getters = {
   
   setBreeder: (state) => (data) => {
     state.breeder = data;
+},
+setFemaleBreeder: (state) => (data) => {
+  state.femaleBreeder = data;
 },
 setVaccine: (state) => (data) => {
   state.vaccine = data;

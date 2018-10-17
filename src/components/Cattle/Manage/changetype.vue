@@ -1,6 +1,7 @@
 <template>
     <v-content>
         <v-layout class="pd-30">
+             
             <v-flex xs4>
                 <CattleAvatar :url="cattle.image_url" />
             </v-flex>
@@ -57,7 +58,7 @@
             cattle: {}
         },
         async mounted() {
-            await this.initial();
+        
         },
         methods: {
             change: async function (type) {

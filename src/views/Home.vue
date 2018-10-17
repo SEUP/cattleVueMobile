@@ -1,5 +1,5 @@
 <template>
-   <v-content class="box-blue">
+   <v-content class="box-blue font">
       <v-container fluid fill-height>
         <v-layout align-center justify-center> 
           <v-flex xs12 sm8 md4  >
