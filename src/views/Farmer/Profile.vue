@@ -1,5 +1,6 @@
 <template>
     <v-content v-if="farmer">
+          <ActionBar />
         <v-container fluid>
             <v-layout row align-center>
                 <v-flex class="">
@@ -41,7 +42,7 @@
     import FarmerCaptureAvatar from "@/components/Farmer/Avatar/FarmerCaptureAvatar";
     import FarmerSelectAvatar from "@/components/Farmer/Avatar/FarmerSelectAvatar";
     import FarmerLogout from "@/components/Farmer/Profile/FarmerLogout";
-
+ import ActionBar from "@/components/Menu/ActionBar";
     export default {
         name: 'App',
         components: {
@@ -49,13 +50,15 @@
             FarmerSelectAvatar,
             FarmerCaptureAvatar,
             FarmerProfileCard,
-            FarmerAvatar
+            FarmerAvatar,
+            ActionBar
 
         },
         async beforeRouteEnter(to, from, next) {
             //fetch neccessery data
             await store.dispatch("farmer/getFarmer")
             await store.dispatch("farmer/downloadAvatar")
+            await store.dispatch("mobile/defaultActionBar", 'ข้อมูลผู้ใช้')
             next()
         },
         computed: {

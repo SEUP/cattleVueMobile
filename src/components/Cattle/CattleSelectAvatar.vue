@@ -1,18 +1,26 @@
 <template>
     <div>
-        <v-btn @click="captureImage()" depressed :color="buttonColor" block>เลือกภาพ</v-btn>
+       
+        <v-btn class="box-green" round style="width:50%;" @click="captureImage()" depressed :color="buttonColor" block>เลือกภาพ</v-btn>
     </div>
 </template>
 
 <script>
+   import {
+        get
+    } from "vuex-pathify"
     export default {
+        
         name: "FarmerSelectAvatar",
         props : {
+            
           buttonColor : {
               type : [String],
               default : "primary",
-              cattle:{},
+             
           }
+        },computed: {
+            getId: get('manageDef/choose_id'),
         },
         methods: {
             captureImage: async function () {
@@ -28,13 +36,13 @@
                 navigator.camera.getPicture(
                     async (imageUri) =>{
                         let uri = `data:image/png;base64,${imageUri}` 
-                        alert(this.cattle.id);
+                        //alert(this.cattle.id);
                     let params = {
-                        api: 'farmer/cattles/' + this.cattle.id + '/avatar',
+                        id:this.getId, 
                         form: uri
-                    }
-                   await this.$store.store.dispatch("manageDef/createData", params); 
-                    
+                    } 
+                   await this.$store.dispatch("manageDef/uploadAvatar", params); 
+                this.$router(-1);
                     },
                     async (error) => {
                         window.console.log(error)

@@ -124,7 +124,7 @@
                     <h4 class="nm">ดูข้อมูลการแจ้งเตือนทั้งหมด</h4>
                 </v-flex>
             </v-layout>
-
+ 
         </v-container>
 
         <v-dialog v-model="dialogx" class="font circle" width="500">
@@ -139,8 +139,9 @@
                 </center>
                 <v-card-text class="pd-10">
                     <div class="box-gray pd-10 circle">
-                        <h3>การผสม</h3>
-                        <h4>วันที่ 12/02/2561</h4>
+                   <h3>{{notificate.title}}</h3>
+                        <h4>{{dateTH(notificate.start)}} </h4> 
+
                     </div>
 
                 </v-card-text>
@@ -151,7 +152,7 @@
                     <v-layout row>
                         <v-flex xs12 class="box-green pd-10">
                             <center>
-                                <h2 class="nm" @click="close()">ดูทั้งหมด</h2>
+                                <h2 class="nm" @click="$router.push({name : 'noti'})">ดูทั้งหมด</h2>
                             </center>
                         </v-flex>
 
@@ -167,7 +168,7 @@
                 </v-card>
             </v-card>
         </v-dialog>
-
+     
     </v-content>
 </template>
 <style>
@@ -190,7 +191,8 @@
         },
         data() {
             return {
-                dialogx: false
+                dialogx: false,
+                notificate:{},
             }
         },
         async beforeRouteEnter(to, from, next) {
@@ -205,17 +207,33 @@
             avatar: get("farmer/avatar"),
             noti: get("core/noti"),
             notiState: get("core/notiState"),
+             setNoti: get('manageDef/setNoti'),
+             dateTH: get('core/dateTH'),
         },
         async mounted() {
             await this.initial();
-
+             this.notiLoad();
         },
         methods: {
+            notiLoad:async function(){
+                let params = {
+                        api: 'farmer/farmers/' + this.farmer.id + '/reports/cattleEvents',
+                    }
+                 let data = await store.dispatch("manageDef/getData", params);
+                
+                for(let i=0; i<data.length; i++){
+                    if(data[i].title){
+                        this.notificate = data[i];
+                        break;
+                    }
+                }
+            },
             getCattle: async function () {
                     await store.dispatch("cattle/getCattle", this.farmer.id)
                 },
                 initial: async function () {
                         this.getCattle();
+                       
                         //alert(this.noti );
                         if (this.noti == 0) {
                             this.dialogx = true;

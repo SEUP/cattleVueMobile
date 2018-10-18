@@ -1,6 +1,7 @@
 import axios from "@/axios"
  
 const state = {
+  choose_id:'',
   femaleBreeder:{},
   breeder:{},
   vaccine:{},
@@ -17,7 +18,9 @@ sale:{},
 }
 
 const getters = { 
-  
+  setId: (state) => (data) => {
+    state.choose_id = data;
+},
   setBreeder: (state) => (data) => {
     state.breeder = data;
 },
@@ -106,7 +109,7 @@ const actions = {
             return response.data
           })
           .catch((error) => {
-            alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+            alert(error.stack);
             console.log(apiUrl, error.response.data);
             return null
           });
@@ -171,7 +174,24 @@ const actions = {
                 alert('เกิดข้อผิดพลาดยกเลิกการจำหน่าย');
               });
             
-          }
+          },
+
+          async uploadAvatar(context, params) {
+ 
+    
+            let result = await
+                axios.post('/api/v1/farmer/cattles/'+params.id+'/avatar', {img: params.form})
+                    .then((response) => {
+                        alert('เปลี่ยนรูปสำเร็จ');
+                        return response.data
+                    })
+                    .catch((error) => {
+                      alert('เปลี่ยนรูปไม่สำเร็จ');
+                        return null
+                    })
+            return result
+        },
+ 
 
 }
 

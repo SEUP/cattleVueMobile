@@ -1,18 +1,24 @@
 <template>
     <div>
-        <v-btn @click="captureImage()" depressed :color="buttonColor" block>ถ่ายภาพ</v-btn>
+        <v-btn class="box-red" round style="width:50%;" @click="captureImage()" depressed :color="buttonColor" block>ถ่ายภาพ</v-btn>
     </div>
 </template>
 
 <script>
+ import {
+        get
+    } from "vuex-pathify"
     export default {
         name: "FarmerCaptureAvatar",
         props : {
+             cattle:{},
             buttonColor : {
                 type : [String],
                 default : "primary",
 
             }
+        },computed: {
+            getId: get('manageDef/choose_id'),
         },
         methods: {
             captureImage: async function () {
@@ -28,10 +34,10 @@
                     async (imageUri) =>{
                         let uri = `data:image/png;base64,${imageUri}` 
                     let params = {
-                        api: 'farmer/cattles/' + this.cattle.id + '/avatar',
+                        id:this.getId, 
                         form: uri
-                    }
-                   let uu = await store.dispatch("manageDef/createData", params);
+                    } 
+                   await this.$store.dispatch("manageDef/uploadAvatar", params); 
                 
                     },
                     async (error) => {

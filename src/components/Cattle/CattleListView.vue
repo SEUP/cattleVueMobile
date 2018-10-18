@@ -69,6 +69,7 @@
             getAge: get("cattle/getAge"),
             cattles: get("cattle/cattles"), 
             getCattleChoose: get("cattle/getCattleChoose"),
+              setId: get('manageDef/setId'),
         },
         props: {
             params: {}
@@ -81,7 +82,7 @@
                     this.getCattle();
                 },
                 goProfile(data) {
-
+                    this.setId(data.id);
                     this.$router.push({
                         name: 'cattle-profile',
                         params: {
