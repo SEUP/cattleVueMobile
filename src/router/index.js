@@ -113,5 +113,18 @@ export default new Router({
             props: true,
             component: loadView('Cattle/Core/Manage/Breeder/create')
         },
+        {
+            path: '/cattle/sell',
+            name: 'sell',
+            props: true,
+            component: loadView('Cattle/Sell/sell')
+        },
+        {
+            path: '/noti',
+            name: 'noti',
+            props: true,
+            component: loadView('Noti/noti')
+        },
     ]
+    
 })

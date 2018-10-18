@@ -1,16 +1,21 @@
 <template>
     <v-content class="font">
-        <ActionBar />
+  
         <pre v-if="debug">{{cattleChoose}}</pre>
        <center> <v-btn @click="AddBreeder()" round class="box-green wh">เพิ่มข้อมูล</v-btn></center>
         <v-container>
             <v-layout v-for="female in FemaleBreeder.data">
-                <v-card>
-                    <pre>
-                        {{female}}
-                    </pre>
-            <v-btn @click="editBreeder(female)">แก้ไข</v-btn>
-             <v-btn @click="removeBreeder(female.id)">ลบ</v-btn>
+              
+                 <v-card class="box-green  pd-10 wh" style="width:100%;">
+                    <h3>วันที่: {{dateTH(female.breeding_date)}}</h3>
+                    <v-card class=" mrt-6 pd-6">
+                        <h4><b>ชนิด:</b> {{getType(female.breed_type)}}</h4>
+                        <h4 v-if="female.breed_type == '240200'" ><b>ผู้ทำ:</b> {{notNull(getType(female.maker))}}</h4>
+                        <h4><b>ผลการผสมพันธุ์:</b>{{getType(female.breeding_result)}}</h4> 
+                
+                    </v-card>
+            <v-btn class="box-yellow"  @click="editBreeder(female)">แก้ไข</v-btn>
+             <v-btn color="red" dark @click="removeBreeder(female.id)">ลบ</v-btn>
                 </v-card>
    
             </v-layout> 
@@ -54,7 +59,13 @@
         computed: {
             cattleChoose: get("cattle/cattleChoose"),
             FemaleBreeder:get('manageDef/femaleBreeder'),
-            getFemaleBreeder:get('manageDef/setFemaleBreeder')
+            getFemaleBreeder:get('manageDef/setFemaleBreeder'),
+              getAge: get("cattle/getAge"),
+            dateTH: get('core/dateTH'),
+            getType: get('choice/getChoiceByCode'),
+            setBreeder:get('manageDef/setBreeder'),
+            loadBreeder:get('manageDef/breeder'),
+        
         },
         async mounted() {
             this.load();

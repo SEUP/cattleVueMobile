@@ -115,7 +115,9 @@ const actions = {
 
       async clearState(context) {
         context.commit('clearState')
-      }
+      },
+
+     
 
 }
 

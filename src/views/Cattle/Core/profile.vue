@@ -11,9 +11,9 @@
             <v-layout>
                 <v-flex xs12>
                     <center>
-                        <v-btn large  class="box-green" round><v-icon>mdi-image</v-icon>เปลี่ยนรูป</v-btn>
-                        <v-btn large  class="box-red" round><v-icon>mdi-camera</v-icon>ถ่ายรูป</v-btn>
-                    </center>
+                        <CaptureAvatar cattle:="cattle" />
+                        <SelectAvatar cattle:="cattle"/>
+                      </center>
                 </v-flex>
             </v-layout>
 
@@ -40,12 +40,14 @@
     import FarmerAvatar from "@/components/Farmer/Avatar/FarmerAvatar";
     import ActionBar from "@/components/Menu/ActionBar";
     import AddForm from "@/components/Cattle/AddForm";
+     import CaptureAvatar from "@/components/Cattle/CattleCaptureAvatar";
+    import SelectAvatar from "@/components/Cattle/CattleSelectAvatar";
     export default {
         name: 'App',
         components: {
             FarmerAvatar,
             ActionBar,
-            AddForm,
+            AddForm,CaptureAvatar,SelectAvatar
         },
         props: {
             cattle: {}

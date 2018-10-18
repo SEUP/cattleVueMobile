@@ -9,51 +9,51 @@
                 </v-card>
             </v-tab-item>
 
-            <v-tab key="1" ripple> การขุน </v-tab>
-            <v-tab-item key="1">
+            <v-tab v-if="cattle.cattle_type == '020300'"  key="1" ripple> การขุน </v-tab>
+            <v-tab-item v-if="cattle.cattle_type == '020300'" key="1">
                 <v-card flat>
-                    การขุน
+                        <Khun :cattle="cattle" />  
                 </v-card>
             </v-tab-item>
 
-            <v-tab key="2" ripple> การผสมพันธุ์ </v-tab>
-            <v-tab-item key="2">
+            <v-tab key="2" v-if="cattle.cattle_type == '020100' || cattle.cattle_type == '020200' " ripple> การผสมพันธุ์ </v-tab>
+            <v-tab-item v-if="cattle.cattle_type == '020100' || cattle.cattle_type == '020200' "  key="2">
                 <v-card flat>
-                    <BreederFemale :cattle="cattle" />
-                   <!---- <BreederDef :cattle="cattle" /> ---->
+                 <BreederFemale v-if="cattle.cattle_type == '020200'" :cattle="cattle" />
+                    <BreederDef  v-if="cattle.cattle_type == '020100'" :cattle="cattle" /> 
                 </v-card>
             </v-tab-item>
 
             <v-tab key="3" ripple> การทำวัคซีน </v-tab>
             <v-tab-item key="3">
                 <v-card flat>
-                    <Vaccine :cattle="cattle" />
+                  <Vaccine :cattle="cattle" /> 
                 </v-card>
             </v-tab-item>
 
             <v-tab key="4" ripple> การถ่ายพยาธิ </v-tab>
             <v-tab-item key="4">
                 <v-card flat>
-                    <Worms :cattle="cattle" />
+                  <Worms :cattle="cattle" />
                 </v-card>
             </v-tab-item>
 
             <v-tab key="5" ripple> การรักษา </v-tab>
             <v-tab-item key="5">
                 <v-card flat>
-                    <Doctor :cattle="cattle" />
+                  <Doctor :cattle="cattle" /> 
                 </v-card>
             </v-tab-item>
-            <v-tab key="6" ripple> การอย่านม </v-tab>
-            <v-tab-item key="6">
+            <v-tab key="6" v-if="cattle.cattle_type == '020400'" ripple> การหย่านม </v-tab>
+            <v-tab-item v-if="cattle.cattle_type == '020400'"  key="6">
                 <v-card flat>
-                    การอย่านม
+                        <Milk :cattle="cattle" />  
                 </v-card>
             </v-tab-item>
             <v-tab key="7" ripple> การจำหน่าย </v-tab>
             <v-tab-item key="7">
                 <v-card flat>
-                    <Sell :cattle="cattle" /> 
+                 <Sell :cattle="cattle" />  
                 </v-card>
             </v-tab-item>
 
@@ -78,6 +78,10 @@
     import Doctor from "@/components/Cattle/Manage/doctor/doctor";
     import Sell from "@/components/Cattle/Manage/sell/sell";
     import BreederFemale from "@/views/Cattle/Core/Manage/FemaleBreeder";
+
+  import Khun from "@/components/Cattle/Manage/khun/khun";
+ import Milk from "@/components/Cattle/Manage/milk/milk";
+
     export default {
         name: 'App',
         components: {
@@ -89,7 +93,7 @@
             Worms,
             Doctor,
             Sell,
-            BreederFemale
+            BreederFemale,Khun,Milk
         },
         props: {
             cattle: {}

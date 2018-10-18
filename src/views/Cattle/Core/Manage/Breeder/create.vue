@@ -181,7 +181,7 @@
     import {
         get
     } from "vuex-pathify"
-    import ActionBar from "@/components/Menu/ActionBar";
+    import ActionBar from "@/components/Menu/ActionBar2";
     import DatePicker from "@/components/Share/DatePicker";
     import Choice from "@/components/Share/Choice";
     import introductionBreeding from "@/components/Share/introductionBreeding";

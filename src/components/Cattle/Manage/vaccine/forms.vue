@@ -1,76 +1,57 @@
 <template>
     <v-content>
-        <v-btn v-if="!update" round class="box-purple wh " @click="dialog.on = true"> + เพิ่มข้อมูล</v-btn>
-        <v-btn v-else @click="(dialog.on = true)&&(form= forms)" round class="box-yellow">
-            <h3>แก้ไข</h3>
+        <v-btn @click="openDialog()" v-if="!update" class="box-green">
+            <h4>
+                <v-icon>mdi-plus-circle</v-icon>เพิ่มข้อมูล
+            </h4>
+        </v-btn>
+        <v-btn @click="openDialog()" v-if="update" class="box-yellow">
+            <h4>
+                <v-icon>mdi-pencil</v-icon>แก้ไขข้อมูล
+            </h4>
+        </v-btn>
+        <v-btn @click="removeData()" v-if="update" class="box-red">
+            <h4>
+                <v-icon>mdi-delete</v-icon>ลบข้อมูล
+            </h4>
         </v-btn>
 
-        <v-btn v-if="update" @click="removeData()" round color="red" class="wh">
-            <h3>ลบ</h3>
-        </v-btn>
-        <v-dialog v-model="dialog.on" persistent>
+        <v-dialog v-model="dialog" scrollable persistent :overlay="false" transition="dialog-transition">
             <v-card>
-                <v-container>
-                    <h3>
-                        <v-btn fab color="red" dark @click="closeDialog()">X</v-btn>การข้อมูลการผสมพันธุ์
-                    </h3>
-                    <v-divider light></v-divider>
+                <v-toolbar color="primary">
+                    <v-btn icon dark @click.native="closeDialog()">
+                        <v-icon>close</v-icon>
+                    </v-btn>
+                    <h1 class="wh" v-if="!update">เพิ่มข้อมูล</h1>
+                    <h1 class="wh" v-if="update">อัพเดทข้อมูล</h1>
+                </v-toolbar>
+                <v-container grid-list-xs>
+                    <date-picker label="วัน/เดือน/ปี ที่ตรวจท้อง" :valDate="form.vaccine_date" v-model="form.vaccine_date"
+                        @change="form.vaccine_date = $event" />
 
+                    <choice to="ผู้ทำ" :remark="form.options.maker" v-model="form.maker" @change="form.options.maker = $event" />
 
+                    <choice to="ชนิดวัคซีน" :remark="form.options.vaccine_type" v-model="form.vaccine_type" @change="form.options.vaccine_type = $event" />
 
-                    <v-dialog ref="dialog0" v-model="datePicker[0].dialog" :return-value.sync="datePicker[0].date"
-                        persistent lazy full-width width="290px">
-                        <v-text-field slot="activator" :value="dateTH(datePicker[0].date)" label="วัน/เดือน/ปี"
-                            readonly></v-text-field>
-                        <v-date-picker v-model="datePicker[0].date" scrollable>
-                            <v-spacer></v-spacer>
-                            <v-btn flat color="primary" @click="datePicker[0].dialog = false">Cancel</v-btn>
-                            <v-btn flat color="primary" @click.native=" $refs.dialog0.save(datePicker[0].date)">OK</v-btn>
-                        </v-date-picker>
-                    </v-dialog>
+                    <v-text-field label="ชุดการผลิตวัคซีน" v-model="form.vaccine_set"></v-text-field>
 
-                    <v-select v-model="form.maker" :items="notNull(items[0].key)" item-text="choice" item-value="id"
-                        :label="items[0].id" persistent-hint single-line></v-select>
-                    <v-text-field v-if="form.maker == '080300'" v-model="form.options.maker" :label="items[0].id+' อื่นๆ'" ></v-text-field>
+                    <date-picker label="วัน/เดือน/ปี ที่ผลิต" :valDate="form.exp_date" v-model="form.exp_date" @change="form.exp_date = $event" />
 
-                    <v-select v-model="form.vaccine_type" :items="notNull(items[1].key)" item-text="choice" item-value="id"
-                        :label="items[1].id" persistent-hint single-line></v-select>
-                    <v-text-field  v-if="form.vaccine_type == '060400'" v-model="form.options.vaccine_type"   :label="items[1].id+' อื่นๆ'" ></v-text-field>
+                    <date-picker label="วัน/เดือน/ปี ที่หมดอายุ" :valDate="form.mfg_date" v-model="form.mfg_date"
+                        @change="form.mfg_date = $event" />
 
-                    <v-text-field v-model="form.vaccine_set" label="ชุดการผลิตวัคซีน"></v-text-field>
-
-                    <v-dialog ref="dialog1" v-model="datePicker[1].dialog" :return-value.sync="datePicker[1].date"
-                        persistent lazy full-width width="290px">
-                        <v-text-field slot="activator" :value="dateTH(datePicker[1].date)" label="วัน/เดือน/ปี ที่ผลิต"
-                            readonly></v-text-field>
-                        <v-date-picker v-model="datePicker[1].date" scrollable>
-                            <v-spacer></v-spacer>
-                            <v-btn flat color="primary" @click="datePicker[1].dialog = false">Cancel</v-btn>
-                            <v-btn flat color="primary" @click.native="$refs.dialog1.save(datePicker[1].date)">OK</v-btn>
-                        </v-date-picker>
-                    </v-dialog>
-
-                    <v-dialog ref="dialog2" v-model="datePicker[2].dialog" :return-value.sync="datePicker[2].date"
-                        persistent lazy full-width width="290px">
-                        <v-text-field slot="activator" :value="dateTH(datePicker[2].date)" label="วัน/เดือน/ปี ที่หมดอายุ"
-                            readonly></v-text-field>
-                        <v-date-picker v-model="datePicker[2].date" scrollable>
-                            <v-spacer></v-spacer>
-                            <v-btn flat color="primary" @click="datePicker[2].dialog = false">Cancel</v-btn>
-                            <v-btn flat color="primary" @click.native=" $refs.dialog2.save(datePicker[2].date)">OK</v-btn>
-                        </v-date-picker>
-
-                    </v-dialog>
-                    <v-btn v-if="!update" @click="createData()" large round class="box-green wh full-width">บันทึก</v-btn>
-                    <v-btn v-else @click="updateData()" large round class="box-green wh full-width">แก้ไข</v-btn>
-
-
-                </v-container>
+                   </v-container>
+                   <center>
+                     <v-btn v-if="!update" class="box-green full-width" @click="createData()" large>บันทึก</v-btn>
+                    <v-btn  v-if="update"  class="box-yellow full-width" @click="updateData()" large>อัพเดท</v-btn>
+               </center>
             </v-card>
         </v-dialog>
 
-
     </v-content>
+
+
+
 </template>
 
 <script>
@@ -79,144 +60,99 @@
         get
     } from "vuex-pathify"
     import moment from 'moment';
+    import DatePicker from "@/components/Share/DatePicker";
+    import Choice from "@/components/Share/Choice";
+
     export default {
         name: "Forms",
+        components: {
+
+            DatePicker,
+            Choice
+        },
         data() {
             return {
-                dialog: {
-                    on: false
-                },
-                form: {
-                    options:{
-                        maker:'',
-                        vaccine_type:'',
-                    }
-                },
-                tmp: {},
-                /*******DatePicker***************/
-                datePicker: [{
-                        dialog: false,
-                        date: null,
-                    },
-                    {
-                        dialog: false,
-                        date: null,
-                    },
-                    {
-                        dialog: false,
-                        date: null,
-                    },
-                ],
-                /********************************/
-                items: [{
-                        id: 'ผู้ทำ',
-                        key: {},
-                    },
-                    {
-                        id: 'ชนิดวัคซีน',
-                        key: {},
-                    },
-                ],
+                To:'vaccine',
+                DefaultForm: {},
+                dialog: false,
+                form: {},
+                date: null,
             }
         },
         computed: {
-            dateTH: get('core/dateTH'),
             notNull: get('core/notNull'),
             setVaccine: get('manageDef/setVaccine'),
             loadVaccine: get('manageDef/vaccine'),
         },
         props: {
             cattle: {},
-            forms: {},
-            update: null
+            update: '',
+            forms:{},
+
         },
         async mounted() {
             await this.initial();
         },
         methods: {
-
-            updateDialog() {
-                this.form = this.forms
+            openDialog() {
+                this.dialog = true;
             },
             closeDialog() {
-                if (this.update) {
-                    this.form = this.forms;
-                } else {
-
-                    this.form = {};
+                if(!this.update){ 
+                this.getDefaultForm();
                 }
-                this.preDate();
-                this.dialog.on = false
+                this.getData();
+                this.dialog = false;
             },
-            createData: async function () {
-                    this.setDate();
-                    let params = {
-                        api: 'farmer/cattles/' + this.cattle.id + '/vaccine',
-                        form: this.form
-                    }
-                    let create = await store.dispatch("manageDef/createData", params);
-                    this.closeDialog();
-                    this.load();
-                },
-                updateData: async function () {
-                        this.setDate();
-                        let params = {
-                            api: 'farmer/cattles/' + this.cattle.id + '/vaccine/' + this.forms.id,
-                            form: this.form
-                        }
-                        let create = await store.dispatch("manageDef/updateData", params);
-                        this.closeDialog();
-                        this.load();
-                    },
-                    removeData: async function () {
-                            let params = {
-                                api: 'farmer/cattles/' + this.cattle.id + '/vaccine/' + this.forms.id,
-                                form: this.form
-                            }
-                            let check = confirm('คุณแน่ใจใช่ไหมที่จะลบข้อมูลนี้');
-                            if (check) {
-                                let create = await store.dispatch("manageDef/removeData", params);
-                            }
+            createData:async function(){
+                  let params = {
+                    api: 'farmer/cattles/' + this.cattle.id + '/'+this.To,
+                    form:this.form
+                }
+                this.form = await store.dispatch("manageDef/createData", params);
+                 this.closeDialog();
+            },
+            updateData:async function(){
+                  let params = {
+                    api: 'farmer/cattles/' + this.cattle.id + '/'+this.To+'/'+this.forms.id,
+                    form:this.form
+                }
+               let c  = await store.dispatch("manageDef/updateData", params);
+                this.closeDialog();
+            },
+             removeData: async function () {
+                let params = {
+                    api: 'farmer/cattles/' + this.cattle.id + '/'+this.To+'/'+this.forms.id,
+                }
+                this.form = await store.dispatch("manageDef/removeData", params); 
+                  this.closeDialog();
+            },
+            getData:async function(){
+                 let params = {
+                    api: 'farmer/cattles/' + this.cattle.id + '/'+this.To,
+                }
+                let data = await store.dispatch("manageDef/getData", params);
+                this.setVaccine(data);
 
-
-                            this.load();
-                        },
-                        load: async function () {
-                                let params = {
-                                    api: 'farmer/cattles/' + this.cattle.id + '/vaccine',
-                                }
-                                let data = await store.dispatch("manageDef/getData", params);
-                                this.setVaccine(data);
-                            },
-                            setDate() {
-                                this.form.vaccine_date = this.datePicker[0].date
-                                this.form.exp_date = this.datePicker[1].date
-                                this.form.mfg_date = this.datePicker[2].date
-
-                            },
-                            preDate() {
-                                if (this.update) {
-                                    this.datePicker[0].date = this.forms.vaccine_date;
-                                    this.datePicker[1].date = this.forms.exp_date;
-                                    this.datePicker[2].date = this.forms.mfg_date;
-                                } else {
-                                    for (let index = 0; index < this.datePicker.length; index++) {
-                                        this.datePicker[index].date = null;
-                                    }
-                                }
-                            },
-                            getSelect: async function (as) {
-
-                                    return await this.tmp;
-                                },
-                                initial: async function () {
-                                    this.preDate();
-                                    for (let index = 0; index < this.items.length; index++) {
-                                        this.items[index].key = await store.dispatch("choice/getChoicesByType",
-                                            this.items[index].id);
-                                    }
-
-                                }
+            },
+            getDefaultForm: async function () {
+                let params = {
+                    api: 'farmer/cattles/' + this.cattle.id + '/'+this.To+'/create',
+                }
+                try {
+                    this.form = await store.dispatch("manageDef/getForm", params);  
+                } catch (error) {
+                    
+                }
+                
+            },
+            initial: async function () {
+                if(!this.update){ 
+                this.getDefaultForm();
+                }else{ 
+                    this.form = this.forms;
+                }
+            }
 
         }
     }

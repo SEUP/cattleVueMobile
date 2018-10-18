@@ -53,10 +53,8 @@
 
 <script>
     import store from "@/store/"
-    import {
-        get
-    } from "vuex-pathify"
-      import CattleAvatar from "@/components/Cattle/Avatar/Image";
+    import { get} from "vuex-pathify"
+   import CattleAvatar from "@/components/Cattle/Avatar/Image";
     export default {
         name: "CattleListView",
         components:{

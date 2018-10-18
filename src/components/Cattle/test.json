@@ -36,4 +36,39 @@
     },
     "created_at": "2018-10-14T18:42:26.000Z",
     "updated_at": "2018-10-14T18:45:42.000Z"
+},
+
+{
+    "id": 1105,
+    "cattle_id": 1250,
+    "time_at": 2,
+    "vaccine_date": "2018-10-27",
+    "vaccine_type": "060400",
+    "maker": "080300",
+    "exp_date": "2018-10-15",
+    "mfg_date": "2018-10-25",
+    "vaccine_set": "zxc",
+    "options": {
+        "maker": "sads",
+        "vaccine_type": "asd"
+    },
+    "created_at": "2018-10-13 14:58:36",
+    "updated_at": "2018-10-13 14:58:36"
+},
+
+{
+    "id": 98,
+    "cattle_id": 1228,
+    "start_date": "2018-10-24",
+    "start_weight": "df",
+    "start_length": "77",
+    "start_chest": "77",
+    "start_height": "77",
+    "end_date": "2018-10-24",
+    "end_weight": "77",
+    "end_length": "77",
+    "end_chest": "77",
+    "end_height": "77",
+    "created_at": "2018-10-05 08:07:14",
+    "updated_at": "2018-10-05 08:07:14"
 }

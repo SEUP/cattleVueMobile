@@ -41,6 +41,27 @@ const actions = {
          }
      },
 
+     async defaultActionBarB(context,params) { 
+        let title = 'Cattle Farmer';
+        if(params){
+            title = params;
+        }
+         state.ActionBar = {
+             bg:'box-purple', 
+             title:title,
+             iconLeft:'mdi-arrow-left',
+             
+             btnFirst:false,
+             iconFirst:'mdi-menu',
+             pathFirst:'',
+
+             btnSecond:false,
+             iconSecond:'mdi-menu',
+             pathSecond:'',
+
+         }
+     },
+
      async customActionBar(context,params) { 
         context.commit('setActionBar',params)
     },
