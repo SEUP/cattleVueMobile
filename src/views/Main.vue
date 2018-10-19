@@ -4,10 +4,9 @@
         <v-container class="elevation-0 wh font" style="background:transparent">
             <v-layout row>
                 <v-flex xs2>
-                    
-
+                     
                     <v-menu offset-y class="font">
-                        <img slot="activator" dark class="circle shadow wh" style="height:38px; weigt:38px;" src="https://scontent.fbkk5-1.fna.fbcdn.net/v/t1.0-9/37784883_1856053931120755_8597063430257508352_n.jpg?_nc_cat=109&oh=77b851796e69b5c79d0af54c4e99b2dc&oe=5C4F8471"
+                        <img slot="activator" dark class="circle shadow wh" style="height:38px; weigt:38px;" :src="'http://mct.ict.up.ac.th:10008/'+farmer.image_url"
                         alt="">  
                         <v-list>
                             <v-list-tile  key="0" @click="$router.push({name : 'farmer-profile'})" >
