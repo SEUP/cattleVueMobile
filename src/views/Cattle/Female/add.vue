@@ -76,6 +76,7 @@
                         this.getCattle();
                         this.setDataForAdd();
                         console.log('cattle',this.cccc);
+                         
                   },
 
         }

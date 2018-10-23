@@ -26,7 +26,7 @@
                     <h1 class="wh" v-if="update">อัพเดทข้อมูล</h1>
                 </v-toolbar>
                 <v-container grid-list-xs>
-                    <date-picker label="วัน/เดือน/ปี ที่ตรวจท้อง" :valDate="form.vaccine_date" v-model="form.vaccine_date"
+                    <date-picker label="วัน/เดือน/ปี ที่ทำวัคซีน" :valDate="form.vaccine_date" v-model="form.vaccine_date"
                         @change="form.vaccine_date = $event" />
 
                     <choice to="ผู้ทำ" :remark="form.options.maker" v-model="form.maker" @change="form.options.maker = $event" />

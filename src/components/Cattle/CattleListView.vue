@@ -86,7 +86,8 @@
                     this.$router.push({
                         name: 'cattle-profile',
                         params: {
-                            cattle: data
+                            cattle: data,
+                            updated:1,
                         }
                     });
                 },

@@ -3,11 +3,11 @@
 
         <v-card>
             <v-container>
+              
                 <v-text-field v-model="form.name" label="ชื่อโค"></v-text-field>
                 <v-text-field v-model="form.ear_number" label="เบอร์หู"></v-text-field>
 
-                <v-select v-model="form.cattle_breeding" :items="notNull(cattle_sex)" item-text="choice" item-value="id"
-                    label="พันธุ์โค" persistent-hint return-object single-line></v-select>
+                <choice to="พันธุ์โค" :remark="form.options.cattle_breeding" v-model="form.cattle_breeding" @change="form.options.cattle_breeding = $event" />
 
                 <v-text-field v-model="form.number_children" v-if="form.cattle_type=='020200'" type="number" label="จำนวนการให้ลูก"></v-text-field>
             </v-container>
@@ -49,8 +49,9 @@
                     </v-date-picker>
                 </v-dialog>
 
-                <v-select v-model="form.cattle_source" :items="notNull(cattle_type)" item-text="choice" item-value="id"
-                    label="แหล่งที่มา" persistent-hint return-object single-line></v-select>
+
+                <choice to="แหล่งที่มา" :remark="form.options.cattle_source" v-model="form.cattle_source" @change="form.options.cattle_source = $event" />
+ 
                 <v-text-field type="number" v-model="form.buy_price" label="ราคา (บาท)"></v-text-field>
             </v-container>
         </v-card>
@@ -81,13 +82,18 @@
         get
     } from "vuex-pathify"
     import moment from 'moment';
+    import DatePicker from "@/components/Share/DatePicker";
+    import Choice from "@/components/Share/Choice";
     export default {
         name: "AddForm",
+        components: {
+            Choice,
+            DatePicker
+        },
         data() {
             return {
                 form: {
-                    name: '',
-                    type: {},
+              
                 },
                 cattle_type: [],
                 cattle_sex: [],
@@ -110,6 +116,7 @@
             }
         },
         computed: {
+             farmer: get("farmer/farmer"),
             test: get("core/test"),
             getAge: get("cattle/getAge"),
             dateTH: get('core/dateTH')
@@ -127,49 +134,71 @@
                 let birthdate = moment(this.form.birth_date).format("YYYY-MM-DD");
                 this.birthDate.year = today.diff(birthdate, 'years')
                 this.birthDate.month = today.diff(birthdate, 'month') % 12
+
+                if(isNaN(this.birthDate.year) ){
+                    
+                     this.birthDate.year =0;
+                }
+                if(isNaN( this.birthDate.month )){
+                     this.birthDate.month =0;
+                }
+
             },
             ageChange: async function () {
-                let today = new moment();
-                today.set('date', 1)
-                today.subtract(parseInt(this.birthDate.year), 'years');
-                today.subtract(parseInt(this.birthDate.month), 'months');
+                    let today = new moment();
+                    today.set('date', 1)
+                    today.subtract(parseInt(this.birthDate.year), 'years');
+                    today.subtract(parseInt(this.birthDate.month), 'months');
 
-                this.form.birth_date = today.format("YYYY-MM-DD")
+                    this.form.birth_date = today.format("YYYY-MM-DD")
 
-            }, 
-
-
-            setData() {
-                this.form = this.addData;
-            },
-            create: async function () {
-                    this.form.cattle_source = this.form.cattle_source.id;
-                    this.form.cattle_sex = this.form.cattle_sex.id;
-
-                    let c = await store.dispatch("cattle/createCattle", this.form);
-                    this.$router.go(-1);
                 },
-                update: async function () {
-                            this.form.cattle_source = this.form.cattle_source.id;
-                    this.form.cattle_breeding = this.form.cattle_breeding.id;
-                        let c = await store.dispatch("cattle/updateCattle", this.form);
+
+
+                setData() {
+                    this.form = this.addData;
+                },
+                create: async function () {
+                       
+                        let c = await store.dispatch("cattle/createCattle", this.form);
                         this.$router.go(-1);
                     },
-                    notNull(data) {
-                        if (data == null) {
-                            return 'ยังไม่มีข้อมูล';
-                        } else {
-                            return data;
-                        }
-                    },
-                    initial: async function () {
-                        this.cattle_type = await store.dispatch("choice/getChoicesByType", 'แหล่งที่มา');
-                        this.cattle_sex = await store.dispatch("choice/getChoicesByType", 'พันธุ์โค');
-                        console.log(this.cattle_sex);
-                        this.setData();
-                        this.getOlds();
+                    update: async function () {
+                            this.form.cattle_source = this.form.cattle_source.id;
+                            this.form.cattle_breeding = this.form.cattle_breeding.id;
+                            let c = await store.dispatch("cattle/updateCattle", this.form);
+                            this.$router.go(-1);
+                        },
+                        notNull(data) {
+                            if (data == null) {
+                                return 'ยังไม่มีข้อมูล';
+                            } else {
+                                return data;
+                            }
+                        },
+                        initial: async function () {
+                                this.cattle_type = await store.dispatch("choice/getChoicesByType", 'แหล่งที่มา');
+                                this.cattle_sex = await store.dispatch("choice/getChoicesByType", 'พันธุ์โค');
+                                console.log(this.cattle_sex);
+                                   this.getDefaultForm();
+                                 this.setData();
+                         
+                                this.getOlds();
+                             
+                            },
+                            getDefaultForm: async function () {  
+                                    let params = {
+                                        api: 'farmer/farmer/' + this.farmer.id + '/cattles/create',
+                                    }
+                                    try {
+                                        this.form = await store.dispatch("manageDef/getForm", params);
+                                    } catch (error) {
 
-                    }
+                                    }
+
+                                    
+
+                                },
 
         }
     }
