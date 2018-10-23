@@ -27,7 +27,7 @@
                         persistent lazy full-width width="290px">
                         <v-text-field slot="activator" :value="dateTH(form.breeding_date)" label="วัน/เดือน/ปี"
                             readonly></v-text-field>
-                        <v-date-picker v-model="form.breeding_date" value="moment()" scrollable>
+                        <v-date-picker locale="th" v-model="form.breeding_date" value="moment()" scrollable>
                             <v-spacer></v-spacer>
                             <v-btn flat color="primary" @click="breederDate.dialog = false">Cancel</v-btn>
                             <v-btn flat color="primary" @click.native="(breederDate.dialog=false)&&$refs.dialog.save(breederDate.date)">OK</v-btn>
