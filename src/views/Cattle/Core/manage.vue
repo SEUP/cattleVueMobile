@@ -95,9 +95,7 @@
             Sell,
             BreederFemale,Khun,Milk
         },
-        props: {
-            cattle: {}
-        },
+         
         data() {
             return {
 
@@ -108,7 +106,7 @@
             next()
         },
         computed: {
-
+            cattle : get("cattle/cattleChoose"),
 
         },
         async mounted() {
@@ -116,6 +114,7 @@
         },
         methods: {
             initial: async function () {
+                
 
             },
         }

@@ -39,7 +39,7 @@
                         <v-text-field slot="activator" v-if="dateTmp == null" :value="dateTH(form.breeding_date)" label="วัน/เดือน/ปี"
                             readonly></v-text-field>
                         <v-text-field slot="activator" v-else :value="dateTH(dateTmp)" label="วัน/เดือน/ปี" readonly></v-text-field>
-                        <v-date-picker v-model="dateTmp" scrollable>
+                        <v-date-picker locale="th" v-model="dateTmp" scrollable>
                             <v-spacer></v-spacer>
                             <v-btn flat color="primary" @click="breederDate.dialog = false">Cancel</v-btn>
                             <v-btn flat color="primary" @click.native="(breederDate.dialog=false)&&$refs.dialog.save(breederDate.date)">OK</v-btn>
@@ -56,7 +56,7 @@
 
                     <v-divider light></v-divider>
                     <v-btn v-if="!update" @click="createData()" large round class="box-green wh full-width">บันทึก</v-btn>
-                    <v-btn v-else @click="updateData()" large round class="box-green wh full-width">แก้ไข</v-btn>
+                    <v-btn v-else @click="updateData()" large round class="box-green wh full-width">บันทึก</v-btn>
                 </v-container>
             </v-card>
         </v-dialog>

@@ -61,9 +61,7 @@
               <v-card class="elevation-0">
                 <date-picker label="วัน/เดือน/ปี ที่ผสม" :valDate='form.breeding_date'
                              @change="babyBirthday($event)"
-                />
-                   <v-text-field  label="วันที่ควรตรวจการกลับสัด"   :value="dateback()" readonly hide-details
-                              class="pb-1 pr-2"></v-text-field>
+                /> 
 
                 <choice to="ประเภทการผสมพันธุ์" :remark="form.options.breed_type"
                         v-model="form.breed_type"
@@ -118,9 +116,9 @@
                         v-model="form.reversal"
                         @change="form.options.reversal = $event"></choice>
 
-                <v-text-field v-if="form.reversal == '280100'" label="วันที่ควรตรวจท้อง"
+               <!----  <v-text-field v-if="form.reversal == '280100'" label="วันที่ควรตรวจท้อง"
                               v-model="dateBack" readonly hide-details
-                              class="pb-1 pr-2"></v-text-field>
+                              class="pb-1 pr-2"></v-text-field> ---->
 
               </v-card>
               <div v-if = "form.reversal == '280200'">กรุณาบันทึก เเละผสมพันธุ์ใหม่</div>
@@ -138,9 +136,9 @@
                         v-model="form.breeding_result"
                         @change="form.options.breeding_result = $event"/>
 
-                <v-text-field v-if="form.breeding_result == '120100'" label="วันที่ควาดว่าจะคลอด"
+               <!--- <v-text-field v-if="form.breeding_result == '120100'" label="วันที่ควาดว่าจะคลอด"
                               v-model="form.options.baby_date_birth" readonly hide-details
-                              class="pb-1 pr-2"></v-text-field>
+                              class="pb-1 pr-2"></v-text-field> ---->
 
               </v-card>
               <div v-if = "form.breeding_result == '120200'">กรุณาบันทึก เเละผสมพันธุ์ใหม่</div>
@@ -181,7 +179,7 @@
     import {
         get
     } from "vuex-pathify"
-    import ActionBar from "@/components/Menu/ActionBar2";
+    import ActionBar from "@/components/Menu/ActionBar";
     import DatePicker from "@/components/Share/DatePicker";
     import Choice from "@/components/Share/Choice";
     import introductionBreeding from "@/components/Share/introductionBreeding";
@@ -271,7 +269,8 @@
                             this.form = create;
                             this.form.status_id = step;
                             if(this.form.status_id == '7'){
-                                this.$router.go('-1');
+                                this.$router.go(-1);  
+                                
                             }
             },
             babyBirthday: async function (date) {
@@ -289,7 +288,7 @@
 
           bd1 = this.getThaiFormatDate(bd1.toDate())
           bd2 = this.getThaiFormatDate(bd2.toDate())
-             alert(`${bd1} ถึง ${bd2}`);
+       
           this.form.options.baby_date_birth = `${bd1} ถึง ${bd2}`
         }
       },

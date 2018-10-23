@@ -17,7 +17,7 @@
         </v-btn>
 
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" transition="dialog-transition">
-            <v-card>
+            <v-card class="bgw">
                 <v-toolbar color="primary">
                     <v-btn icon dark @click.native="closeDialog()">
                         <v-icon>close</v-icon>
@@ -25,7 +25,7 @@
                     <h1 class="wh" v-if="!update">เพิ่มข้อมูล</h1>
                     <h1 class="wh" v-if="update">อัพเดทข้อมูล</h1>
                 </v-toolbar>
-                <v-container grid-list-xs>
+                <v-container grid-list-xs class="bgw">
                     <date-picker label="วัน/เดือน/ปี ที่ทำวัคซีน" :valDate="form.vaccine_date" v-model="form.vaccine_date"
                         @change="form.vaccine_date = $event" />
 
@@ -41,7 +41,7 @@
                         @change="form.mfg_date = $event" />
 
                    </v-container>
-                   <center>
+                   <center class="bgw">
                      <v-btn v-if="!update" class="box-green full-width" @click="createData()" large>บันทึก</v-btn>
                     <v-btn  v-if="update"  class="box-yellow full-width" @click="updateData()" large>อัพเดท</v-btn>
                </center>

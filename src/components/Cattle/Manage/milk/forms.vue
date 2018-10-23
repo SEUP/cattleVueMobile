@@ -32,7 +32,7 @@
                                   
                             <v-flex xs12 style="background-color:white;" >
                                 <p class="title">เริ่มหย่านม</p>
-                                <date-picker label="วัน/เดือน/ปี ที่เริ่มหย่านม" :valDate="form.start_date" v-model="form.start_date"
+                                <date-picker label="วัน/เดือน/ปี ที่เกิด" :valDate="form.start_date" v-model="form.start_date"
                                     @change="form.start_date = $event" />
                                 <v-text-field label="น้ำหนักที่เริ่มหย่านม" suffix="กิโลกรัม" v-model="form.start_weight"></v-text-field>
                                 <v-text-field label="ความยาวลำตัว" suffix="เซนติเมตร" v-model="form.start_length"></v-text-field>
@@ -40,9 +40,9 @@
                                 <v-text-field label="ความสูง" suffix="เซนติเมตร" v-model="form.start_height"></v-text-field>
                            
                                 <p class="title">สิ้นสุดการหย่านม</p>
-                                <date-picker label="วัน/เดือน/ปี ที่สิ้นสุดการหย่านม" :valDate="form.end_date" v-model="form.end_date"
+                                <date-picker label="วัน/เดือน/ปี ที่หย่านม" :valDate="form.end_date" v-model="form.end_date"
                                     @change="form.end_date = $event" />
-                                <v-text-field label="น้ำหนักสิ้นสุดการหย่านม" suffix="กิโลกรัม" v-model="form.end_weight"></v-text-field>
+                                <v-text-field label="น้ำหนัก" suffix="กิโลกรัม" v-model="form.end_weight"></v-text-field>
                                 <v-text-field label="ความยาวลำตัว" suffix="เซนติเมตร" v-model="form.end_length"></v-text-field>
                                 <v-text-field label="รอบอก" suffix="เซนติเมตร" v-model="form.end_chest"></v-text-field>
                                 <v-text-field label="ความสูง" suffix="เซนติเมตร" v-model="form.end_height"></v-text-field>

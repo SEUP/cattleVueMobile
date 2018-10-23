@@ -17,7 +17,7 @@
                 </v-flex>
             </v-layout>
 
-            <AddForm class="mrt-20" :addData="cattle" />
+            <AddForm class="mrt-20" :addData="cattle" updated="1"/>
         </v-container>
 
         <v-dialog v-model="dialog" width="500">
@@ -50,13 +50,15 @@
             AddForm,CaptureAvatar,SelectAvatar
         },
         props: {
-            cattle: {}
+            cattle: {},
+            updated:0,
         },
         data() {
             return {
                 params: {},
                 dialog: false,
                 baseUrl: 'http://mct.ict.up.ac.th:10008/',
+                updated2:0,
             }
         },
         async beforeRouteEnter(to, from, next) {
@@ -84,6 +86,7 @@
                 },
                 initial: async function () {
                         this.getCattle();
+                        this.updated2 = this.updated
                     },
 
         }

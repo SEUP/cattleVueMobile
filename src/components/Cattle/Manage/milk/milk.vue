@@ -20,7 +20,7 @@
                   <v-layout>
                     <v-flex xs6 class="verticalBar">
                       <v-card-text class="font-weight-bold">
-                        วัน/เดือน/ปี ที่เริ่มหย่านม
+                        วัน/เดือน/ปี เมื่อเเรกเกิด
                       </v-card-text>
                     </v-flex>
                     <v-flex xs6>
@@ -34,7 +34,7 @@
                   <v-layout>
                     <v-flex xs6 class="verticalBar">
                       <v-card-text class="font-weight-bold">
-                        รอบอก เมื่อเริ่มหย่านม
+                        รอบอก เมื่อเเรกเกิด
                       </v-card-text>
                     </v-flex>
                     <v-flex xs6>
@@ -48,7 +48,7 @@
                   <v-layout>
                     <v-flex xs6 class="verticalBar">
                       <v-card-text class="font-weight-bold">
-                        ความสูง เมื่อเริ่มหย่านม
+                        ความสูง เมื่อเเรกเกิด
                       </v-card-text>
                     </v-flex>
                     <v-flex xs6>
@@ -62,7 +62,7 @@
                   <v-layout>
                     <v-flex xs6 class="verticalBar">
                       <v-card-text class="font-weight-bold">
-                        ความยาวลำตัว เมื่อเริ่มหย่านม
+                        ความยาวลำตัว เมื่อเเรกเกิด
                       </v-card-text>
                     </v-flex>
                     <v-flex xs6>
@@ -76,7 +76,7 @@
                   <v-layout>
                     <v-flex xs6 class="verticalBar">
                       <v-card-text class="font-weight-bold">
-                        น้ำหนัก เมื่อเริ่มหย่านม
+                        น้ำหนัก เมื่อเเรกเกิด
                       </v-card-text>
                     </v-flex>
                     <v-flex xs6>
@@ -107,7 +107,7 @@
                   <v-layout>
                     <v-flex xs6 class="verticalBar">
                       <v-card-text class="font-weight-bold">
-                        รอบอก เมื่อสิ้นสุดการหย่านม
+                        รอบอก เมื่อสิ้นสุดหย่านม
                       </v-card-text>
                     </v-flex>
                     <v-flex xs6>
@@ -121,7 +121,7 @@
                   <v-layout>
                     <v-flex xs6 class="verticalBar">
                       <v-card-text class="font-weight-bold">
-                        ความสูง เมื่อสิ้นสุดการหย่านม
+                        ความสูง เมื่อสิ้นสุดหย่านม
                       </v-card-text>
                     </v-flex>
                     <v-flex xs6>
@@ -135,7 +135,7 @@
                   <v-layout>
                     <v-flex xs6 class="verticalBar">
                       <v-card-text class="font-weight-bold">
-                        ความยาวลำตัว เมื่อสิ้นสุดการหย่านม
+                        ความยาวลำตัว เมื่อสิ้นสุดหย่านม
                       </v-card-text>
                     </v-flex>
                     <v-flex xs6>
@@ -149,7 +149,7 @@
                   <v-layout>
                     <v-flex xs6 class="verticalBar">
                       <v-card-text class="font-weight-bold">
-                        น้ำหนัก เมื่อสิ้นสุดการหย่านม
+                        น้ำหนัก เมื่อสิ้นสุดหย่านม
                       </v-card-text>
                     </v-flex>
                     <v-flex xs6>

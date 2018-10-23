@@ -7,9 +7,12 @@
                 ทำลาย
             </v-tab>
             <v-tab-item key="0" style="height:100%;">
-                <v-layout v-for="cattle in sale.data" class="pd-20">
+                <div v-for="cattle in sale.data" >
+                    
               
-                    <v-card flat class="box-blue shadow pd-12 full-width wh" v-if="cattle.sale.sale_price == null" >
+                <v-layout class="pd-20" v-if="cattle.sale.sale_price == null">
+              
+                    <v-card flat class="box-blue shadow pd-12 full-width wh"  >
                         <v-layout row>
                             <v-flex xs4 class="pdt-20">     <CattleAvatar :url="cattle.image_url" /></v-flex>
                         <v-flex xs8>
@@ -20,7 +23,7 @@
                                     <div class="mrt-6"><b>เบอร์หู : </b> {{notNull(cattle.ear_number)}}</div>
                                     <div><b>อายุ : </b> {{getAge(cattle.birth_date)}} </div>
                                 </div>
-                                <v-btn @click="reCattle(cattle)">ยกเลิกการจำหน่าย</v-btn>
+                                <v-btn @click="reCattle(cattle)">ยกเลิกการทำลาย</v-btn>
                             </v-card-title>
                         </v-flex>
                         </v-layout>
@@ -28,16 +31,16 @@
                     </v-card>
                     
                 </v-layout>
- 
+   </div>
             </v-tab-item>
 
             <v-tab key="1" ripple>
-                ขาย
+                จำหน่าย
             </v-tab>
           <v-tab-item key="1" style="height:100%;">
-                <v-layout v-for="cattle in sale.data" class="pd-20">
-              
-                    <v-card flat class="box-blue shadow pd-12 full-width wh" v-if="cattle.sale.sale_price != null" >
+              <div v-for="cattle in sale.data" v-if="cattle.sale.sale_price != null">
+                     <v-layout  class="pd-20"> 
+                    <v-card flat class="box-blue shadow pd-12 full-width wh"  >
                         <v-layout row>
                             <v-flex xs4 class="pdt-20">     <CattleAvatar :url="cattle.image_url" /></v-flex>
                         <v-flex xs8>
@@ -52,11 +55,13 @@
                             </v-card-title>
                         </v-flex>
                         </v-layout>
+            
+             
                    
                     </v-card>
                     
                 </v-layout>
- 
+   </div>
             </v-tab-item>
         </v-tabs>
 

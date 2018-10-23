@@ -103,12 +103,7 @@
                     },
 
                     manage(data) {
-                        this.$router.push({
-                            name: 'cattle-manage',
-                            params: {
-                                cattle: data
-                            }
-                        });
+                        this.$router.push({  name: 'cattle-manage'  });
                         this.getCattleChoose(data);
                     },
 

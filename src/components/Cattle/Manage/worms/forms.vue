@@ -72,7 +72,7 @@
                 To:'worming',
                 DefaultForm: {},
                 dialog: false,
-                form: {},
+                form: {options:{}},
                 date: null,
             }
         },
@@ -99,15 +99,19 @@
                 this.getDefaultForm();
                 }
                 this.getData();
+                         this.$emit("change",{IsReady :false,dialog:false});
                 this.dialog = false;
-            },
+            }, 
             createData:async function(){
                   let params = {
                     api: 'farmer/cattles/' + this.cattle.id + '/'+this.To,
                     form:this.form
                 }
                 this.form = await store.dispatch("manageDef/createData", params);
+                        this.$emit("change",{IsReady :false,dialog:false});
                  this.closeDialog();
+         
+                 this.getData();
             },
             updateData:async function(){
                   let params = {
@@ -115,6 +119,8 @@
                     form:this.form
                 }
                let c  = await store.dispatch("manageDef/updateData", params);
+                        this.$emit("change",{IsReady :false,dialog:false});
+               this.getData();
                 this.closeDialog();
             },
              removeData: async function () {
@@ -143,11 +149,16 @@
                 }
                 
             },
+              reNew: async function () {
+                  this.form = this.forms;
+                
+            },
             initial: async function () {
                 if(!this.update){ 
                 this.getDefaultForm();
                 }else{ 
                     this.form = this.forms;
+                  //  this.reNew()
                 }
             }
 

@@ -33,7 +33,7 @@
             //fetch neccessery data
             await store.dispatch("farmer/getFarmer")
             await store.dispatch("farmer/downloadAvatar")
-            await store.dispatch("mobile/defaultActionBar",'เพิ่มพ่อพันธุ์')
+            await store.dispatch("mobile/defaultActionBar",'เพิ่มโคแรกเกิด')
 
             next()
         },

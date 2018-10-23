@@ -3,10 +3,10 @@
 
         <v-card>
             <v-container>
-              
+            
                 <v-text-field v-model="form.name" label="ชื่อโค"></v-text-field>
                 <v-text-field v-model="form.ear_number" label="เบอร์หู"></v-text-field>
-
+            <choice v-if="form.cattle_type == '020300' || form.cattle_type == '020400' " to="เพศโค" v-model="form.cattle_sex"/>
                 <choice to="พันธุ์โค" :remark="form.options.cattle_breeding" v-model="form.cattle_breeding" @change="form.options.cattle_breeding = $event" />
 
                 <v-text-field v-model="form.number_children" v-if="form.cattle_type=='020200'" type="number" label="จำนวนการให้ลูก"></v-text-field>
@@ -25,10 +25,10 @@
                 <v-dialog ref="dialog" v-model="birthDate.dialog" :return-value.sync="birthDate.date" persistent lazy
                     full-width width="290px">
                     <v-text-field slot="activator" :value="dateTH(form.birth_date)" label="วัน/เดือน/ปี เกิด" readonly></v-text-field>
-                    <v-date-picker v-model="form.birth_date" scrollable>
+                    <v-date-picker locale="th" v-model="form.birth_date" scrollable>
                         <v-spacer></v-spacer>
-                        <v-btn flat color="primary" @click="birthDate.dialog = false">Cancel</v-btn>
-                        <v-btn flat color="primary" @click="getOlds()" @click.native="(birthDate.dialog=false)&&($refs.dialog.save(birthDate.date))">OK</v-btn>
+                        <v-btn flat color="primary" @click="birthDate.dialog = false">ยกเลิก</v-btn>
+                        <v-btn flat color="primary" @click="getOlds()" @click.native="(birthDate.dialog=false)&&($refs.dialog.save(birthDate.date))">ตกลง</v-btn>
                     </v-date-picker>
                 </v-dialog>
 
@@ -42,10 +42,10 @@
                 <v-dialog ref="dialog" v-model="sellDate.dialog" :return-value.sync="sellDate.date" persistent lazy
                     full-width width="290px">
                     <v-text-field slot="activator" :value="dateTH(form.buy_date)" label="วัน/เดือน/ปี ที่ซื้อ" readonly></v-text-field>
-                    <v-date-picker v-model="form.buy_date" scrollable>
+                    <v-date-picker locale="th" v-model="form.buy_date" scrollable>
                         <v-spacer></v-spacer>
-                        <v-btn flat color="primary" @click="sellDate.dialog = false">Cancel</v-btn>
-                        <v-btn flat color="primary" @click.native="(sellDate.dialog=false)&&$refs.dialog.save(sellDate.date)">OK</v-btn>
+                        <v-btn flat color="primary" @click="sellDate.dialog = false">ยกเลิก</v-btn>
+                        <v-btn flat color="primary" @click.native="(sellDate.dialog=false)&&$refs.dialog.save(sellDate.date)">ตกลง</v-btn>
                     </v-date-picker>
                 </v-dialog>
 
@@ -122,7 +122,8 @@
             dateTH: get('core/dateTH')
         },
         props: {
-            addData: {}
+            addData: {},
+            updated:0,
         },
         async mounted() {
             await this.initial();
@@ -153,19 +154,21 @@
                     this.form.birth_date = today.format("YYYY-MM-DD")
 
                 },
-
+ 
 
                 setData() {
-                    this.form = this.addData;
+                    this.form.farmer_id = this.addData.farmer_id;
+                    this.form.cattle_status = this.addData.cattle_status;
+                    this.form.cattle_type = this.addData.cattle_type;
+                    this.form.cattle_breeding = this.addData.cattle_breeding;
                 },
                 create: async function () {
-                       
+                       //this.setData();
                         let c = await store.dispatch("cattle/createCattle", this.form);
-                        this.$router.go(-1);
+                       this.$router.go(-1);
                     },
                     update: async function () {
-                            this.form.cattle_source = this.form.cattle_source.id;
-                            this.form.cattle_breeding = this.form.cattle_breeding.id;
+                    
                             let c = await store.dispatch("cattle/updateCattle", this.form);
                             this.$router.go(-1);
                         },
@@ -180,10 +183,14 @@
                                 this.cattle_type = await store.dispatch("choice/getChoicesByType", 'แหล่งที่มา');
                                 this.cattle_sex = await store.dispatch("choice/getChoicesByType", 'พันธุ์โค');
                                 console.log(this.cattle_sex);
-                                   this.getDefaultForm();
-                                 this.setData();
+                                if(this.updated == '1'){
+                                    this.form = this.addData;
+                                }else{
+                                     this.getDefaultForm();
+                                }
+                                   
                          
-                                this.getOlds();
+                                this.getOlds(); 
                              
                             },
                             getDefaultForm: async function () {  
@@ -196,7 +203,7 @@
 
                                     }
 
-                                    
+                                    this.setData()
 
                                 },
 

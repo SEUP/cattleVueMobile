@@ -9,7 +9,7 @@
             </h1>
         </center>
         <v-divider light></v-divider> 
-        
+ 
         <v-layout row v-for="data in datas.data">
             <v-flex xs12 class="pd-20">
                 <v-card class="box-brown  pd-10 wh">
@@ -25,7 +25,7 @@
             </v-flex>
 
         </v-layout>
-
+ 
 
     </v-content>
 </template>
