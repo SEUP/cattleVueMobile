@@ -20,9 +20,13 @@
              
           }
         },computed: {
-            getId: get('manageDef/choose_id'),
+            getId: get('manageDef/choose_id'), 
         },
         methods: {
+            
+                change(){
+                    this.$emit('send','sad');
+                },
             captureImage: async function () {
                 let options = {
                     destinationType : navigator.camera.DestinationType.DATA_URL,
@@ -42,7 +46,8 @@
                         form: uri
                     } 
                    await this.$store.dispatch("manageDef/uploadAvatar", params); 
-                this.$router(-1);
+                  await this.$store.dispatch("cattle/downloadAvatar")
+                        this.$router(-1);
                     },
                     async (error) => {
                         window.console.log(error)

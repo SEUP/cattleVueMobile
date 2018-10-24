@@ -20,12 +20,22 @@
                     </v-card>
                     <center class="mrt-10">
                          <Forms :cattle="cattle" :forms="data" :update="'asd'" /> 
+                         <v-btn @click="update(data)">แก้ไข</v-btn>
                     </center>
                 </v-card>
             </v-flex>
 
         </v-layout>
- 
+    
+    <v-dialog
+        v-model="dialog"
+        scrollable fullscreen 
+        persistent :overlay="false"
+        max-width="500px"
+        transition="dialog-transition"
+    >
+        <pre>{{wormChoose}}</pre>
+    </v-dialog>
 
     </v-content>
 </template>
@@ -42,7 +52,7 @@
         data() {
             return {
                 worms: {},
-                
+                dialog:false
 
             }
         },
@@ -55,6 +65,8 @@
             getType: get('choice/getChoiceByCode'),
             setData: get('manageDef/setWorms'),
             datas: get('manageDef/worms'),
+            choose:get('manageDef/getWormChoose'),
+             wormChoose:get('manageDef/wormChoose')
         },
         props: {
             cattle: {}
@@ -64,7 +76,11 @@
         },
         methods: {
 
-
+            update(data){
+                this.choose(data);
+                this.dialog = true;
+                 
+            },
             notNull(data) {
                 if (data == null) {
                     return 'ไม่มีข้อมูล';

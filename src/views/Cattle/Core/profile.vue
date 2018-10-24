@@ -2,17 +2,19 @@
     <v-content>
         <ActionBar />
         <v-container>
-            <center>
-                <v-img @click="dialog=true" v-if="cattle.image_url" class="circle50" :src="baseUrl+cattle.image_url"
-                    height="190px" width="190px" contain></v-img>
-                <img @click="dialog=true" v-else class="circle50" src="@/assets/cattle.png" height="190px" width="190px"
-                    contain />
+            <center @click="imageView() "> 
+                <v-img v-if="avatar" style="border-radius:50%;" :src="avatar" height="190px" width="190px" contain></v-img>
+                 <img style="border-radius:50%;"  @click="imageView(baseUrl+cattle.image_url)" v-else src="@/assets/cattle.png"  height="190px" width="190px"
+                contain />
+            <!--- <Avatar  />  ---->
+
+      
             </center>
             <v-layout>
                 <v-flex xs12>
                     <center>
-                        <CaptureAvatar cattle:="cattle" />
-                        <SelectAvatar cattle:="cattle"/>
+                        <CaptureAvatar   cattle:="cattle" />
+                        <SelectAvatar  cattle:="cattle"/>
                       </center>
                 </v-flex>
             </v-layout>
@@ -22,7 +24,7 @@
 
         <v-dialog v-model="dialog" width="500">
 
-            <v-img v-if="cattle.image_url" :src="baseUrl+cattle.image_url" height="100%" width="100%" contain></v-img>
+            <v-img v-if="cattle.image_url" :src="avatar" height="100%" width="100%" contain></v-img>
             <img @click="imageView(baseUrl+cattle.image_url)" v-else src="@/assets/cattle.png" height="100%" width="100%"
                 contain />
 
@@ -42,12 +44,14 @@
     import AddForm from "@/components/Cattle/AddForm";
      import CaptureAvatar from "@/components/Cattle/CattleCaptureAvatar";
     import SelectAvatar from "@/components/Cattle/CattleSelectAvatar";
+  import Avatar from "@/components/Cattle/Avatar/CattleAvatar";
+
     export default {
         name: 'App',
         components: {
             FarmerAvatar,
             ActionBar,
-            AddForm,CaptureAvatar,SelectAvatar
+            AddForm,CaptureAvatar,SelectAvatar,Avatar
         },
         props: {
             cattle: {},
@@ -66,11 +70,12 @@
             await store.dispatch("farmer/getFarmer")
             await store.dispatch("farmer/downloadAvatar")
             await store.dispatch("mobile/defaultActionBar", 'ข้อมูลโค')
-
+            await store.dispatch("cattle/downloadAvatar")
             next()
         },
         computed: {
             farmer: get("farmer/farmer"),
+            avatar: get("cattle/avatar")
 
         },
         async mounted() {
@@ -87,7 +92,12 @@
                 initial: async function () {
                         this.getCattle();
                         this.updated2 = this.updated
+                    
                     },
+
+            loadImage: async function (){
+                
+            }
 
         }
 

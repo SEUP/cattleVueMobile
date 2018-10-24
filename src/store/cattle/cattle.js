@@ -6,6 +6,8 @@ import moment from 'moment';
 const state = {
   cattles: null,
   cattleChoose:null,
+  avatar: null,
+  cattle:null
 }
 
 const getters = {
@@ -33,6 +35,9 @@ const getters = {
     state.cattleChoose = cattle;
   },
   
+  getCattleChoose2: (state) => (cattle) => {
+    state.cattle = cattle;
+  },
 
 }
 
@@ -41,6 +46,10 @@ const mutations = {
   setCattle: function (state, data) {
     state.cattles = data
   },
+
+  setAvatar: function (state, data) {
+    state.avatar = data;
+}
 
 
 }
@@ -116,6 +125,30 @@ const actions = {
       async clearState(context) {
         context.commit('clearState')
       },
+
+      async downloadAvatar(context) {
+         let result = await axios.get('/api/v1/farmer/cattles/'+state.cattle.id+'/avatar',
+            {
+                responseType: 'arraybuffer'
+            })
+            .then((response) => {
+                 
+                if (response.status != 204) {
+                    let image = Buffer.from(response.data, 'binary').toString('base64')
+                    
+                    context.commit('setAvatar', `data:image/*;base64,${image}`)
+                } else {
+                    context.commit('setAvatar', null)
+
+                }
+            })
+            .catch((error) => {
+                context.dispatch("error/setError", error.response.data, {root: true});
+                return null
+            })
+
+        return result
+    },
 
      
 

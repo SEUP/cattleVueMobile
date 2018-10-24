@@ -8,16 +8,23 @@ const state = {
   worms:{},
   doctor:{},
   test:'helloword',
-  
+  url:0,
   sell:{},
 milk:{},
 khun:{},
 noti:{},
 sale:{},
-
+avatar: null,
+wormChoose:{},
 }
 
 const getters = { 
+  getWormChoose: (state) => (data) => {
+    state.url = data;
+},
+  getUrl: (state) => (data) => {
+    state.url = data;
+},
   setId: (state) => (data) => {
     state.choose_id = data;
 },
@@ -66,7 +73,9 @@ setSale: (state) => (data) => {
 
 const mutations = {
 
-
+  setAvatar: function (state, data) {
+    state.avatar = data;
+}
 }
 
 const actions = {
@@ -191,7 +200,28 @@ const actions = {
                     })
             return result
         },
- 
+        async downloadAvatar(context,params) {
+          let result = await axios.get('/api/v1/farmer/cattles/'+params+'/avatar',
+              {
+                  responseType: 'arraybuffer'
+              })
+              .then((response) => {
+                    
+                  if (response.status != 204) {
+                      let image = Buffer.from(response.data, 'binary').toString('base64')
+                      context.commit('setAvatar', `data:image/*;base64,${image}`)
+                  } else {
+                      context.commit('setAvatar', null)
+  
+                  }
+              })
+              .catch((error) => {
+                  context.dispatch("error/setError", error.response.data, {root: true});
+                  return null
+              })
+  
+          return result
+      },
 
 }
 

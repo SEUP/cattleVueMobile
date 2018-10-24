@@ -38,7 +38,7 @@
                         form: uri
                     } 
                    await this.$store.dispatch("manageDef/uploadAvatar", params); 
-                
+                    await this.$store.dispatch("cattle/downloadAvatar")
                     },
                     async (error) => {
                         window.console.log(error)
