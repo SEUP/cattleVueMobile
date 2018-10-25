@@ -7,12 +7,12 @@
         </v-btn>
         <v-btn @click="openDialog()" v-if="update" class="box-yellow">
             <h4>
-                <v-icon>mdi-pencil</v-icon>แก้ไขข้อมูล
+                <v-icon>mdi-pencil</v-icon>แก้ไขข้อมูล{{form.id}}
             </h4>
         </v-btn>
         <v-btn @click="removeData()" v-if="update" class="box-red">
             <h4>
-                <v-icon>mdi-delete</v-icon>ลบข้อมูล
+                <v-icon>mdi-delete</v-icon>ลบข้อมูล {{form.id}}
             </h4>
         </v-btn>
 
@@ -40,7 +40,7 @@
                    </v-container>
                    <center>
                      <v-btn v-if="!update" class="box-green full-width" @click="createData()" large>บันทึก</v-btn>
-                    <v-btn  v-if="update"  class="box-yellow full-width" @click="updateData()" large>อัพเดท</v-btn>
+                    <v-btn  v-if="update"   class="box-yellow full-width" @click="updateData()" large>อัพเดท</v-btn>
                </center>
             </v-card>
         </v-dialog>
@@ -72,7 +72,10 @@
                 To:'worming',
                 DefaultForm: {},
                 dialog: false,
-                form: {options:{}},
+                form: {
+                    options:{},
+                     
+                    },
                 date: null,
             }
         },
@@ -99,7 +102,7 @@
                 this.getDefaultForm();
                 }
                 this.getData();
-                         this.$emit("change",{IsReady :false,dialog:false});
+                //this.$emit("change",{IsReady :false,dialog:false});
                 this.dialog = false;
             }, 
             createData:async function(){
@@ -108,10 +111,11 @@
                     form:this.form
                 }
                 this.form = await store.dispatch("manageDef/createData", params);
-                        this.$emit("change",{IsReady :false,dialog:false});
+                      //  
                  this.closeDialog();
          
                  this.getData();
+                 this.$emit("change",this.cattle.id);
             },
             updateData:async function(){
                   let params = {
@@ -128,7 +132,7 @@
                     api: 'farmer/cattles/' + this.cattle.id + '/'+this.To+'/'+this.forms.id,
                 }
                 this.form = await store.dispatch("manageDef/removeData", params); 
-                  this.closeDialog();
+                this.closeDialog();
             },
             getData:async function(){
                  let params = {
@@ -158,7 +162,7 @@
                 this.getDefaultForm();
                 }else{ 
                     this.form = this.forms;
-                  //  this.reNew()
+                    
                 }
             }
 

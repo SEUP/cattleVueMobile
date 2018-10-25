@@ -20,7 +20,7 @@ wormChoose:{},
 
 const getters = { 
   getWormChoose: (state) => (data) => {
-    state.url = data;
+    state.wormChoose = data;
 },
   getUrl: (state) => (data) => {
     state.url = data;

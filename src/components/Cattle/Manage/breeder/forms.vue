@@ -209,6 +209,8 @@
                             let data = await store.dispatch("manageDef/getData", params);
                             this.setBreeder(data);
                         },
+
+                        
                         initial: async function () {
                             this.type = await store.dispatch("choice/getChoicesByType", 'การให้น้ำเชื้อ');
                             this.maker = await store.dispatch("choice/getChoicesByType", 'ผู้ทำ');
