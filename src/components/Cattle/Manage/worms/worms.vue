@@ -131,6 +131,7 @@
             closeDialog: async function () {
                 this.dialog = false;
                 this.getDefaultForm();
+                this.initial();
             },
 
             updateDialog: async function (params) {
