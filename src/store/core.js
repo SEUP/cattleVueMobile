@@ -22,7 +22,7 @@ const getters = {
         let buddhist = dateConvert
             .locale("th")
             .add(543, "years")
-            .format("DD-MM-YYYY");
+            .format("DD/MM/YYYY");
         return buddhist;
     },
     notNull: (state) => (data)=> {

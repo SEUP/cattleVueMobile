@@ -98,7 +98,7 @@ const actions = {
           return response.data
         })
         .catch((error) => {
-          alert('เกิดข้อผิดพลาดในการแก้ไขข้อมูล');
+          //alert('เกิดข้อผิดพลาดในการแก้ไขข้อมูล');
           return null
         });
       return result

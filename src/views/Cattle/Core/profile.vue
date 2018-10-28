@@ -24,7 +24,7 @@
 
         <v-dialog v-model="dialog" width="500">
 
-            <v-img v-if="cattle.image_url" :src="avatar" height="100%" width="100%" contain></v-img>
+            <v-img v-if="avatar" :src="avatar" height="100%" width="100%" contain></v-img>
             <img @click="imageView(baseUrl+cattle.image_url)" v-else src="@/assets/cattle.png" height="100%" width="100%"
                 contain />
 

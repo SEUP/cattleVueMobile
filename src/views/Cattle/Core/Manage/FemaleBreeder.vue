@@ -9,9 +9,10 @@
                  <v-card class="box-green  pd-10 wh" style="width:100%;">
                     <h3>วันที่: {{dateTH(female.breeding_date)}}</h3>
                     <v-card class=" mrt-6 pd-6">
-                        <h4><b>ชนิด:</b> {{getType(female.breed_type)}}</h4>
+                      <!--  <pre>{{female}}</pre> ---->
+                         <h4><b>ชนิด:</b> {{getType(female.breed_type)}}</h4>
                         <h4 v-if="female.breed_type == '240200'" ><b>ผู้ทำ:</b> {{notNull(getType(female.maker))}}</h4>
-                        <h4><b>ผลการผสมพันธุ์:</b>{{getType(female.breeding_result)}}</h4> 
+                        <h4><b>ผลการผสมพันธุ์:</b>{{getType(female.breeding_result)}} &nbsp;<span v-if="female.birth_outcomes == '250200'">(แท้ง)</span></h4> 
                 
                     </v-card>
             <v-btn class="box-yellow"  @click="editBreeder(female)">แก้ไข</v-btn>

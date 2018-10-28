@@ -2,6 +2,7 @@
     <v-content class="font">
         <ActionBar />
              <v-container class="bg-white">
+             <!---  <pre>{{form}}</pre> ---->
             <v-stepper v-model="form.status_id" >
             <v-stepper-header>
               <v-stepper-step :complete="form.status_id > 1 " step="1">
@@ -62,6 +63,10 @@
                 <date-picker label="วัน/เดือน/ปี ที่ผสม" :valDate='form.breeding_date'
                              @change="babyBirthday($event)"
                 /> 
+ <!-----------------------วันที่ควรตรวจการกลับสัด-------------------------------->
+                  <v-text-field  label="วันที่ควรตรวจการกลับสัด" :value="dateback()"
+                             readonly hide-details
+                              class="pb-1 pr-2"></v-text-field>
 
                 <choice to="ประเภทการผสมพันธุ์" :remark="form.options.breed_type"
                         v-model="form.breed_type"
@@ -115,10 +120,10 @@
                 <choice to="ผลการตรวจการกลับสัด" :remark="form.reversal"
                         v-model="form.reversal"
                         @change="form.options.reversal = $event"></choice>
-
-               <!----  <v-text-field v-if="form.reversal == '280100'" label="วันที่ควรตรวจท้อง"
-                              v-model="dateBack" readonly hide-details
-                              class="pb-1 pr-2"></v-text-field> ---->
+  <!-----------------------วันที่ควรตรวจท้อง-------------------------------->
+           <v-text-field v-if="form.reversal == '280100'" label="วันที่ควรตรวจท้อง"
+                               :value="checkBellyDay()" readonly hide-details
+                              class="pb-1 pr-2"></v-text-field> 
 
               </v-card>
               <div v-if = "form.reversal == '280200'">กรุณาบันทึก เเละผสมพันธุ์ใหม่</div>
@@ -136,9 +141,10 @@
                         v-model="form.breeding_result"
                         @change="form.options.breeding_result = $event"/>
 
-               <!--- <v-text-field v-if="form.breeding_result == '120100'" label="วันที่ควาดว่าจะคลอด"
-                              v-model="form.options.baby_date_birth" readonly hide-details
-                              class="pb-1 pr-2"></v-text-field> ---->
+          <!-----------------------วันที่ควาดว่าจะคลอด   v-model="form.options.baby_date_birth"-------------------------------->
+               <v-text-field v-if="form.breeding_result == '120100'" label="วันที่ควาดว่าจะคลอด"
+                            :value="baby()" readonly hide-details
+                              class="pb-1 pr-2"></v-text-field> 
 
               </v-card>
               <div v-if = "form.breeding_result == '120200'">กรุณาบันทึก เเละผสมพันธุ์ใหม่</div>
@@ -196,8 +202,8 @@
                 debug: true,
                 dateBack:'',
                 dateOut:'',
-
-                form: {
+                form:{},
+               /* form: {
                     "cattle_id": null,
                     "status_id": 1,
                     "time_at": null,
@@ -221,8 +227,9 @@
                     "birth_outcomes": '',
                     "options": {
                         "check_reversal_date":'',
-                    }
-                }
+                        "options.check_reversal_date":'',
+                    }*/
+                
             }
         },
         props: {
@@ -236,6 +243,7 @@
         computed: {
             cattleChoose: get("cattle/cattleChoose"),
               getThaiFormatDate: get('choice/getThaiFormatDate'),
+                   dateTH: get('core/dateTH')
         },
         async mounted() {
             this.load();
@@ -243,17 +251,78 @@
         },
         
         methods: {
+
+baby() {
+        let date = this.form.breeding_date;
+        if (date) {
+          let day1 = 282 - 4
+          let day2 = 282 + 4
+
+          let breedDate = moment(date);
+          let bd1 = moment(date).add(day1, 'days')
+          let bd2 = moment(date).add(day2, 'days')
+
+          bd1 = this.dateTH(bd1.toDate())
+          bd2 = this.dateTH(bd2.toDate())
+
+          return  `${bd1} ถึง ${bd2}`
+        }
+      },
+
+
+checkBellyDay () {
+      let date = this.form.breeding_date;
+        if (date) {
+          let day1 = 42
+          let day2 = 45
+
+          let breedDate = moment(date);
+          let bd1 = moment(date).add(day1, 'days')
+          let bd2 = moment(date).add(day2, 'days')
+
+         bd1 = this.dateTH(bd1.toDate())
+        bd2 = this.dateTH(bd2.toDate())
+
+         //this.form.options.check_belly_date = `${bd1} ถึง ${bd2}`
+         return `${bd1} ถึง ${bd2}`
+        }
+      },
+              getDefaultForm: async function () {
+                                    let params = {
+                                        api: 'farmer/cattles/' + this.cattleChoose.id+ '/femalebreed/create',
+                                    }
+                                    try {
+                                        this.form = await store.dispatch("manageDef/getForm", params);
+                                    } catch (error) {
+
+                                    }
+
+                                },
+
+          //วันที่คาดว่ากลับสัด
             dateback(){
-                var new_date = moment(this.form.breeding_date);
-     
-            return 'asds';
+              let date = this.form.breeding_date;
+              let day1 = 21;
+
+              let breedDate = moment(date);
+              let bd1 = moment(date).add(day1, 'days')
+              bd1 = this.dateTH(bd1);
+              if(bd1 != 'Invalid date'){
+
+              // this.form.options.check_reversal_date = bd1;
+                   return bd1;
+              }else{
+                return '';
+              }
+         
             },
             load: async function () {   
                 this.form.cattle_id = this.cattleChoose.id;
                 if(this.forms){
-                    this.form = this.forms;
-                   
-                         
+                    this.getDefaultForm();
+                    this.form = this.forms;  
+                }else{
+                  this.getDefaultForm();
                 }
          
             },
@@ -267,6 +336,7 @@
                         }
                             let create = await store.dispatch("manageDef/createData", params);
                             this.form = create;
+                            this.form.cattle_id = this.cattleChoose.id;
                             this.form.status_id = step;
                             if(this.form.status_id == '7'){
                                 this.$router.go(-1);  
@@ -276,7 +346,7 @@
             babyBirthday: async function (date) {
              
         this.checkReversalDate(date)
-        this.checkBellyDay(date)
+        //this.checkBellyDay(date)
         this.form.breeding_date = date;
         if (date) {
           let day1 = 282 - 4
@@ -292,7 +362,7 @@
           this.form.options.baby_date_birth = `${bd1} ถึง ${bd2}`
         }
       },
-      checkBellyDay: async function (date) {
+    /*  checkBellyDay: async function (date) {
         // this.form.breeding_date = date;
         if (date) {
           let day1 = 42
@@ -307,7 +377,7 @@
 
           this.form.options.check_belly_date = `${bd1} ถึง ${bd2}`
         }
-      },
+      },*/
       checkReversalDate: async function (date) {
         //this.form.options.check_reversal_date = date;
         if (date) {
