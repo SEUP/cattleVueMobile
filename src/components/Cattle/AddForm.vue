@@ -24,7 +24,7 @@
             <v-container>
                 <v-dialog ref="dialog" v-model="birthDate.dialog" :return-value.sync="birthDate.date" persistent lazy
                     full-width width="290px">
-                    <v-text-field slot="activator" :value="dateTH(form.birth_date)" label="วัน/เดือน/ปี เกิด" readonly></v-text-field>
+                    <v-text-field slot="activator" :value="(form.birth_date!=null)?dateTH(form.birth_date):null" label="วัน/เดือน/ปี เกิด" readonly></v-text-field>
                     <v-date-picker locale="th" v-model="form.birth_date" scrollable>
                         <v-spacer></v-spacer>
                         <v-btn flat color="primary" @click="birthDate.dialog = false">ยกเลิก</v-btn>
@@ -41,7 +41,7 @@
             <v-container>
                 <v-dialog ref="dialog" v-model="sellDate.dialog" :return-value.sync="sellDate.date" persistent lazy
                     full-width width="290px">
-                    <v-text-field slot="activator" :value="dateTH(form.buy_date)" label="วัน/เดือน/ปี ที่ซื้อ" readonly></v-text-field>
+                    <v-text-field slot="activator" :value="(form.buy_date!=null)?dateTH(form.buy_date):null" label="วัน/เดือน/ปี ที่ซื้อ" readonly></v-text-field>
                     <v-date-picker locale="th" v-model="form.buy_date" scrollable>
                         <v-spacer></v-spacer>
                         <v-btn flat color="primary" @click="sellDate.dialog = false">ยกเลิก</v-btn>
