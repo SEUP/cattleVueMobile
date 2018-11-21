@@ -23,7 +23,7 @@
                                     <div class="mrt-6"><b>เบอร์หู : </b> {{notNull(cattle.ear_number)}}</div>
                                     <div><b>อายุ : </b> {{getAge(cattle.birth_date)}} </div>
                                 </div>
-                                <v-btn @click="reCattle(cattle)">ยกเลิกการทำลาย</v-btn>
+                                <v-btn @click="reDestroy(cattle)">ยกเลิกการทำลาย</v-btn>
                             </v-card-title>
                         </v-flex>
                         </v-layout>
@@ -123,10 +123,13 @@
                     return data;
                 }
             },
+            reDestroy: async function (cattle) {
+                let reCattle =  store.dispatch('manageDef/backDestroy',cattle);
+                this.initial();
+                this.$router.go(-1);
+            },
             reCattle: async function (cattle) {
                 let reCattle =  store.dispatch('manageDef/backSell',cattle);
-               
-
                 this.initial();
                 this.$router.go(-1);
             },

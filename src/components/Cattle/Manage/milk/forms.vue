@@ -23,8 +23,7 @@
                     <v-btn icon dark @click.native="closeDialog()">
                         <v-icon>close</v-icon>
                     </v-btn>
-                    <h1 class="wh" v-if="update">อัพเดทข้อมูล</h1>
-                    <h1 class="wh" v-if="update">อัพเดทข้อมูล</h1>
+                    <h1 class="wh" v-if="update">อัพเดทข้อมูล</h1> 
                 </v-toolbar>
                 <v-container style="background-color:white;" >
                     <v-card-text style="background-color:white;">

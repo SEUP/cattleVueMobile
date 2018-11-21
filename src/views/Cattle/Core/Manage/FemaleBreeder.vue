@@ -14,9 +14,22 @@
                         <h4 v-if="female.breed_type == '240200'" ><b>ผู้ทำ:</b> {{notNull(getType(female.maker))}}</h4>
                         <h4><b>ผลการผสมพันธุ์:</b>{{getType(female.breeding_result)}} &nbsp;<span v-if="female.birth_outcomes == '250200'">(แท้ง)</span></h4> 
                 
-                    </v-card>
-            <v-btn class="box-yellow"  @click="editBreeder(female)">แก้ไข</v-btn>
-             <v-btn color="red" dark @click="removeBreeder(female.id)">ลบ</v-btn>
+                    </v-card> 
+ <center class="mrt-10">
+
+                        <v-btn @click="editBreeder(female)" class="box-yellow">
+                            <h4>
+                                <v-icon>mdi-pencil</v-icon>แก้ไขข้อมูล 
+                            </h4>
+                        </v-btn>
+                        <v-btn @click="removeBreeder(female.id)"   class="box-red">
+                            <h4>
+                                <v-icon>mdi-delete</v-icon>ลบข้อมูล 
+                            </h4>
+                        </v-btn>
+                    </center>
+
+
                 </v-card>
    
             </v-layout> 

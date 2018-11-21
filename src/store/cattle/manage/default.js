@@ -185,6 +185,31 @@ const actions = {
             
           },
 
+          backDestroy: async function(context,form){ 
+            let cattles = null;
+            console.log('/api/v1/farmer/farmer/'+form.farmer_id+'/cattles/'+form.id);
+            let resultv = await axios.get('/api/v1/farmer/farmer/'+form.farmer_id+'/cattles/'+form.id)
+            .then((response) => {
+              console.log('Load Ok'); 
+              cattles = response.data  
+            })
+            .catch((error) => {
+              console.log(error.stack);
+            })
+        
+            cattles.cattle_status = "010100"
+            let result = await axios.put('/api/v1/farmer/farmer/'+form.farmer_id+'/cattles/'+form.id,cattles)
+              .then((response) => {
+                alert('ยกเลิกการทำลายสำเร็จ');
+                
+              })
+              .catch((error) => {
+                console.log(error.stack); 
+                alert('เกิดข้อผิดพลาดยกเลิกการทำลาย');
+              });
+            
+          },
+
           async uploadAvatar(context, params) {
  
     
