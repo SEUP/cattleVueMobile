@@ -4,9 +4,10 @@
         <pre v-if="debug">{{cattleChoose}}</pre>
        <center> <v-btn @click="AddBreeder()" round class="box-green wh">เพิ่มข้อมูล</v-btn></center>
         <v-container>
-            <v-layout v-for="female in FemaleBreeder.data">
-              
-                 <v-card class="box-green  pd-10 wh" style="width:100%;">
+            <v-layout row v-for="female in FemaleBreeder.data">
+ 
+                <v-flex xs12>
+<v-card class="box-green  pd-10 wh" style="width:100%;">
                     <h3>วันที่: {{dateTH(female.breeding_date)}}</h3>
                     <v-card class=" mrt-6 pd-6">
                       <!--  <pre>{{female}}</pre> ---->
@@ -15,7 +16,7 @@
                         <h4><b>ผลการผสมพันธุ์:</b>{{getType(female.breeding_result)}} &nbsp;<span v-if="female.birth_outcomes == '250200'">(แท้ง)</span></h4> 
                 
                     </v-card> 
- <center class="mrt-10">
+                        <center class="mrt-10">
 
                         <v-btn @click="editBreeder(female)" class="box-yellow">
                             <h4>
@@ -28,10 +29,11 @@
                             </h4>
                         </v-btn>
                     </center>
-
-
-                </v-card>
-   
+                        
+                </v-card><br>
+                </v-flex>
+                 
+            
             </v-layout> 
            
         </v-container>
