@@ -21,6 +21,12 @@ export default new Router({
             component: loadView('Main')
         },
         {
+            path: '/about',
+            name: 'about',
+            component: loadView('About')
+        },
+        
+        {
             path: '/main/profile',
             name: 'farmer-profile',
             component: loadView('Farmer/Profile')

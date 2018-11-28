@@ -114,13 +114,25 @@
                 </v-flex>
             </v-layout>
 
-            <v-layout @click="$router.push({name : 'noti'})" row class="pd-20 ma-3 shadow circle box-white">
+
+              <v-layout @click="$router.push({name : 'noti'})" row class="pd-20 ma-3 shadow circle box-white">
                 <v-flex xs4>
                     <v-icon class="mrl-18 pd-10 box-yellow wh circle shadow" style="font-size:40px;">mdi-bell</v-icon>
                 </v-flex>
                 <v-flex xs8>
                     <h2 class="nm">การแจ้งเจือน</h2>
                     <h4 class="nm">ดูข้อมูลการแจ้งเตือนทั้งหมด</h4>
+                </v-flex>
+            </v-layout>
+
+            
+            <v-layout @click="$router.push({name : 'about'})" row class="pd-20 ma-3 shadow circle box-white">
+                <v-flex xs4>
+                    <v-icon class="mrl-18 pd-10 box-greenFX wh circle shadow" style="font-size:40px;">mdi-information</v-icon>
+                </v-flex>
+                <v-flex xs8>
+                    <h2 class="nm">เกี่ยวกับ</h2>
+                    <h4 class="nm">ดูข้อมูลเกี่ยวกับแอปพลิเคชัน</h4>
                 </v-flex>
             </v-layout>
  
