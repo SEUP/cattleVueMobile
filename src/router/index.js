@@ -7,7 +7,7 @@ function loadView(view) {
     return () => import(`../views/${view}.vue`)
 }
 
-
+   
 export default new Router({
     routes: [
         {

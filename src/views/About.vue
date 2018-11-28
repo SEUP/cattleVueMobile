@@ -1,7 +1,7 @@
 <template>
    <v-content >
        <ActionBar />
-      <v-container fluid fill-height>
+      <v-container fluid fill-height>   
         <v-layout align-center justify-center> 
              <v-layout  row class="pd-20 ma-3 shadow circle box-white">
             

@@ -35,7 +35,7 @@
 
 <script>
 
-    import store from "@/store/"
+    import store from "@/store/"   
     import {get} from 'vuex-pathify'
     import FarmerAvatar from "@/components/Farmer/Avatar/FarmerAvatar";
     import FarmerProfileCard from "@/components/Farmer/Profile/FarmerProfileCard";

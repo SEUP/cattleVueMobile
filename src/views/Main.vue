@@ -145,7 +145,7 @@
                         <v-icon class=" c-yellow f70 animated tada infinite">mdi-bell-ring</v-icon>
                     </v-layout>
                 </v-card-title>
-                <center>
+                <center>   
                     <h2>คุณมีการแจ้งเตือนใหม่</h2>
                 </center>
                 <v-card-text class="pd-10">
