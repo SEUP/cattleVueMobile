@@ -136,7 +136,7 @@
                 </v-flex>
             </v-layout>
  
-        </v-container>
+        </v-container>   
 
         <v-dialog v-model="dialogx" class="font circle" width="500">
             <v-card>
