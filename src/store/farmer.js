@@ -118,6 +118,17 @@ const actions = {
             return result
         }
     },
+    async getFarmForm(context, params) {
+        let result = await axios.get(`/api/v1/farmer/farmers/${params.id}/farms/create`)
+          .then((response) => {
+            context.commit("setFarm", response.data)
+            return response.data
+          }).catch((error) => {
+            context.dispatch("error/setError", error.response.data, {root: true});
+            return null
+          })
+        return result
+      },
 
     async downloadAvatar(context) {
         let result = await axios.get(`/api/v1/farmer/farmers/${context.state.farmer.id}/avatar`,
