@@ -4,16 +4,23 @@
         <v-container class="elevation-0 wh font" style="background:transparent">
             <v-layout row>
                 <v-flex xs2>
-                     
+
                     <v-menu offset-y class="font">
-                        <img slot="activator" dark class="circle shadow wh" style="height:38px; weigt:38px;" :src="'http://mct.ict.up.ac.th:10008/'+farmer.image_url"
-                        alt="">  
+                        <img slot="activator" dark class="circle shadow wh" style="height:38px; weigt:38px;"
+                             :src="'http://mct.ict.up.ac.th:10008/'+farmer.image_url"
+                             alt="">
                         <v-list>
-                            <v-list-tile  key="0" @click="$router.push({name : 'farmer-profile'})" >
-                                <v-list-tile-title class="font"><v-icon>mdi-account-circle</v-icon>ข้อมูลผู้ใช้</v-list-tile-title>
+                            <v-list-tile key="0" @click="$router.push({name : 'farmer-profile'})">
+                                <v-list-tile-title class="font">
+                                    <v-icon>mdi-account-circle</v-icon>
+                                    ข้อมูลผู้ใช้
+                                </v-list-tile-title>
                             </v-list-tile>
-                              <v-list-tile  key="1" @click="$router.push({name : 'farmer-farm'})">
-                                <v-list-tile-title class="font"><v-icon>mdi-home-variant</v-icon>ข้อมูลฟาร์ม</v-list-tile-title>
+                            <v-list-tile key="1" @click="$router.push({name : 'farmer-farm'})">
+                                <v-list-tile-title class="font">
+                                    <v-icon>mdi-home-variant</v-icon>
+                                    ข้อมูลฟาร์ม
+                                </v-list-tile-title>
                             </v-list-tile>
                         </v-list>
                     </v-menu>
@@ -27,11 +34,14 @@
                 <v-flex xs2 style="text-align:right;">
 
                     <v-menu offset-y>
-                       
+
                         <v-icon class="wh" slot="activator" dark>mdi-menu</v-icon>
                         <v-list>
-                            <v-list-tile  key="0" @click="logout()">
-                                <v-list-tile-title  class="font"><v-icon>mdi-logout</v-icon>ออกจากระบบ</v-list-tile-title>
+                            <v-list-tile key="0" @click="logout()">
+                                <v-list-tile-title class="font">
+                                    <v-icon>mdi-logout</v-icon>
+                                    ออกจากระบบ
+                                </v-list-tile-title>
                             </v-list-tile>
                         </v-list>
                     </v-menu>
@@ -40,7 +50,6 @@
 
 
         </v-container>
-
 
 
         <v-container fluid>
@@ -115,7 +124,7 @@
             </v-layout>
 
 
-              <v-layout @click="$router.push({name : 'noti'})" row class="pd-20 ma-3 shadow circle box-white">
+            <v-layout @click="$router.push({name : 'noti'})" row class="pd-20 ma-3 shadow circle box-white">
                 <v-flex xs4>
                     <v-icon class="mrl-18 pd-10 box-yellow wh circle shadow" style="font-size:40px;">mdi-bell</v-icon>
                 </v-flex>
@@ -125,18 +134,19 @@
                 </v-flex>
             </v-layout>
 
-            
+
             <v-layout @click="$router.push({name : 'about'})" row class="pd-20 ma-3 shadow circle box-white">
                 <v-flex xs4>
-                    <v-icon class="mrl-18 pd-10 box-greenFX wh circle shadow" style="font-size:40px;">mdi-information</v-icon>
+                    <v-icon class="mrl-18 pd-10 box-greenFX wh circle shadow" style="font-size:40px;">mdi-information
+                    </v-icon>
                 </v-flex>
                 <v-flex xs8>
                     <h2 class="nm">เกี่ยวกับ</h2>
                     <h4 class="nm">ดูข้อมูลเกี่ยวกับแอปพลิเคชัน</h4>
                 </v-flex>
             </v-layout>
- 
-        </v-container>   
+
+        </v-container>
 
         <v-dialog v-model="dialogx" class="font circle" width="500">
             <v-card>
@@ -145,13 +155,13 @@
                         <v-icon class=" c-yellow f70 animated tada infinite">mdi-bell-ring</v-icon>
                     </v-layout>
                 </v-card-title>
-                <center>   
+                <div style="text-align: center">
                     <h2>คุณมีการแจ้งเตือนใหม่</h2>
-                </center>
+                </div>
                 <v-card-text class="pd-10">
                     <div class="box-gray pd-10 circle">
-                   <h3>{{notificate.title}}</h3>
-                        <h4>{{dateTH(notificate.start)}} </h4> 
+                        <h3>{{notificate.title}}</h3>
+                        <h4>{{dateTH(notificate.start)}} </h4>
 
                     </div>
 
@@ -179,7 +189,7 @@
                 </v-card>
             </v-card>
         </v-dialog>
-     
+
     </v-content>
 </template>
 <style>
@@ -203,7 +213,7 @@
         data() {
             return {
                 dialogx: false,
-                notificate:{},
+                notificate: {},
             }
         },
         async beforeRouteEnter(to, from, next) {
@@ -218,50 +228,49 @@
             avatar: get("farmer/avatar"),
             noti: get("core/noti"),
             notiState: get("core/notiState"),
-             setNoti: get('manageDef/setNoti'),
-             dateTH: get('core/dateTH'),
+            setNoti: get('manageDef/setNoti'),
+            dateTH: get('core/dateTH'),
         },
         async mounted() {
             await this.initial();
-             this.notiLoad();
+            this.notiLoad();
         },
         methods: {
-            notiLoad:async function(){
+            notiLoad: async function () {
                 let params = {
-                        api: 'farmer/farmers/' + this.farmer.id + '/reports/cattleEvents',
-                    }
-                 let data = await store.dispatch("manageDef/getData", params);
-                
-                for(let i=0; i<data.length; i++){
-                    if(data[i].title){
+                    api: 'farmer/farmers/' + this.farmer.id + '/reports/cattleEvents',
+                }
+                let data = await store.dispatch("manageDef/getData", params);
+
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].title) {
                         this.notificate = data[i];
                         break;
                     }
                 }
             },
             getCattle: async function () {
-                    await store.dispatch("cattle/getCattle", this.farmer.id)
-                },
-                initial: async function () {
-                        this.getCattle();
-                       
-                        //alert(this.noti );
-                        if (this.noti == 0) {
-                            this.dialogx = true;
-                            this.notiState();
-                        }
-                    },
-                    close() {
-                        this.dialogx = false;
-                    },
-                    logout : async function(){
+                await store.dispatch("cattle/getCattle", this.farmer.id)
+            },
+            initial: async function () {
+                await this.getCattle();
+
+                if (this.noti == 0) {
+                    this.dialogx = true;
+                    this.notiState();
+                }
+            },
+            close() {
+                this.dialogx = false;
+            },
+            logout: async function () {
                 await this.$store.dispatch("login/logout")
                 this.$store.dispatch('loading/showLoad')
                 let vm = this
-                setTimeout( () => {
+                setTimeout(() => {
                     vm.$store.dispatch('loading/dismissLoad')
-                    vm.$router.replace({name : 'home'})
-                },1000)
+                    vm.$router.replace({name: 'home'})
+                }, 1000)
             }
         }
 
