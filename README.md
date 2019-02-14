@@ -10,6 +10,11 @@ npm install
 npm run serve
 ```
 
+### Install Android Platform 
+```
+cordova platform add android
+```
+
 ### Compiles and minifies for production
 ```
 npm run build
