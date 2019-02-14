@@ -1,24 +1,33 @@
 <template>
     <v-content>
-        <ActionBar />
+        <ActionBar/>
         <v-container>
-
-  
-        <v-layout v-for="Noti in noti"  >
-            <div  v-if="Noti.title" style="width:100%;" >
-            <v-card  class=" mr-10 shadow pd-12 full-width wh"  >
-                            <v-layout class="box-blue pd-10" row>
-                        <h4>{{Noti.title}}</h4>
-                            </v-layout>
- <v-layout class="pd-10" row>
-                        <h4 style="color:black;">{{dateTH(Noti.start)}}</h4>
-                            </v-layout>
-                        </v-card>
-            </div>
-            
-
-        </v-layout>
-      </v-container>
+            <template v-if="noti.length > 0">
+            <v-layout v-for="Noti in noti" v-bind:key="Noti.id">
+                <div v-if="Noti.title" style="width:100%;">
+                    <v-card class=" mr-10 shadow pd-12 full-width wh">
+                        <v-layout class="box-blue pd-10" row>
+                            <h4>{{Noti.title}}</h4>
+                        </v-layout>
+                        <v-layout class="pd-10" row>
+                            <h4 style="color:black;">{{dateTH(Noti.start)}}</h4>
+                        </v-layout>
+                    </v-card>
+                </div>
+            </v-layout>
+            </template>
+            <template v-else>
+            <v-layout>
+                <div style="width:100%;">
+                    <v-card class=" mr-10 shadow pd-12 full-width wh">
+                        <v-layout class="box-blue pd-10" row>
+                            <h4>ยังไม่มีการแจ้งเตือนใหม่ในขณะนี้</h4>
+                        </v-layout>
+                    </v-card>
+                </div>
+            </v-layout>
+            </template>
+        </v-container>
     </v-content>
 </template>
 
@@ -32,12 +41,11 @@
     import ActionBar from "@/components/Menu/ActionBar";
     import CattleListView from "@/components/Cattle/CattleListView";
     import CattleAvatar from "@/components/Cattle/Avatar/Image";
+
     export default {
         name: "ChangeType",
         data() {
-            return {
-             
-            }
+            return {}
         },
         components: {
             Forms,
@@ -70,21 +78,19 @@
                 }
             },
             reCattle: async function (cattle) {
-                    let reCattle = store.dispatch('manageDef/backSell', cattle);
-
-
-                    this.initial();
-                    this.$router.go(-1);
-                },
-                initial: async function () {
-                    await store.dispatch("mobile/defaultActionBar", 'การเเจ้งเตือน')
-                    let params = {
-                        api: 'farmer/farmers/' + this.farmer.id + '/reports/cattleEvents',
-                    }
-                    let data = await store.dispatch("manageDef/getData", params);
-                    this.setNoti(data);
-          
+                await store.dispatch('manageDef/backSell', cattle);
+                await this.initial();
+                this.$router.go(-1);
+            },
+            initial: async function () {
+                await store.dispatch("mobile/defaultActionBar", 'การเเจ้งเตือน')
+                let params = {
+                    api: 'farmer/farmers/' + this.farmer.id + '/reports/cattleEvents',
                 }
+                let data = await store.dispatch("manageDef/getData", params);
+                this.setNoti(data);
+
+            }
 
         }
     }
