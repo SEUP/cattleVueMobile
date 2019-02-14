@@ -19,3 +19,9 @@ npm run build
 ```
 npm run lint
 ```
+
+
+### run android
+```
+npm run android
+```
