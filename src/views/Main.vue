@@ -256,8 +256,9 @@
                 await this.getCattle();
 
                 if (this.noti == 0) {
+                    this.dialogx = false;
+                }else {
                     this.dialogx = true;
-                    this.notiState();
                 }
             },
             close() {
