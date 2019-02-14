@@ -129,7 +129,7 @@
                     <v-icon class="mrl-18 pd-10 box-yellow wh circle shadow" style="font-size:40px;">mdi-bell</v-icon>
                 </v-flex>
                 <v-flex xs8>
-                    <h2 class="nm">การแจ้งเจือน</h2>
+                    <h2 class="nm">การแจ้งเตือน</h2>
                     <h4 class="nm">ดูข้อมูลการแจ้งเตือนทั้งหมด</h4>
                 </v-flex>
             </v-layout>
