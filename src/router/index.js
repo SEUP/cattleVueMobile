@@ -6,14 +6,19 @@ Vue.use(Router)
 function loadView(view) {
     return () => import(`../views/${view}.vue`)
 }
-   
-   
+
+
 export default new Router({
     routes: [
         {
             path: '/',
             name: 'home',
             component: loadView('Home')
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: loadView('Register')
         },
         {
             path: '/main',
@@ -25,7 +30,7 @@ export default new Router({
             name: 'about',
             component: loadView('About')
         },
-        
+
         {
             path: '/main/profile',
             name: 'farmer-profile',
@@ -42,7 +47,7 @@ export default new Router({
             props: true,
             component: loadView('Cattle/Core/profile')
         },
-         /*****************************MaleCattle*************************************** */ 
+         /*****************************MaleCattle*************************************** */
         {
             path: '/cattle/male/view',
             name: 'male-view',
@@ -132,5 +137,5 @@ export default new Router({
             component: loadView('Noti/noti')
         },
     ]
-    
+
 })

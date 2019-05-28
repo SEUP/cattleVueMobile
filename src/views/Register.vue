@@ -6,7 +6,7 @@
             <v-layout  justify-center   >
               <img  style="height:250px;" src="@/assets/logob.png"/>
             </v-layout>
-          <login-form/>
+          <register-form/>
           </v-flex>
         </v-layout>
       </v-container>
@@ -18,12 +18,12 @@
 
 <script>
 // @ is an alias to /src
-import LoginForm from "@/components/Login/LoginForm.vue";
+import RegisterForm from "@/components/Login/RegisterForm.vue";
 
 export default {
-  name: "home",
+  name: "Register",
   components: {
-    LoginForm
+      RegisterForm
   }
 };
 </script>
