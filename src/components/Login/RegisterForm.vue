@@ -1,25 +1,25 @@
 <template>
     <v-card class="border font">
         <v-card-title>
-            <h2 class=" font">Register</h2>
+            <h2 class=" font">สมัครสมาชิก</h2>
         </v-card-title>
         <v-card-text>
             <v-form>
-                <v-text-field v-model="form.username" label="Username" />
-                <v-text-field v-model="form.email" label="E-mail" type="email" />
-                <v-text-field type="password" v-model="form.password" label="Password" />
-                <v-text-field type="password" v-model="form.password_confirmation" label="Password Confirmation" />
+                <v-text-field v-model="form.username" label="ชื่อผู้ใช้" />
+                <v-text-field v-model="form.email" label="อีเมล์" type="email" />
+                <v-text-field type="password" v-model="form.password" label="รหัสผ่าน" />
+                <v-text-field type="password" v-model="form.password_confirmation" label="ยืนยันรหัสผ่าน" />
 
-                <v-text-field v-model="form.firstname" label="First Name" />
-                <v-text-field v-model="form.lastname" label="Last Name" />
-                <v-text-field v-model="form.personal_id" label="Personal ID" />
+                <v-text-field v-model="form.firstname" label="ชื่อ" />
+                <v-text-field v-model="form.lastname" label="นามสกุล" />
+                <v-text-field v-model="form.personal_id" label="รหัสบัตรประจำตัวประชาชน" />
 
             </v-form>
             <v-btn @click="register()" replace block round color="primary">
-                <v-icon></v-icon>Register
+                <v-icon></v-icon>สมัครสมาชิก
             </v-btn>
             <v-btn to="/" replace  block round color="success">
-                <v-icon></v-icon>Back to Login
+                <v-icon></v-icon>กลับไปหน้าเข้าสู่ระบบ
             </v-btn>
         </v-card-text>
     </v-card>

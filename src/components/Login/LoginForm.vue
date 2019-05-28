@@ -12,7 +12,7 @@
                 <v-icon>mdi-login-variant</v-icon>เข้าสู่ระบบ
             </v-btn>
             <v-btn to="/register" block round color="success">
-                <v-icon>mdi-register</v-icon>Register
+                <v-icon>mdi-account</v-icon>สมัครสมาชิก
             </v-btn>
         </v-card-text>
     </v-card>
