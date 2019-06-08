@@ -134,7 +134,7 @@
                 this.$router.go(-1);
             },
             initial: async function () {
-                await store.dispatch("mobile/defaultActionBar", 'ข้อมูลการจำน่าย')
+                await store.dispatch("mobile/defaultActionBar", 'ข้อมูลการจำหน่าย')
                 let params = {
                     api: 'farmer/farmer/' + this.farmer.id + '/cattles?keyword=&cattle_status=010200',
                 }
