@@ -8,8 +8,8 @@
                 <v-flex xs8>
                  <center> <v-icon class="mrl-18 pd-10 box-purple wh circle shadow" style="font-size:40px;">mdi-cow</v-icon>   </center>
           
-                    <h2 class="nm">Cattle Application</h2>
-                    <h4 class="nm">version 1.03</h4>
+                    <h2 class="nm">Beef​ Cattle Farm Management (BCFM)</h2>
+                    <h4 class="nm">version 1.04</h4>
                     <v-btn round class="box-greenFX" href="https://github.com/SEUP/cattleVueMobile/issues" >แจ้งปัญหาการใช้งาน</v-btn>
          
                 </v-flex>
