@@ -10,7 +10,7 @@
           
                     <h2 class="nm">Beef​ Cattle Farm Management (BCFM)</h2>
                     <h4 class="nm">version 1.04</h4>
-                    <v-btn round class="box-greenFX" href="https://github.com/SEUP/cattleVueMobile/issues" >แจ้งปัญหาการใช้งาน</v-btn>
+                    <v-btn round class="box-greenFX" href="https://forms.gle/WNEHVDBrQsqiRCwa7" >แจ้งปัญหาการใช้งาน</v-btn>
          
                 </v-flex>
             </v-layout> 
