@@ -17,6 +17,7 @@
                 <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
             </v-layout>
         </v-img>
+       <v-icon style="font-size:80px;" v-else >mdi-account-circle</v-icon>
 
 <v-dialog v-model="dialog" width="500">
 

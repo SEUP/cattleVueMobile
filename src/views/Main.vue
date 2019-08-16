@@ -4,11 +4,12 @@
         <v-container class="elevation-0 wh font" style="background:transparent">
             <v-layout row>
                 <v-flex xs2>
-
+                  
                     <v-menu offset-y class="font">
-                        <img slot="activator" dark class="circle shadow wh" style="height:38px; weigt:38px;"
+                        <img v-if="farmer.image_url" slot="activator" dark class="circle shadow wh" style="height:38px; weigt:38px; border-radius:50px;"
                              :src="'http://mct.ict.up.ac.th:10008/'+farmer.image_url"
                              alt="">
+                        <v-btn v-else slot="activator" outline dark icon ><v-icon>mdi-account</v-icon></v-btn>
                         <v-list>
                             <v-list-tile key="0" @click="$router.push({name : 'farmer-profile'})">
                                 <v-list-tile-title class="font">

@@ -12,8 +12,7 @@
             </farmer-edit-profile-dialog>
 
         </v-toolbar>
-        <!--content-->
-
+        <!--content--> 
         <v-list two-line>
             <v-list-tile>
                 <v-list-tile-content>
@@ -42,10 +41,10 @@
             </v-list-tile>
             <v-divider/>
             <v-list-tile>
-                <v-list-tile-content>
+                <v-list-tile-content >
                     <v-list-tile-title>ตำบล</v-list-tile-title>
                     <v-list-tile-sub-title>
-                        {{farmer.houseDistrict.district_name ? farmer.houseDistrict.district_name : "-" }}
+                      {{farmer.houseDistrict.district_name ? farmer.houseDistrict.district_name : "-" }} 
                     </v-list-tile-sub-title>
                 </v-list-tile-content>
             </v-list-tile>
@@ -90,7 +89,7 @@
 </template>
 
 <script>
-    import {get} from "vuex-pathify"
+    import {get,sync} from "vuex-pathify"
 
     import FarmerEditProfileDialog from "./FarmerEditProfileDialog";
 
@@ -98,7 +97,7 @@
         name: "Farm",
         components: {FarmerEditProfileDialog},
         computed: {
-            farmer: get("farmer/farmer"),
+            ...sync('farmer/*'),
             hiddenPersonalID: function () {
                 let personalId = this.farmer.personal_id
                 if (personalId) {
@@ -109,6 +108,13 @@
             }
         },
         data: () => ({}),
+        async mounted() { 
+            
+          if(!this.farmer.houseAmphur == null ){
+              alert('s')
+          }
+       
+       } 
 
     }
 </script>

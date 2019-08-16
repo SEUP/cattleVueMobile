@@ -10,7 +10,7 @@ function replaceEmptyWithNull(x) {
 }
 
 const state = {
-    farmer: null,
+    farmer: {},
     farm: null,
     avatar: null,
 }
@@ -51,7 +51,18 @@ const actions = {
     async getFarmer(context) {
         let result = await axios.get('/api/v1/farmer/user')
             .then(async (response) => {
+                if(!response.data.houseDistrict){
+                    response.data.houseDistrict = {}
+                }
+                if(!response.data.houseAmphur){
+                    response.data.houseAmphur = {}
+                }
+                if(!response.data.houseProvince){
+                    response.data.houseProvince = {}
+                }
+                
                 let farmer = response.data
+
                 let farm;
                 if (farmer.farm == null) {
                     farm = await context.dispatch("getFarmForm", {id: farmer.id})
