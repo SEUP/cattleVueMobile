@@ -11,8 +11,7 @@
                 <v-text-field type="password" v-model="form.password_confirmation" label="ยืนยันรหัสผ่าน" />
 
                 <v-text-field v-model="form.firstname" label="ชื่อ" />
-                <v-text-field v-model="form.lastname" label="นามสกุล" />
-                <v-text-field v-model="form.personal_id" label="รหัสบัตรประจำตัวประชาชน" />
+                <v-text-field v-model="form.lastname" label="นามสกุล" /> 
 
             </v-form>
             <v-btn @click="register()" replace block round color="primary">
