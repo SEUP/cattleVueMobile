@@ -7,6 +7,7 @@
                 </v-btn>
             </slot>
         </div>
+
         <v-dialog v-if="form"
                   persistent
                   fullscreen
@@ -57,7 +58,7 @@
 
 </template>
 <script>
-    import {get} from "vuex-pathify"
+    import {get,sync} from "vuex-pathify"
     import _ from "lodash"
 
     import Base from "@/components/Base"
@@ -80,6 +81,7 @@
             }
         },
         computed: {
+             ...sync('farmer/*'),
             farm: get("farmer/farm"),
         },
         methods: {

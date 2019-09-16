@@ -114,6 +114,8 @@
                 </v-flex>
             </v-layout>
 
+           
+
             <v-layout @click="$router.push({name : 'sell'})" row class="pd-20 ma-3 shadow circle box-white">
                 <v-flex xs4>
                     <v-icon class="mrl-18 pd-10 box-blue wh circle shadow" style="font-size:40px;">mdi-sale</v-icon>
@@ -124,6 +126,15 @@
                 </v-flex>
             </v-layout>
 
+                <v-layout @click="$router.push({name : 'question'})" row class="pd-20 ma-3 shadow circle box-white">
+                <v-flex xs4>
+                    <v-icon class="mrl-18 pd-10 red wh circle shadow" style="font-size:40px;">mdi-file-document-box-multiple</v-icon>
+                </v-flex>
+                <v-flex xs8>
+                    <h2 class="nm">แบบสอบถาม 8 ส่วน</h2>
+                    <h4 class="nm">ดู แก้ไข แบบสอบถาม</h4>
+                </v-flex>
+            </v-layout>
 
             <v-layout @click="$router.push({name : 'noti'})" row class="pd-20 ma-3 shadow circle box-white">
                 <v-flex xs4>

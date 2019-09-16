@@ -136,6 +136,11 @@ export default new Router({
             props: true,
             component: loadView('Noti/noti')
         },
+        {
+            path: '/question',
+            name: 'question',
+            component: loadView('Question')
+        },
     ]
 
 })
