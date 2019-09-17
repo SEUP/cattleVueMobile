@@ -10,28 +10,26 @@
             <v-spacer></v-spacer>
             <v-btn @click.native="updateFarmOwner" flat color="white"><v-icon>save</v-icon>แก้ไข</v-btn>
     </v-toolbar>
-     <v-toolbar class="mrt-60" color="white"><center style="width:100%;">
-      <v-btn color="success" @click="elFocus(1)" round icon>1</v-btn>
-        <v-btn color="success" @click="elFocus(2)" round icon>2</v-btn>
-         <v-btn color="success" @click="elFocus(3)" round icon>3</v-btn>
-          <v-btn color="success" @click="elFocus(4)" round icon>4</v-btn>
-           <v-btn color="success" @click="elFocus(5)" round icon>5</v-btn>
-            <v-btn color="success" @click="elFocus(6)" round icon>6</v-btn>
-             <v-btn color="success" @click="elFocus(7)" round icon>7</v-btn>
-              <v-btn color="success" @click="elFocus(8)" round icon>8</v-btn>
-     </center>
- 
-     </v-toolbar>
+    
+     <v-tabs 
+      class="shadow mrt-60 round"
+       color="white"
+       dark
+       slider-color="primary"
+     >
+       <v-tab  v-for="i in 8" :key="i">
+         <v-btn @click="elFocus(i)"  round flat color="primary">ส่วนที่ {{i}}</v-btn>
+          
+       </v-tab> 
+     </v-tabs>
     <v-layout row>
     
       <v-flex xs12> 
         <v-container fluid grid-list-lg>
           <v-layout row wrap v-if="form">
+        
             <v-flex xs12>
-           
-            </v-flex>
-            <v-flex lg9>
-              <v-card>
+              <v-card> 
                 <v-divider class="pt-1 indigo"></v-divider>
                 <v-stepper v-model="steper" vertical non-linear>
 
