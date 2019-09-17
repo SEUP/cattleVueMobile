@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="isLoaded">
+  <div v-if="isLoaded">
     <v-toolbar color="primary" fixed>
            <v-btn class="white--text" icon @click="$router.go(-1)">
                 <v-icon>mdi-arrow-left</v-icon>
@@ -25,9 +25,8 @@
     <v-layout row>
     
       <v-flex xs12> 
-        <v-container fluid grid-list-lg>
-          <v-layout row wrap v-if="form">
-        
+        <div >
+          <v-layout row wrap v-if="form"> 
             <v-flex xs12>
               <v-card> 
                 <v-divider class="pt-1 indigo"></v-divider>
@@ -139,12 +138,12 @@
               
             </v-flex>
           </v-layout>
-        </v-container>
+        </div>
 
       </v-flex>
     </v-layout>
 
-  </v-container>
+  </div>
 
 </template>
 
