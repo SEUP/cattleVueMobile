@@ -12,6 +12,7 @@ import core from "./core"
 import manage_default from "./cattle/manage/default"
 import femaleBreeder from "./cattle/manage/femaleBreeder"
 import admin from "./admin/index"
+import districtSelect from "./admin/districtSelect"
 Vue.use(Vuex)
 
 const modules = {
@@ -25,7 +26,8 @@ const modules = {
     core:core,
     manageDef:manage_default,
     femaleBreeder:femaleBreeder,
-    admin:admin
+    admin:admin,
+    districtSelect
 }
 
 export default new Vuex.Store({

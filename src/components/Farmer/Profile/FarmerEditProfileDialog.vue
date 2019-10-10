@@ -41,16 +41,16 @@
                         <v-text-field label="นามสกุล" v-model="form.lastname"
                                       :error-messages="error.lastname"/>
                         <v-text-field label="รหัสบัตรประจำตัวประชาชน" v-model="form.personal_id"
-                                      :error-messages="error.personal_id"/>
+                                     />
                         <v-text-field label="เบอร์โทรศัพท์" v-model="form.phone_number"
                                       :error-messages="error.phone_number"/>
                         <v-text-field label="ที่อยู่ปัจจุบัน" v-model="form.house_address"/>
 
-
+                        {{form.house_province}}
                         <district-select v-if="form" @change="updateDistrictSelect"
                         :valProvince="form.house_province"
                         :valAmphur="form.house_amphur"
-                        :valDistrict="form.house_district"></district-select>
+                        :valDistrict="44"></district-select>
 
                         <v-text-field label="รหัสไปรษณีย์" v-model="form.house_zipcode" hide-details/>
                         <br>
