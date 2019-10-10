@@ -9,7 +9,7 @@
         "ios": "vue-cli-service build && cordova run ios",
         "browser": "vue-cli-service build && cordova run browser",
         "lint": "vue-cli-service lint",
-        "full": "vue-cli-service build && cordova run android --release -- --keystore=/Users/opt/Downloads/KeyStore/keystore.jks --storePassword=password --alias=user --password=password"
+        "full": "vue-cli-service build && cordova run android --release -- --keystore=./keystore.jks --storePassword=password --alias=user --password=password"
     },
     "dependencies": {
         "@babel/polyfill": "^7.0.0-rc.1",
@@ -52,7 +52,9 @@
     "cordova": {
         "plugins": {
             "cordova-plugin-whitelist": {},
-            "cordova-plugin-camera": {},
+            "cordova-plugin-camera": {
+                "ANDROID_SUPPORT_V4_VERSION": "27.+"
+            },
             "cordova-plugin-file": {},
             "cordova-plugin-statusbar": {},
             "cordova-plugin-splashscreen": {}
