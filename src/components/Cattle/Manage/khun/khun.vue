@@ -10,10 +10,10 @@
         </center>
         <v-divider light></v-divider> 
         
-        <v-layout row v-for="khun in khun.data">
+        <v-layout row v-for="khun,index in khun.data" :key="index">
             <v-flex class="my-2" xs12>
-              <v-card class="card--flex-toolbar elevation-0" style="border: 1px #e5e5e3 solid">
-        
+              <v-card class="card--flex-toolbar elevation-0" style="border: 1px #e5e5e3 solid" v-if="index ==0"> 
+                 
                 <!--ข้อมูลเมื่อเริ่มขุน-->
                 <template>
                   <v-divider></v-divider>
@@ -181,7 +181,7 @@
             return {
                 Khun: {},
                 update:false,
-                
+                dataKhun:{},
 
             }
         },
@@ -220,6 +220,7 @@
                 }
                 let data = await store.dispatch("manageDef/getData", params);
                 this.setKhun(data);
+                this.dataKhun = this.khun.data[0]
                 if(this.khun.data.length > 0){
                     this.update =true;
                 }

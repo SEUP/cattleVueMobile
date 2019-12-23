@@ -2,6 +2,8 @@
     <v-content class="font">
         <ActionBar />
              <v-container class="bg-white">
+           
+
              <!---  <pre>{{form}}</pre> ---->
             <v-stepper v-model="form.status_id" >
             <v-stepper-header>
@@ -246,7 +248,7 @@
                    dateTH: get('core/dateTH')
         },
         async mounted() {
-            this.load();
+           await this.load();
 
         },
         
@@ -319,10 +321,11 @@ checkBellyDay () {
             load: async function () {   
                 this.form.cattle_id = this.cattleChoose.id;
                 if(this.forms){
-                    this.getDefaultForm();
+                   await  this.getDefaultForm();
                     this.form = this.forms;  
+                    this.form.status_id =1
                 }else{
-                  this.getDefaultForm();
+                  await this.getDefaultForm();
                 }
          
             },

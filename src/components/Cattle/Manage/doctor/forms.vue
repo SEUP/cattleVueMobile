@@ -28,16 +28,16 @@
                 </v-toolbar>
                 
                 <v-container grid-list-xs style="background-color:white;">
- 
+                   <pre>{{form}}</pre>
                     <h3>อาการ</h3>
                     <date-picker label="วัน/เดือน/ปี ที่สังเกตุอาการ" :valDate="form.observation_date" v-model="form.observation_date"
                         @change="form.observation_date = $event" />
 
-                    <v-text-field v-model="form.cause" label="ลักษณะอาการเบื้องต้น"></v-text-field>
+                    <v-text-field v-model="form.initial_symptoms" label="ลักษณะอาการเบื้องต้น"></v-text-field>
 
                     <choice to="กลุ่มอาการ" :remark="form.options.symptom_group" v-model="form.symptom_group" @change="form.options.symptom_group = $event" />
-
-                    <choice to="โรค" :remark="form.options.symptom_group" v-model="form.symptom_group" @change="form.options.symptom_group = $event" />
+                      
+                    <choice to="โรค" :remark="form.options.disease" v-model="form.disease" @change="form.options.disease = $event" />
 
  
                     <h3>การรักษา</h3>
@@ -116,11 +116,11 @@
             openDialog() {
                 this.dialog = true;
             },
-            closeDialog() {
+           async closeDialog() {
                 if (!this.update) {
                     this.getDefaultForm();
                 }
-                this.getData();
+              await   this.getData();
                 this.dialog = false;
             },
             createData: async function () {
@@ -129,7 +129,7 @@
                         form: this.form
                     }
                     this.form = await store.dispatch("manageDef/createData", params);
-                    this.closeDialog();
+                    await this.closeDialog();
                 },
                 updateData: async function () {
                         let params = {
@@ -137,14 +137,14 @@
                             form: this.form
                         }
                         let c = await store.dispatch("manageDef/updateData", params);
-                        this.closeDialog();
+                        await this.closeDialog();
                     },
                     removeData: async function () {
                             let params = {
                                 api: 'farmer/cattles/' + this.cattle.id + '/' + this.To + '/' + this.forms.id,
                             }
                             this.form = await store.dispatch("manageDef/removeData", params);
-                            this.closeDialog();
+                            await this.closeDialog();
                         },
                         getData: async function () {
                                 let params = {
