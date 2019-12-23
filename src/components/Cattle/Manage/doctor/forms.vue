@@ -15,7 +15,7 @@
                 <v-icon>mdi-delete</v-icon>ลบข้อมูล
             </h4>
         </v-btn>
-
+   
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" transition="dialog-transition">
             <v-card style="background-color:white;">
 
@@ -25,10 +25,10 @@
                     </v-btn>
                     <h1 class="wh" v-if="!update">เพิ่มข้อมูล</h1>
                     <h1 class="wh" v-if="update">อัพเดทข้อมูล</h1>
-                </v-toolbar>
+                </v-toolbar>   
                 
                 <v-container grid-list-xs style="background-color:white;">
-                   <pre>{{form}}</pre>
+                  <!--- <pre>{{form}}</pre> ---> 
                     <h3>อาการ</h3>
                     <date-picker label="วัน/เดือน/ปี ที่สังเกตุอาการ" :valDate="form.observation_date" v-model="form.observation_date"
                         @change="form.observation_date = $event" />

@@ -1,7 +1,8 @@
 <template>
     <v-content class="font">
         <ActionBar />
-             <v-container class="bg-white">
+       
+             <v-container class="bg-white" v-if="form">
            
 
              <!---  <pre>{{form}}</pre> ---->
@@ -40,7 +41,8 @@
 
             <v-stepper-content step="1">
               <v-card class="elevation-0">
-                <introductionBreeding to="การเหนี่ยวนำการเป็นสัด" :remark="form.options.induction"
+                
+                <introductionBreeding v-if="form.induction" to="การเหนี่ยวนำการเป็นสัด" :remark="form.options.induction"
                                       v-model="form.induction"
                                       @change="form.options.induction = $event"></introductionBreeding>
                 <date-picker v-if="form.induction == '270100'" label="วัน/เดือน/ปี ที่เหนี่ยวนำ"
@@ -70,7 +72,7 @@
                              readonly hide-details
                               class="pb-1 pr-2"></v-text-field>
 
-                <choice to="ประเภทการผสมพันธุ์" :remark="form.options.breed_type"
+                <choice v-if="form.breed_type" to="ประเภทการผสมพันธุ์" :remark="form.options.breed_type"
                         v-model="form.breed_type"
                         @change="form.options.breed_type = $event"/>
                 <!--ผสมตามธรรมชาติ-->
@@ -84,7 +86,7 @@
                                   persistent-hint
                                   v-model="form.male_name"></v-text-field>
                   </v-layout>
-                  <choice to="พันธุ์โค" :remark="form.options.male_breed"
+                  <choice to="พันธุ์โค" v-if="form.male_breed" :remark="form.options.male_breed"
                           v-model="form.male_breed"
                           @change="form.options.male_breed = $event"/>
                   <v-text-field label="ค่าใช้จ่าย" suffix="บาท" v-model="form.charge"></v-text-field>
@@ -99,14 +101,14 @@
                     <v-text-field label="เบอร์หูพ่อพันธุ์" v-model="form.male_number"></v-text-field>
                   </v-layout>
                   ข้อมูลหลอดน้ำเชื้อ
-                  <choice to="พันธุ์โค" :remark="form.options.male_breed"
+                  <choice to="พันธุ์โค" v-if="form.male_breed" :remark="form.options.male_breed"
                           v-model="form.male_breed"
                           @change="form.options.male_breed = $event"/>
                   <v-text-field label="เปอร์เซ็นต์เลือด" v-model="form.blood_percentage" type="number"/>
                   <v-text-field label="ผลิตโดย" v-model="form.sperms_produced_by"></v-text-field>
                   <v-text-field label="ราคา" v-model="form.charge" suffix="บาท"></v-text-field>
 
-                  <choice to="ผู้ให้บริการผสมเทียม" :remark="form.options.ivf_provider"
+                  <choice to="ผู้ให้บริการผสมเทียม" v-if="form.ivf_provider" :remark="form.options.ivf_provider"
                           v-model="form.ivf_provider"
                           @change="form.options.ivf_provider = $event"/>
                 </template>
@@ -119,7 +121,7 @@
                 <date-picker label="วัน/เดือน/ปี ที่ตรวจการกลับสัด" :valDate='form.reversal_date'
                              @change="form.reversal_date = $event"
                 />
-                <choice to="ผลการตรวจการกลับสัด" :remark="form.reversal"
+                <choice to="ผลการตรวจการกลับสัด" v-if="form.reversal" :remark="form.reversal"
                         v-model="form.reversal"
                         @change="form.options.reversal = $event"></choice>
   <!-----------------------วันที่ควรตรวจท้อง-------------------------------->
@@ -140,6 +142,7 @@
                              v-model="form.check_date"
                              @change="form.check_date = $event"/>
                 <choice to="ผลการตรวจการผสมพันธุ์" :remark="form.options.breeding_result"
+                        v-if="form.breeding_result"
                         v-model="form.breeding_result"
                         @change="form.options.breeding_result = $event"/>
 
@@ -163,6 +166,7 @@
                                @change="form.real_birth_date = $event"/>
                   <choice to="ผลการคลอด" :remark="form.birth_outcomes"
                           v-model="form.birth_outcomes"
+                          v-if="form.birth_outcomes"
                           @change="form.options.birth_outcomes = $event"/>
                 </div>
               </v-card>
@@ -204,7 +208,13 @@
                 debug: true,
                 dateBack:'',
                 dateOut:'',
-                form:{},
+                 form: {
+                     
+                    "options": {
+                        "check_reversal_date":'',
+                        "options.check_reversal_date":'',
+                    } , 
+            }
                /* form: {
                     "cattle_id": null,
                     "status_id": 1,
@@ -322,12 +332,15 @@ checkBellyDay () {
                 this.form.cattle_id = this.cattleChoose.id;
                 if(this.forms){
                    await  this.getDefaultForm();
-                    this.form = this.forms;  
-                    this.form.status_id =1
+                    await this.setForm(this.forms);
                 }else{
                   await this.getDefaultForm();
                 }
          
+            },
+            async setForm(form){
+              this.form = form; 
+               this.form.status_id =1 
             },
             change(step){
                 this.form.status_id = step;
