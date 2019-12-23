@@ -1,11 +1,9 @@
 <template>
     <v-content class="font">
         <ActionBar />
-       
+         
              <v-container class="bg-white" v-if="form">
-           
-
-             <!---  <pre>{{form}}</pre> ---->
+            
             <v-stepper v-model="form.status_id" >
             <v-stepper-header>
               <v-stepper-step :complete="form.status_id > 1 " step="1">
@@ -340,7 +338,7 @@ checkBellyDay () {
             },
             async setForm(form){
               this.form = form; 
-               this.form.status_id =1 
+               this.form.status_id =1  
             },
             change(step){
                 this.form.status_id = step;

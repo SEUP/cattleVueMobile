@@ -118,9 +118,9 @@
             },
            async closeDialog() {
                 if (!this.update) {
-                    this.getDefaultForm();
+                  await  this.getDefaultForm();
                 }
-              await   this.getData();
+              await  this.getData();
                 this.dialog = false;
             },
             createData: async function () {
@@ -167,7 +167,7 @@
                                 },
                                 initial: async function () {
                                     if (!this.update) {
-                                        this.getDefaultForm();
+                                       await this.getDefaultForm();
                                     } else {
                                         this.form = this.forms;
                                     }

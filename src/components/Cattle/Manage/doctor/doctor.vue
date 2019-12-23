@@ -10,12 +10,13 @@
         </center>
         <v-divider light></v-divider> 
         
-        <v-layout row v-for="doctor in datas.data">
+        <v-layout row v-for="doctor,index in datas.data" :key="index">
             <v-flex xs12 class="pd-20">
                 <v-card class="box-blue  pd-10 wh">
                     <h3>วันที่: {{dateTH(doctor.therapy_date)}}</h3>
                     <v-card class=" mrt-6 pd-6">
-                        <h4><b>โรค:</b> {{getType(doctor.symptom_group)}}</h4>
+                        <h4><b>กลุ่มโรค:</b> {{getType(doctor.symptom_group)}}</h4>
+                        <h4 style="font-size:14px;"><b>อาการ:</b> {{notNull(doctor.initial_symptoms)}}</h4><hr>
                         <h4><b>ผล:</b> {{notNull(getType(doctor.therapy_result))}}</h4>  
                     </v-card>
                     <center class="mrt-10">
