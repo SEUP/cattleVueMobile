@@ -35,17 +35,16 @@ const actions = {
         return result
     },
 
-    register : async ({commit,state,dispatch}) => {
+    register : async ({commit,state,dispatch},params) => {
         window.console.log("user/register")
-        let result = await axios.post('/api/v1/farmer/register', state.registerForm)
+        let result = await axios.post('/api/v1/farmer/register',params)
             .then((r) => {
                 window.console.log("login/register", r.data)
                 let storage = window.localStorage;
                 storage.setItem("token", r.data.token)
                 axios.defaults.headers.common['Authorization'] = `Bearer ${storage.getItem('token')}`;
                 window.console.log('login/register', 'finish')
-                commit("resetRegisterForm")
-
+                commit("resetRegisterForm") 
                 return r.data;
             }).catch((error) => {
                 window.console.error(error.stack)

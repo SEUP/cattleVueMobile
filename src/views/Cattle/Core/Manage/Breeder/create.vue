@@ -2,7 +2,7 @@
     <v-content class="font">
         <ActionBar />
          
-             <v-container class="bg-white" v-if="form">
+             <v-container class="bg-white"  v-if="responseFrom" >
             
             <v-stepper v-model="form.status_id" >
             <v-stepper-header>
@@ -39,14 +39,14 @@
 
             <v-stepper-content step="1">
               <v-card class="elevation-0">
-                
-                <introductionBreeding v-if="form.induction" to="การเหนี่ยวนำการเป็นสัด" :remark="form.options.induction"
-                                      v-model="form.induction"
+             
+                <introductionBreeding  to="การเหนี่ยวนำการเป็นสัด" :remark="form.options.induction"
+                                      v-model="form.induction" 
                                       @change="form.options.induction = $event"></introductionBreeding>
                 <date-picker v-if="form.induction == '270100'" label="วัน/เดือน/ปี ที่เหนี่ยวนำ"
                              :valDate='form.induction_date'
                              @change="form.induction_date = $event"
-                />
+                />  
 
               </v-card>
               <v-btn color="primary" @click="changeStep(2)">ต่อไป</v-btn>
@@ -206,6 +206,7 @@
                 debug: true,
                 dateBack:'',
                 dateOut:'',
+                responseFrom:false,
                  form: {
                      
                     "options": {
@@ -331,10 +332,17 @@ checkBellyDay () {
                 if(this.forms){
                    await  this.getDefaultForm();
                     await this.setForm(this.forms);
+                    
                 }else{
                   await this.getDefaultForm();
                 }
-         
+
+                await this.displaySteper()
+          
+            },
+
+            async displaySteper(){
+              this.responseFrom = true;
             },
             async setForm(form){
               this.form = form; 

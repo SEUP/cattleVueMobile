@@ -1,9 +1,12 @@
 import axios from "@/axios"
 import _ from 'lodash'
 import moment from 'moment';
-
+import {
+   make
+} from "vuex-pathify"
 const state = {
-    noti:0
+    noti:0,
+    tabs:0,
 }
 
 const getters = {
@@ -37,10 +40,8 @@ const getters = {
 
 }
 
-const mutations = {
+const mutations = make.mutations(state)
 
-
-}
 
 const actions = {
 

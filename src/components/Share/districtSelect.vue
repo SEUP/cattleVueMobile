@@ -17,6 +17,7 @@
               @change="amphurChange">
     </v-select>
     <v-select :items="districts"
+     
               hide-details
               return-object
               v-model="selDistrict"

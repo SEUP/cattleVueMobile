@@ -75,7 +75,9 @@
                 To:'vaccine',
                 DefaultForm: {},
                 dialog: false,
-                form: {},
+                form: {
+                   options:{maker:''}
+                },
                 date: null,
             }
         },

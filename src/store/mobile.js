@@ -4,6 +4,7 @@ import _ from 'lodash'
 
 const state = {
     ActionBar:{}, 
+    tabs:0,
 }
 
 const getters = {

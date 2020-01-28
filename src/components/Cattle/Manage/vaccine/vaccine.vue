@@ -10,9 +10,9 @@
         </center>
         <v-divider light></v-divider> 
         
-        <v-layout row v-for="vaccine in vaccines.data">
+        <v-layout row v-for="vaccine,index in vaccines.data" :key="index" >
             <v-flex xs12 class="pd-20">
-                <v-card class="box-blue  pd-10 wh">
+                <v-card class="box-blue  pd-10 wh"   >
                     <h3>วันที่: {{dateTH(vaccine.vaccine_date)}}</h3>
                     <v-card class=" mrt-6 pd-6">
                         <h4><b>ชนิด:</b> {{getType(vaccine.vaccine_type)}}</h4>
