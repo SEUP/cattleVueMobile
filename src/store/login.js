@@ -46,8 +46,9 @@ const actions = {
                 window.console.log('login/register', 'finish')
                 commit("resetRegisterForm") 
                 return r.data;
-            }).catch((error) => {
+            }).catch((error) => { 
                 window.console.error(error.stack)
+                return error.response.data
             })
         //do login
 
