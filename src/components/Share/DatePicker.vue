@@ -20,7 +20,7 @@
         append-icon="event"
         @blur="parseDate(showDate)"
       ></v-text-field>
-      <v-date-picker ref="datePicker" @change="$emit('change',date)" v-model="date" no-title @input="menu = false"
+      <v-date-picker :readonly="readonly" ref="datePicker" @change="$emit('change',date)" v-model="date" no-title @input="menu = false"
                      locale="th"/>
     </v-menu>
   </div>
@@ -28,13 +28,13 @@
 </template>
 
 <script>
-
-    import moment from "moment"
-
-
-    export default {
-    name: "DatePicker",
+  export default {
+    name: "datePicker",
     props: {
+      readonly : {
+        type : [Boolean],
+        default : false
+      },
       valDate: {
         type: [String, Object],
       },
@@ -63,7 +63,7 @@
           this.showDate = null
         }
       },
-      menu: function () {
+      menu: function (val) {
         if (this.$refs.datePicker) {
           if (this.valDate) {
             this.$refs.datePicker.tableDate = moment(this.valDate, "YYYY-MM-DD").format("YYYY-M")
@@ -97,7 +97,7 @@
               this.showDate = null;
             }
           } catch (e) {
-            window.console.log('parseDate', e.stack);
+            console.log('parseDate', e.stack);
             this.date = null;
           }
 
