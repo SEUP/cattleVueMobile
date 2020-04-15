@@ -8,7 +8,7 @@
             <v-toolbar-title class="white--text">แบบสอบถาม 8 ส่วน</v-toolbar-title>
 
             <v-spacer></v-spacer>
-            <v-btn @click.native="updateFarmOwner" flat color="white"><v-icon>save</v-icon>แก้ไข</v-btn>
+            <v-btn @click.native="updateFarmOwner" flat color="white"><v-icon>save</v-icon>บันทึก</v-btn>
     </v-toolbar>
     
      <v-tabs 
@@ -40,8 +40,10 @@
 
                       <part1></part1>
 
-                      <v-btn color="primary" @click.native="steper = 2">Continue</v-btn>
-                      <v-btn flat @click.native="steper=0" outline>Cancel</v-btn>
+
+                      <v-btn color="primary" @click.native="elFocus(2)">ถัดไป</v-btn>
+
+                      <v-btn flat @click.native="elFocus(0)" outline>ย้อนกลับ</v-btn>
                     </v-stepper-content>
                   </template>
                   <template>
@@ -50,8 +52,8 @@
                     </v-stepper-step>
                     <v-stepper-content :step="2">
                       <Part2></Part2>
-                      <v-btn color="primary" @click.native="steper = 3">Continue</v-btn>
-                      <v-btn flat @click.native="steper=0" outline>Cancel</v-btn>
+                      <v-btn color="primary" @click.native="elFocus(3)">ถัดไป</v-btn>
+                      <v-btn flat @click.native="elFocus(1)" outline>ย้อนกลับ</v-btn>
                     </v-stepper-content>
                   </template>
                   <template id="f3">
@@ -62,8 +64,8 @@
 
                       <Part3></Part3>
 
-                      <v-btn color="primary" @click.native="steper = 4">Continue</v-btn>
-                      <v-btn flat @click.native="steper=0" outline>Cancel</v-btn>
+                      <v-btn color="primary" @click.native="elFocus(4)">ถัดไป</v-btn>
+                      <v-btn flat @click.native="elFocus(2)" outline>ย้อนกลับ</v-btn>
                     </v-stepper-content>
                   </template>
 
@@ -73,8 +75,8 @@
                     </v-stepper-step>
                     <v-stepper-content :step="4">
                       <part4></part4>
-                      <v-btn color="primary" @click.native="steper = 5">Continue</v-btn>
-                      <v-btn flat @click.native="steper=0" outline>Cancel</v-btn>
+                      <v-btn color="primary" @click.native="elFocus(5)">ถัดไป</v-btn>
+                      <v-btn flat @click.native="elFocus(3)" outline>ย้อนกลับ</v-btn>
                     </v-stepper-content>
                   </template>
 
@@ -86,8 +88,8 @@
 
                       <part5></part5>
 
-                      <v-btn color="primary" @click.native="steper = 6">Continue</v-btn>
-                      <v-btn flat @click.native="steper=0" outline>Cancel</v-btn>
+                      <v-btn color="primary" @click.native="elFocus(6)">ถัดไป</v-btn>
+                      <v-btn flat @click.native="elFocus(4)" outline>ย้อนกลับ</v-btn>
                     </v-stepper-content>
                   </template>
 
@@ -99,8 +101,8 @@
 
                       <part6></part6>
 
-                      <v-btn color="primary" @click.native="steper = 7">Continue</v-btn>
-                      <v-btn flat @click.native="steper=0" outline>Cancel</v-btn>
+                      <v-btn color="primary" @click.native="elFocus(7)">ถัดไป</v-btn>
+                      <v-btn flat @click.native="elFocus(5)" outline>ย้อนกลับ</v-btn>
                     </v-stepper-content>
                   </template>
 
@@ -113,8 +115,8 @@
                       <!---->
                       <part7></part7>
 
-                      <v-btn color="primary" @click.native="steper = 8">Continue</v-btn>
-                      <v-btn flat @click.native="steper=0" outline>Cancel</v-btn>
+                      <v-btn color="primary" @click.native="elFocus(8)">ถัดไป</v-btn>
+                      <v-btn flat @click.native="elFocus(6)" outline>ย้อนกลับ</v-btn>
                     </v-stepper-content>
                   </template>
 
@@ -126,8 +128,8 @@
 
                       <part8></part8>
 
-                      <v-btn color="success" @click.native="updateFarmOwner">save</v-btn>
-                      <v-btn flat @click="$router.go(-1)" outline>Cancel</v-btn>
+                      <v-btn color="success" @click.native="updateFarmOwner">บันทึก</v-btn>
+                      <v-btn flat @click="$router.go(-1)" outline>ย้อนกลับ</v-btn>
                     </v-stepper-content>
                   </template>
                 </v-stepper>
@@ -202,7 +204,9 @@
             this.isLoaded = true
         }
         , methods: {
-            elFocus: function (el) {
+             
+            elFocus:async function (el) {
+              await  this.updateFarmOwner();
                 this.steper = el
             },
             updateFarmOwner: async function () {

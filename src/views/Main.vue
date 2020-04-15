@@ -172,8 +172,10 @@
                 </div>
                 <v-card-text class="pd-10">
                     <div class="box-gray pd-10 circle">
-                        <h3>{{notificate.title}}</h3>
-                        <h4>{{dateTH(notificate.start)}} </h4>
+                       
+                       <div v-for="txt,index in notiTxt" :key="index">
+                           {{txt}}<br>
+                       </div>
 
                     </div>
 
@@ -226,6 +228,7 @@
             return {
                 dialogx: false,
                 notificate: {},
+                notiTxt:[],
             }
         },
         async beforeRouteEnter(to, from, next) {
@@ -244,11 +247,41 @@
             dateTH: get('core/dateTH'),
         },
         async mounted() {
-            await this.initial();
-            this.notiLoad();
+            await this.notiLoad();
+            await this.initial(); 
+            await this.getNoti();
         },
         methods: {
+            async getNoti(){ 
+                
+                let data = await store.dispatch("core/getNotification", this.farmer.id);
+                let vaccine = (data.vaccine).length 
+                if(vaccine > 0 ){
+                    this.notiTxt.push('วัคซีนป้องกันโรค : ' +vaccine+ ' แจ้งเตือน');
+                } 
+                let worming = (data.worming).length  
+                if(worming > 0 ){
+                    this.notiTxt.push('พยาธิในโคเนื้อ : ' +worming+ '  แจ้งเตือน');
+                } 
+                let breed_out = (data.breed_out).length  
+                if(breed_out > 0 ){
+                    this.notiTxt.push('การกลับสัด : ' +breed_out+ ' แจ้งเตือน');
+                } 
+                let beel = (data.beel).length 
+                if(beel > 0 ){
+                    this.notiTxt.push('การตรวจท้อง : ' +beel+ ' แจ้งเตือน');
+                }  
+                let baby = (data.baby).length
+                if(baby > 0 ){
+                    this.notiTxt.push('การคลอด : ' +baby+ ' แจ้งเตือน');
+                }   
+                if(this.notiTxt.length >0){
+                    this.dialogx = true;
+                }
+                
+            },
             notiLoad: async function () {
+             
                 let params = {
                     api: 'farmer/farmers/' + this.farmer.id + '/reports/cattleEvents',
                 }
@@ -260,13 +293,14 @@
                         break;
                     }
                 }
+ 
+ 
             },
             getCattle: async function () {
                 await store.dispatch("cattle/getCattle", this.farmer.id)
             },
             initial: async function () {
-                await this.getCattle();
-
+                await this.getCattle(); 
                 if (this.noti == 0) {
                     this.dialogx = false;
                 }else {

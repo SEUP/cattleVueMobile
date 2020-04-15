@@ -45,6 +45,18 @@ const mutations = make.mutations(state)
 
 const actions = {
 
+
+    getNotification:async function(context,params){
+        let result = await axios.get(`/api/v1/farmer/farmers/${params}/notification`)
+        .then(async (response) => { 
+            return response.data;
+        }).catch((error) => {
+            context.dispatch("error/setError", error.response.data, {root: true});
+            return null
+        })
+    return result
+    }   
+
 }
 
 
