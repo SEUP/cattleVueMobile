@@ -30,8 +30,8 @@
                         @change="form.vaccine_date = $event" />
 
                     <choice to="ผู้ทำ" :remark="form.options.maker" v-model="form.maker" @change="form.options.maker = $event" />
-
-                    <choice to="ชนิดวัคซีน" :remark="form.options.vaccine_type" v-model="form.vaccine_type" @change="form.options.vaccine_type = $event" />
+ 
+                    <choice to="ชนิดวัคซีน" :disableFemale="(cattle.cattle_type == '020200')?true:false"  :remark="form.options.vaccine_type" v-model="form.vaccine_type" @change="form.options.vaccine_type = $event" />
 
                     <v-text-field label="ชุดการผลิตวัคซีน" v-model="form.vaccine_set"></v-text-field>
 
