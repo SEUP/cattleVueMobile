@@ -46,7 +46,7 @@
                             <h3 class="wh">{{res.cattle}}</h3>
                         </v-card-title>
                         <v-card-text>
-                            <h4><b>วันที่ : </b> {{dateTH(res.date)}}</h4>
+                            <h4><b>วันที่ : </b> {{dateTH(res.breedout_date)}}</h4>
                         </v-card-text>
                     </v-card>
                 </div>
@@ -61,7 +61,7 @@
                             <h3 class="wh">{{res.cattle}}</h3>
                         </v-card-title>
                         <v-card-text>
-                            <h4><b>วันที่ : </b> {{dateTH(res.date)}}</h4>
+                            <h4><b>วันที่ : </b> {{dateTH(res.beel_date)}}</h4>
                         </v-card-text>
                     </v-card>
                 </div>
@@ -76,7 +76,7 @@
                             <h3 class="wh">{{res.cattle}}</h3>
                         </v-card-title>
                         <v-card-text>
-                            <h4><b>วันที่ : </b> {{dateTH(res.date)}}</h4>
+                            <h4><b>วันที่ : </b> {{dateTH(res.baby_date)}}</h4>
                         </v-card-text>
                     </v-card>
                 </div>
