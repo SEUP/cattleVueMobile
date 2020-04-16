@@ -39,7 +39,6 @@
 
                 <v-stepper-content step="1">
                     <v-card class="elevation-0">
-                        {{form.options.induction}}
                         <introductionBreeding to="การเหนี่ยวนำการเป็นสัด" :remark="form.options.induction"
                                               v-model="form.induction"
                                               @change="form.options.induction = $event"></introductionBreeding>
