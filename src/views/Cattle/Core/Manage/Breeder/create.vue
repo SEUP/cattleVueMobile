@@ -262,10 +262,10 @@
         methods: {
 
             baby() {
-                let date = this.form.breeding_date;
+                let date = this.form.check_date
                 if (date) {
-                    let day1 = 282 - 4
-                    let day2 = 282 + 4
+                    let day1 = 279
+                    let day2 = 279 + 10
 
                     let breedDate = moment(date);
                     let bd1 = moment(date).add(day1, 'days')
@@ -280,10 +280,10 @@
 
 
             checkBellyDay() {
-                let date = this.form.breeding_date;
+                let date = this.form.reversal_date;
                 if (date) {
-                    let day1 = 42
-                    let day2 = 45
+                    let day1 = 45
+                    let day2 = 48
 
                     let breedDate = moment(date);
                     let bd1 = moment(date).add(day1, 'days')
@@ -372,12 +372,13 @@
             },
             babyBirthday: async function (date) {
 
-                this.checkReversalDate(date)
+                // this.checkReversalDate(date)
                 //this.checkBellyDay(date)
                 this.form.breeding_date = date;
+                date = this.form.check_date
                 if (date) {
-                    let day1 = 282 - 4
-                    let day2 = 282 + 4
+                    let day1 = 279
+                    let day2 = 279 + 10
 
                     let breedDate = moment(date);
                     let bd1 = moment(date).add(day1, 'days')
