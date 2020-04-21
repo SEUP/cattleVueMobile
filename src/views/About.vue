@@ -9,7 +9,7 @@
                  <center> <v-icon class="mrl-18 pd-10 box-purple wh circle shadow" style="font-size:40px;">mdi-cow</v-icon>   </center>
           
                     <h2 class="nm">Beef​ Cattle Farm Management (BCFM)</h2>
-                    <h4 class="nm">version 1.1.7 build 1</h4>
+                    <h4 class="nm">version 1.1.9</h4>
                     <v-btn round class="box-greenFX" href="https://forms.gle/WNEHVDBrQsqiRCwa7" >แจ้งปัญหาการใช้งาน</v-btn>
          
                 </v-flex>
