@@ -7,7 +7,7 @@
       <form @submit.prevent="register()">
         <v-text-field required v-model="form.personal_id" label="รหัสบัตรประจำตัวประชาชน" />
         <v-text-field v-model="form.username" label="ชื่อผู้ใช้" required />
-        <v-text-field v-model="form.email" label="อีเมล์" type="email" />
+        <!-- <v-text-field v-model="form.email" label="อีเมล์" type="email" /> -->
         <v-text-field type="password" v-model="form.password" label="รหัสผ่าน" required />
         <v-text-field
           type="password"

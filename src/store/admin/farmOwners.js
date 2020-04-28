@@ -113,6 +113,20 @@ export default {
           return null
         });
       return result
+    },
+
+    async syncQuestion(context,params){
+      let data  = await axios.put(`/api/v1/admin/farm-owners/${params.id}`,params.data).then(
+        (r)=>{
+          console.log(r.data);
+          return r.data;
+        }
+      ).catch(
+        (e)=>{ 
+          return e.response;
+        }
+      );
+     return data;
     }
 
   }

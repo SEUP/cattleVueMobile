@@ -31,27 +31,69 @@
 
 <script>
     import {
+        get,
         sync,
         call
     } from 'vuex-pathify'
+    import store from "@/store/"
     export default {
         name: "LoginForm",
         computed: {
             form: sync('login/loginForm'),
+            farmer: get("farmer/farmer"),
         },
+        data: () => ({ 
+            formSync:{},
+        }),
         created() {},
         mounted() {},
         methods: {
             login: async function () {
                 let result = await this.$store.dispatch("login/login")
                 if (result) {
-                    this.$router.replace({
+                    await store.dispatch("farmer/getFarmer")
+                    await store.dispatch("farmer/downloadAvatar")
+                    await this.loadQuestion(); 
+                    await this.syncToQuestion();
+
+                    await this.$router.replace({
                         name: 'main'
                     })
                 } else {
                     alert("ข้อมูลไม่ถูกต้อง ไม่สามารถเข้าสู่ระบบได้")
                 }
-            }
+            },
+            async syncToQuestion(){
+                let form = _.cloneDeep(this.farmer)
+                console.log('[sss]',form);
+                console.log('[sss2]',this.formSync);
+                this.formSync.firstname = form.firstname
+                this.formSync.lastname = form.lastname
+                this.formSync.personal_id = form.personal_id
+
+                this.formSync.house_province = form.house_province
+                this.formSync.house_amphur = form.house_amphur
+                this.formSync.farm_district = form.farm_district
+
+                this.formSync.mobile_no = form.phone_number
+                this.formSync.house_postcode = form.house_zipcode
+                
+                let put = {
+                    'id' : this.farmer.id,
+                    'data':this.formSync
+                }
+                await store.dispatch("admin/farmOwners/syncQuestion", put)
+                let data = await store.state.admin.farmOwners.farmOwner
+            },
+            async loadQuestion(){
+                let farmOwnerId = this.farmer.id
+                this.formSync = await this.$store.dispatch("admin/farmOwners/getFarmOwnerById", {
+                    id: farmOwnerId,
+                    isAdmin: true
+                }); 
+            }, 
+
+            
         },
         watch: {},
 

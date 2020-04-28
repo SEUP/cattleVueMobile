@@ -72,7 +72,8 @@
         components: {DatePicker, Choice, DistrictSelect},
         data: () => ({
             dialog: false,
-            form : null
+            form : null,
+            formSync:{},
         }),
         watch : {
             dialog : function() {
@@ -84,20 +85,37 @@
              ...sync('farmer/*'),
             farm: get("farmer/farm"),
         },
+        async mounted(){
+            await this.load();
+        },
         methods: {
+            
             CheckFarmStatus : async function(){
                 let farmStatus = this.form.farm_issue_status
                 if(farmStatus == "230200"){
                     this.form.farm_issue_date = null
                     this.form.farm_issue_id = null
-                }
-
+                } 
             },
             save: async function () {
                 let data = await this.$store.dispatch("farmer/updateFarm", this.form)
+                await this.syncToQuestion();
                 if (data) {
                     this.dialog = false
                 }
+            },
+            async syncToQuestion(){
+                this.formSync.farm_lat = this.form.farm_lat
+                this.formSync.farm_long = this.form.farm_lng
+                await this.$store.dispatch("admin/farmOwners/updateState", this.formSync)
+                let data = await this.$store.state.admin.farmOwners.farmOwner
+            },
+            async load(){ 
+                let farmOwnerId = this.farmer.id
+                this.formSync = await this.$store.dispatch("admin/farmOwners/getFarmOwnerById", {
+                    id: farmOwnerId,
+                    isAdmin: true
+                });  
             },
         }
     }

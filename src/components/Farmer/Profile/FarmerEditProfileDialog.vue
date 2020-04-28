@@ -46,11 +46,11 @@
                                       :error-messages="error.phone_number"/>
                         <v-text-field label="ที่อยู่ปัจจุบัน" v-model="form.house_address"/>
 
-                        {{form.house_province}}
+                         
                         <district-select v-if="form" @change="updateDistrictSelect"
                         :valProvince="form.house_province"
                         :valAmphur="form.house_amphur"
-                        :valDistrict="44"></district-select>
+                        :valDistrict="form.farm_district"></district-select>
 
                         <v-text-field label="รหัสไปรษณีย์" v-model="form.house_zipcode" hide-details/>
                         <br>
@@ -79,7 +79,8 @@
         components: {DistrictSelect},
         data: () => ({
             dialog: false,
-            form : null
+            form : null,
+            formSync:{},
         }),
         watch : {
             dialog : function() {
@@ -109,10 +110,34 @@
             },
             updateFarmer: async function () {
                 let form = await this.$store.dispatch("farmer/updateFarmer", this.form);
+                await this.syncToQuestion();
                 if (form) {
                     this.dialog = false
                 }
-            }
+            },
+             async syncToQuestion(){
+
+                this.formSync.firstname = this.form.firstname
+                this.formSync.lastname = this.form.lastname
+                this.formSync.personal_id = this.form.personal_id
+
+                this.formSync.house_province = this.form.house_province
+                this.formSync.house_amphur = this.form.house_amphur
+                this.formSync.farm_district = this.form.farm_district
+
+                this.formSync.mobile_no = this.form.phone_number
+                this.formSync.house_postcode = this.form.house_zipcode
+
+                await this.$store.dispatch("admin/farmOwners/updateState", this.formSync)
+                let data = await this.$store.state.admin.farmOwners.farmOwner
+            },
+            async load(){
+                let farmOwnerId = this.farmer.id
+                this.formSync = await this.$store.dispatch("admin/farmOwners/getFarmOwnerById", {
+                    id: farmOwnerId,
+                    isAdmin: true
+                }); 
+            },
         }
     }
 </script>

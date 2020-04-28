@@ -32,6 +32,7 @@
         methods: {
             initial: async function () {
                 await this.$store.dispatch("farmer/getFarmer")
+                
             }
         }
 
