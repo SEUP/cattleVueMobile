@@ -5,7 +5,7 @@
         <v-divider class="mrt-20" light></v-divider>
         <center>
             <h1>การผสมพันธุ์
-                <BreederForms :cattle="cattle" :form="{}" />
+                <BreederForms :cattle="cattle" :forms="{}" />
             </h1>
         </center>
         <v-divider light></v-divider>
