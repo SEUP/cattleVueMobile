@@ -1,5 +1,5 @@
 <template>
-    <v-btn @click="logout()" block color="red" dark>Logout</v-btn>
+    <v-btn @click="logout()" block color="red" dark>ออกจากระบบ</v-btn>
 </template>
 
 <script>
