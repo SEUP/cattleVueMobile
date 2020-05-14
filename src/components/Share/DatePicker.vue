@@ -1,5 +1,6 @@
 <template>
   <div>
+   
     <v-menu
       ref="menu1"
       :close-on-content-click="false"
@@ -28,6 +29,7 @@
 </template>
 
 <script>
+import moment from 'moment';
   export default {
     name: "datePicker",
     props: {
@@ -77,8 +79,15 @@
 
     },
     async mounted() {
-      this.date = this.valDate;
-      this.showDate = this.formatDate(this.valDate)
+      let currentDate  = '';
+      if(this.valDate){
+         currentDate = moment(this.valDate).format("YYYY-MM-DD");
+      }else{
+         currentDate = moment().format("YYYY-MM-DD");
+      } 
+      console.log(this.valDate);
+      this.date = currentDate;
+      this.showDate = this.formatDate(currentDate)
 
     },
     methods: {

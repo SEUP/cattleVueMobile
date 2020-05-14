@@ -47,11 +47,10 @@
                         <v-text-field label="ที่อยู่ปัจจุบัน" v-model="form.house_address"/>
 
                          
-                        <district-select v-if="form" @change="updateDistrictSelect"
+                        <district-select v-if="form.house_province" @change="updateDistrictSelect"
                         :valProvince="form.house_province"
                         :valAmphur="form.house_amphur"
-                        :valDistrict="form.farm_district"></district-select>
-
+                        :valDistrict="form.house_district"></district-select> 
                         <v-text-field label="รหัสไปรษณีย์" v-model="form.house_zipcode" hide-details/>
                         <br>
                         <!--<v-text-field label="Username" v-model="form.username"-->

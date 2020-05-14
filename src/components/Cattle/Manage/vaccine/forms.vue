@@ -25,7 +25,8 @@
                     <h1 class="wh" v-if="!update">เพิ่มข้อมูล</h1>
                     <h1 class="wh" v-if="update">อัพเดทข้อมูล</h1>
                 </v-toolbar>
-                <v-container grid-list-xs class="bgw">
+                <v-container grid-list-xs class="bgw" v-if="response" >
+                      
                     <date-picker label="วัน/เดือน/ปี ที่ทำวัคซีน" :valDate="form.vaccine_date" v-model="form.vaccine_date"
                         @change="form.vaccine_date = $event" />
 
@@ -79,6 +80,8 @@
                    options:{maker:''}
                 },
                 date: null,
+
+                response:false,
             }
         },
         computed: {
@@ -148,12 +151,16 @@
                 }
                 
             },
+            updateForm: async function () {
+                this.form = this.forms;
+            },
             initial: async function () {
                 if(!this.update){ 
-                this.getDefaultForm();
+                    await this.getDefaultForm();
                 }else{ 
-                    this.form = this.forms;
+                    await this.updateForm();
                 }
+                this.response = true;
             }
 
         }
