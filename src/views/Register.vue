@@ -6,7 +6,8 @@
             <v-layout  justify-center   >
               <img  style="height:250px;" src="@/assets/logob.png"/>
             </v-layout>
-          <register-form/>
+          <register-form v-if="!ios" />
+          <RegisterFormIOS v-else />
           </v-flex>
         </v-layout>
       </v-container>
@@ -19,11 +20,16 @@
 <script>
 // @ is an alias to /src
 import RegisterForm from "@/components/Login/RegisterForm.vue";
-
+import RegisterFormIOS from "@/components/Login/RegisterFormIOS.vue";
 export default {
   name: "Register",
   components: {
-      RegisterForm
-  }
+      RegisterForm,
+      RegisterFormIOS
+  },
+  data: () => ({
+     
+   ios:true,
+  }),
 };
 </script>
