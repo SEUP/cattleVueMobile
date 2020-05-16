@@ -128,6 +128,7 @@
                         <v-text-field v-if="form.reversal == '280100'" label="วันที่ควรตรวจท้อง"
                                       :value="checkBellyDay()" readonly hide-details
                                       class="pb-1 pr-2"></v-text-field>
+                                     
 
                     </v-card>
                     <div v-if="form.reversal == '280200'">กรุณาบันทึก เเละผสมพันธุ์ใหม่</div>
@@ -302,6 +303,8 @@
                 }
                 try {
                     this.form = await store.dispatch("manageDef/getForm", params);
+                    console.log('[HELLO]',this.form);
+                    alert(this.form.status_id);
                 } catch (error) {
 
                 }
@@ -328,9 +331,10 @@
             load: async function () {
                 this.form.cattle_id = this.cattleChoose.id;
                 if (this.forms) {
+                    console.log('[TEST]',this.forms);
                     await this.getDefaultForm();
-                    await this.setForm(this.forms);
-
+                   // await this.setForm(this.forms);
+ 
                 } else {
                     await this.getDefaultForm();
                 }
@@ -343,8 +347,9 @@
                 this.responseFrom = true;
             },
             async setForm(form) {
-                this.form = form;
-                this.form.status_id = 1
+                this.form = form; 
+                alert( Number(form.status_id));
+                this.form.status_id  = Number(form.status_id) 
             },
             changechange(step) {
                 this.form.status_id = step;

@@ -83,7 +83,7 @@ import moment from 'moment';
       if(this.valDate){
          currentDate = moment(this.valDate).format("YYYY-MM-DD");
       }else{
-         currentDate = moment().format("YYYY-MM-DD");
+         currentDate = ''
       } 
       console.log(this.valDate);
       this.date = currentDate;
