@@ -115,7 +115,7 @@
                     <choice to="ผลการตรวจการผสมพันธุ์" :remark="form.options.breeding_result" v-model="form.breeding_result" @change="form.options.breeding_result = $event" />
 
                     <!-----------------------วันที่ควาดว่าจะคลอด   v-model="form.options.baby_date_birth"-------------------------------->
-                    <v-text-field v-if="form.breeding_result == '120100'" label="วันที่ควาดว่าจะคลอด" :value="baby()" readonly hide-details class="pb-1 pr-2"></v-text-field>
+                    <v-text-field v-if="form.breeding_result == '120100'" label="วันที่คาดว่าจะคลอด" :value="baby()" readonly hide-details class="pb-1 pr-2"></v-text-field>
 
                 </v-card>
                 <div v-if="form.breeding_result == '120200'">กรุณาบันทึก เเละผสมพันธุ์ใหม่</div>
