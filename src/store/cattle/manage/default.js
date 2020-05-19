@@ -107,6 +107,16 @@ const actions = {
     
         return result
       },
+      getDataById: async function (context, params) {
+        let result = await axios.get(`api/v1/farmer/cattles/${params.cattle_id}/femalebreed/${params.id}`)
+          .then((response) => {
+            return response.data
+          })
+          .catch((error) => {
+            return null
+          })
+        return result
+      },
     
       async createData(context, params) {
         let form = params.form

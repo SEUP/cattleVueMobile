@@ -5,7 +5,7 @@
     <center>
         <v-btn @click="AddBreeder()" round class="box-green wh">เพิ่มข้อมูล</v-btn>
     </center>
-    <v-container>   
+    <v-container v-if="response">   
         <v-layout row v-for="female,index in FemaleBreeder.data" :key="index">
 
             <v-flex xs12>
@@ -63,6 +63,7 @@ export default {
     data() {
         return {
             debug: false,
+            response:false,
 
         }
     },
@@ -113,8 +114,9 @@ export default {
                 api: 'farmer/cattles/' + this.cattleChoose.id + '/femalebreed',
             }
             let data = await store.dispatch("manageDef/getData", params);
-
+            await store.dispatch("choice/getChoices");
             this.getFemaleBreeder(data);
+            this.response = true;
         }
     }
 
