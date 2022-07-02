@@ -45,21 +45,21 @@
                         <v-text-field label="เบอร์โทรศัพท์" v-model="form.phone_number"
                                       :error-messages="error.phone_number"/>
                         <v-text-field label="ที่อยู่ปัจจุบัน" v-model="form.house_address"/>
-
+                     
                          
-                        <district-select v-if="form.house_province" @change="updateDistrictSelect"
+                        <district-select  @change="updateDistrictSelect"
                         :valProvince="form.house_province"
                         :valAmphur="form.house_amphur"
                         :valDistrict="form.house_district"></district-select> 
                         <v-text-field label="รหัสไปรษณีย์" v-model="form.house_zipcode" hide-details/>
                         <br>
-                        <!--<v-text-field label="Username" v-model="form.username"-->
-                                      <!--:error-messages="error.username"/>-->
-                        <!--<v-text-field label="Email" v-model="form.email"/>-->
-                        <!--<v-text-field type="password" label="Password" v-model="form.password"-->
-                                      <!--:error-messages="error.password"/>-->
-                        <!--<v-text-field type="password" label="Confirmed password" v-model="form.password_confirmation"-->
-                                      <!--:error-messages="error.password_confirmation"/>-->
+                        <v-text-field label="Username" v-model="form.username"
+                                     :error-messages="error.username"/>
+                        <v-text-field label="Email" v-model="form.email"/>
+                        <v-text-field type="password" label="Password" v-model="form.password"
+                                      :error-messages="error.password"/>
+                        <v-text-field type="password" label="Confirmed password" v-model="form.password_confirmation"
+                                      :error-messages="error.password_confirmation"/>
                     </v-flex>
 
                 </v-card-text>

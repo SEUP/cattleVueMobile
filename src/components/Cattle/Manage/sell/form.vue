@@ -16,6 +16,10 @@
                           @change="form.options.sale_note = $event"/>
 
                   <div v-if="form.sale_note == '220100'">
+                  <v-textarea
+                    label="ข้อมูลผู้ซื้อ" 
+                    v-model="form.options.customer"
+                  ></v-textarea>
                     <choice to="ช่องทางการจำหน่าย" :remark="form.options.sale_chanel"
                             v-model="form.sale_chanel"
                             @change="form.options.sale_chanel = $event"/>

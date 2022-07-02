@@ -1,5 +1,5 @@
 <template>
-    <v-content>
+    <v-content v-if="response">
         <ActionBar />
 
         <v-tabs v-model="active" color="cyan" dark slider-color="yellow">
@@ -7,10 +7,10 @@
                 ทำลาย
             </v-tab>
             <v-tab-item key="0" style="height:100%;">
-                <div v-for="cattle in sale.data" >
+                <div v-for="cattle,index in sale.data" :key="index">
                     
               
-                <v-layout class="pd-20" v-if="cattle.sale.sale_price == null">
+                <v-layout class="pd-20"   v-if="cattle.sale.sale_note =='220200'"   >
               
                     <v-card flat class="box-blue shadow pd-12 full-width wh"  >
                         <v-layout row>
@@ -37,11 +37,11 @@
             <v-tab key="1" ripple>
                 จำหน่าย
             </v-tab>
-          <v-tab-item key="1" style="height:100%;">
-              <div v-for="cattle in sale.data" v-if="cattle.sale.sale_price != null">
-                     <v-layout  class="pd-20"> 
+          <v-tab-item key="1" style="height:100%;"> 
+              <div v-for="cattle,index in sale.data" :key="index"  >
+                     <v-layout  class="pd-20"  v-if="cattle.sale.sale_note =='220100'"   > 
                     <v-card flat class="box-blue shadow pd-12 full-width wh"  >
-                        <v-layout row>
+                        <v-layout row> 
                             <v-flex xs4 class="pdt-20">     <CattleAvatar :url="cattle.image_url" /></v-flex>
                         <v-flex xs8>
                               <v-card-title primary-title>
@@ -88,6 +88,8 @@
         data() {
             return {
                 vaccine: {},
+                response:false,
+                active:0,
 
 
 
@@ -112,6 +114,7 @@
         },
         async mounted() {
             await this.initial();
+            this.response = true;
         },
         methods: {
 
