@@ -39,6 +39,7 @@
     "devDependencies": {
         "@vue/cli-plugin-babel": "^3.0.1",
         "@vue/cli-service": "^3.0.1",
+        "cordova-plugin-inappbrowser": "^4.1.0",
         "vue-cli-plugin-vuetify": "^0.2.0",
         "vue-template-compiler": "^2.5.17"
     },
@@ -61,7 +62,8 @@
             "cordova-plugin-file": {},
             "cordova-plugin-statusbar": {},
             "cordova-plugin-splashscreen": {},
-            "cordova-plugin-wkwebview-engine": {}
+            "cordova-plugin-wkwebview-engine": {},
+            "cordova-plugin-inappbrowser": {}
         },
         "platforms": [
             "android",
