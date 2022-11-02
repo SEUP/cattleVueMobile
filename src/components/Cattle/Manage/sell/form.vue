@@ -100,6 +100,20 @@
         methods: {
      
             createData:async function(){
+                try {
+                    if(this.form.sale_date == null){
+                        this.form.sale_date = moment().format("YYYY-MM-DD")
+                    } 
+                    if(this.form.sale_note == '' || this.form.sale_note == null){
+                        this.form.sale_note = '220200'
+                    }
+
+                    // if(this.form.sale_price == '' || this.form.sale_price == null){
+                    //   this.form.sale_price = 0
+                    // }
+                    
+                    } catch (error) { 
+                    }
                   let params = {
                     api: 'farmer/cattles/' + this.cattle.id + '/'+this.To,
                     form:this.form
